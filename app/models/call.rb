@@ -11,7 +11,7 @@ class Call < ActiveRecord::Base
 
       response do |x| 
         x.Say "Whatever"
-        x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3"
+        #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3"
         x.Redirect flow_url(:greeted)
       end
     end
@@ -22,7 +22,7 @@ class Call < ActiveRecord::Base
 
       response do |x|
       	x.Say "You've been waiting way too long! Goodbye"
-        x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
+        #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
         #HOLD_MUSIC.sort_by { rand }.each do |url|
         #  x.Play url
         #end
