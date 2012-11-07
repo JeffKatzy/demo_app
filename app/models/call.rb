@@ -9,8 +9,9 @@ class Call < ActiveRecord::Base
     state :greeting do
       event :greeted, :to => :waiting
 
-      response do |x|
-        x.Say "Hello. "
+      response do |x| 
+        x.Say "Whatever"
+        x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3",
         x.Redirect flow_url(:greeted)
       end
     end
@@ -20,11 +21,11 @@ class Call < ActiveRecord::Base
       event :time_out, :to => :timed_out
 
       response do |x|
-        x.Play Lecture.first.sound_file.url
+      	x.Say "You've been waiting way too long! Goodbye"
+        x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
         #HOLD_MUSIC.sort_by { rand }.each do |url|
         #  x.Play url
         #end
-        x.Say "You've been waiting way too long! Goodbye"
         x.Hangup
       end
 
@@ -96,8 +97,6 @@ class Call < ActiveRecord::Base
 
   MAX_WAIT_TIME = 60
   HOLD_MUSIC = [
-    "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3",
-    "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
     "http://com.twilio.music.classical.s3.amazonaws.com/ith_chopin-15-2.mp3",
     "http://com.twilio.music.classical.s3.amazonaws.com/oldDog_-_endless_goodbye_%28instr.%29.mp3",
     "http://com.twilio.music.classical.s3.amazonaws.com/ClockworkWaltz.mp3",
