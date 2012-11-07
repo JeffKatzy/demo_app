@@ -1,0 +1,12 @@
+development:
+  bucket: demo_app-dev
+  access_key_id: AKIAJZT7PFZELU7FAPTQ
+  secret_access_key: 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
+test:
+  bucket: demo_app-test
+  access_key_id: AKIAJZT7PFZELU7FAPTQ
+  secret_access_key: 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
+production:
+  bucket: demo_app-pro
+  access_key_id: AKIAJZT7PFZELU7FAPTQ
+  secret_access_key: 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

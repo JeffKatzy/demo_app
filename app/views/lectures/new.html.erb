@@ -1,0 +1,7 @@
+<%= form_for @lecture, :html => { :multipart => true } do |form| %>
+	<%= form.text_field :name %> subject name
+	<%= form.text_field :description %> chapter name
+	<%= form.file_field :sound_file %>
+
+	<%= form.submit "submit" %>
+<% end %>

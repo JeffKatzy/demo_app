@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  cell_number: MyString
+  lesson_id: 1
+
+two:
+  name: MyString
+  cell_number: MyString
+  lesson_id: 1
