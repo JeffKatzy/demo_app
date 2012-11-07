@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106204730) do
+ActiveRecord::Schema.define(:version => 20121107165822) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20121106204730) do
     t.string   "caller"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "state"
   end
 
 end
