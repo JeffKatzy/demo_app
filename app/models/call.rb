@@ -11,7 +11,7 @@ class Call < ActiveRecord::Base
 
       response do |x| 
         x.Say "Whatever"
-        x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3",
+        x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3"
         x.Redirect flow_url(:greeted)
       end
     end
