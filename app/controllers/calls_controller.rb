@@ -5,6 +5,8 @@ class CallsController < ApplicationController
 
   def create
     @call = Call.create!(@parsed_params)
+    Rails.logger.warn("Creating call with these parsed params: #{@parsed_params}")
+    Rails.logger.warn("Created call: #{@call}")
     render :xml => @call.run(:incoming_call)
   end
 
