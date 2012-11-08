@@ -24,7 +24,7 @@ class LecturesController < ApplicationController
 	def delete
 	end
 
-	def show
+	def index
 		@lectures = Lecture.all
 	end
 end
