@@ -18,6 +18,8 @@
 class Call < ActiveRecord::Base
   include CallCenter
 
+  belongs_to :user
+
   attr_accessible :to, :from, :called, :caller
   attr_accessible :account_sid, :call_sid, :call_status, :digits
 
@@ -64,6 +66,11 @@ class Call < ActiveRecord::Base
     state :repeat_lecture_or_give_questions do
       response do |x|
         x.Say "You pressed #{digits}. Goodbye."
+        # if digits == 1
+        #   call_flow(:repeat_lecture)
+        # else
+        #   call_flow(:ask_questions)
+        # end
         x.Hangup
       end
     end
