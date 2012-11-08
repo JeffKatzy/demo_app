@@ -34,20 +34,20 @@ class Call < ActiveRecord::Base
       event :greeted, :to => :play_lecture
 
       response do |x| 
-        x.Say "Whatever"
+        x.Say "Welcome back! Let's get back to your classes."
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3"
         x.Redirect flow_url(:greeted)
       end
     end
 
     state :play_lecture do
-      event :repeat, :to => :play_lecture
-      event :ready_for_question, :to => :asking_question
+      
       event :lecture_finished, :to => :repeat_lecture_or_give_questions
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
-          x.Say "this is a lecture. 1 to repeat, 2 to move on to questions"
+          x.Say "Ok, so the lecture is now finished.  Press 1 to repeat, 
+          or 2 to move on to questions"
           x.Hangup
         end
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
@@ -64,16 +64,35 @@ class Call < ActiveRecord::Base
 
     # In this state, we should have access to digits
     state :repeat_lecture_or_give_questions do
+      event :request_repeat_lecture => :play_lecture
+      event :request_questions => :play_questions
       response do |x|
         x.Say "You pressed #{digits}. Goodbye."
-        # if digits == 1
-        #   call_flow(:repeat_lecture)
-        # else
-        #   call_flow(:ask_questions)
-        # end
-        x.Hangup
+         if digits == 1
+            x.Redirect flow_url(:request_repeat_lecture)
+         else
+            x.Redirect flow_url(:request_questions)
+         end
       end
     end
+
+    state :play_questions do
+      event :request_end => :ended
+        response do |x|
+          x.Say "Now let's play a question."
+        end
+    end
+    #write logic for 
+      #if question is correct, and 
+        # if there is another question, 
+            # go to the next question
+        # if there is not another question
+          # go to congrats, 
+            #and do you want to go to another lecture
+      # if question is incorrect, play explanation
+        # then play next question
+      # end
+
 
 
     state :ended do
