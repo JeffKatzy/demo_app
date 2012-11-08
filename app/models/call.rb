@@ -24,6 +24,7 @@ class Call < ActiveRecord::Base
   attr_accessible :account_sid, :call_sid, :call_status, :digits
 
   call_flow :state, :initial => :initial do
+
     state :initial do
      event :incoming_call, :to => :greeting
     end
@@ -31,7 +32,7 @@ class Call < ActiveRecord::Base
     state :greeting do
       # TODO if user has a current question id, transition to play_question
       # TODO else transition to play_lecture
-      event :greeted, :to => :play_lecture
+      event :greeted, :to => :determine_current_segment
 
       response do |x| 
         x.Say "Welcome back! Let's get back to your classes."
@@ -40,15 +41,29 @@ class Call < ActiveRecord::Base
       end
     end
 
+    state :determine_current_segment do
+      #event :going_to_lecture,  :to => :play_lecture
+      event :going_to_question, :to => :play_question
+      #event  :going_to_lecture,  :to => :play_lecture
+        response do |x|
+          x.Say "Determining current segment.  Going to lecture"
+        #  x.Redirect flow_url(:going_to_lecture)
+          x.Redirect flow_url(:going_to_question) 
+      #if user.current_question == 0
+        # x.Redirect flow_url(:going_to_lecture)
+      # else
+        # x.Redirect flow_url(:going_to_question)
+       end
+    end
+
     state :play_lecture do
       
-      event :lecture_finished, :to => :repeat_lecture_or_give_questions
+      event :lecture_finished, :to => :repeat_or_advance
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
-          x.Say "Ok, so the lecture is now finished.  Press 1 to repeat, 
+          x.Say "This is the lecture.  Ok, the lecture is now finished.  Press 1 to repeat, 
           or 2 to move on to questions"
-          x.Hangup
         end
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
         #HOLD_MUSIC.sort_by { rand }.each do |url|
@@ -63,25 +78,65 @@ class Call < ActiveRecord::Base
     end
 
     # In this state, we should have access to digits
-    state :repeat_lecture_or_give_questions do
-      event :request_repeat_lecture, :to => :play_lecture
-      event :request_questions,  :to => :play_questions
+    state :repeat_or_advance do
+      event :request_repeat, :to => :determine_current_segment
+      event :request_advance,  :to => :advance_user
       response do |x|
-        x.Say "You pressed #{digits}. Goodbye."
+          x.Say "You pressed #{digits}. Goodbye."
          if digits == 1
-            x.Redirect flow_url(:request_repeat_lecture)
+            x.Redirect flow_url(:request_repeat)
          else
-            x.Redirect flow_url(:request_questions)
+            x.Redirect flow_url(:request_advance)
          end
       end
     end
 
-    state :play_questions do
-      event :request_end, :to => :ended
+    state :play_question do
+      event :submit_answer, :to => :check_if_correct
         response do |x|
-          x.Say "Now let's play a question."
+          x.Gather :numDigits => '1', :action => flow_url(:submit_answer) do
+            x.Say "Now let's play a question."
+          end
         end
     end
+
+    state :check_if_correct do
+      event :answer_correct,   :to => :advance_user
+      event :answer_incorrect, :to => :question_explanation
+        response do |x|
+          x.Say "You pressed #{digits}."
+            if digits == 1 #you will need to write a function that checks if its correct or not
+              x.Say "Great, that's right.  Now we'll move onto the next question."
+              x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by 
+              #first writing a state that changes current question to the next question.  Then resend to current question.
+            else
+              x.Say "You may need a little help. Let's send you to the explanation"
+              x.Redirect flow_url(:answer_incorrect)
+            end
+        end
+    end
+
+    state :question_explanation do
+      event :explanation_end, :to => :advance_user
+        response do |x|
+          x.Say "This is the explanation."
+          x.Redirect flow_url(:explanation_end)
+        end
+    end
+
+     state :advance_user do
+        #event :completed_all_questions, :to => :current_lecture
+        #event :completed_a_question, :to => :current_question
+        event :advancing_user, :to => :determine_current_segment
+        response do |x|
+          # user.advance
+          x.Say "We will now advance you to the next part."
+          x.Redirect flow_url(:advancing_user)  
+        end
+     end
+
+
+
     #write logic for 
       #if question is correct, and 
         # if there is another question, 
