@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
 	def delete
 	end
 
-	def show
+	def index
 		@questions = Question.all
 	end
 end
