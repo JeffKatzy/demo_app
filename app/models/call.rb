@@ -24,7 +24,9 @@ class Call < ActiveRecord::Base
     end
 
     state :greeting do
-      event :greeted, :to => :waiting
+      # TODO if user has a current question id, transition to play_question
+      # TODO else transition to play_lecture
+      event :greeted, :to => :play_lecture
 
       response do |x| 
         x.Say "Whatever"
@@ -33,21 +35,33 @@ class Call < ActiveRecord::Base
       end
     end
 
-    state :waiting do
-      event :put_in_conference, :to => :in_conference
-      event :time_out, :to => :timed_out
+    state :play_lecture do
+      event :repeat, :to => :play_lecture
+      event :ready_for_question, :to => :asking_question
+      event :lecture_finished, :to => :repeat_lecture_or_give_questions
 
       response do |x|
-      	x.Say "You've been waiting way too long! Goodbye"
+        x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
+          x.Say "this is a lecture. 1 to repeat, 2 to move on to questions"
+          x.Hangup
+        end
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
         #HOLD_MUSIC.sort_by { rand }.each do |url|
         #  x.Play url
         #end
-        x.Hangup
+        
       end
 
-      after(:success) do
-        update_attributes(:waiting_at => Time.now)
+      before(:always) do
+        # TODO make sure the user's current question id is cleared, and his current lecture id is updated
+      end
+    end
+
+    # In this state, we should have access to digits
+    state :repeat_lecture_or_give_questions do
+      response do |x|
+        x.Say "You pressed #{digits}. Goodbye."
+        x.Hangup
       end
     end
 
