@@ -18,11 +18,14 @@ class CallsController < ApplicationController
 
   def parse_params
     pms = underscore_params
+    Rails.logger.warn("underscore_params: #{pms}")
+    Rails.logger.warn("Call.column_names: #{Call.column_names}")
     @parsed_params = Call.column_names.inject({}) do |result, key|
       value = pms[key]
       result[key] = value unless value.blank?
       result
     end
+    Rails.logger.warn("parsed_params: #{@parsed_params}")
   end
 
   def underscore_params
@@ -39,6 +42,7 @@ class CallsController < ApplicationController
 
   def find_and_update_call
     find_call
+    Rails.logger.warn("in find_and_update_call, about to update #{@call.to_s} with these parsed params: #{@parsed_params}")
     @call.update_attributes(@parsed_params)
   end
 end

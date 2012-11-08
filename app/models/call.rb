@@ -18,6 +18,9 @@
 class Call < ActiveRecord::Base
   include CallCenter
 
+  attr_accessible :to, :from, :called, :caller
+  attr_accessible :account_sid, :call_sid, :call_status
+
   call_flow :state, :initial => :initial do
     state :initial do
      event :incoming_call, :to => :greeting
