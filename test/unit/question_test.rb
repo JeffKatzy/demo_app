@@ -1,11 +1,12 @@
 # == Schema Information
 #
-# Table name: lectures
+# Table name: questions
 #
 #  id                     :integer          not null, primary key
 #  lesson_id              :integer
 #  name                   :string(255)
 #  description            :text
+#  answer                 :integer
 #  created_at             :datetime
 #  updated_at             :datetime
 #  soundfile_file_name    :string(255)
@@ -14,14 +15,10 @@
 #  soundfile_updated_at   :datetime
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+require 'test_helper'
 
-one:
-  lesson_id: 1
-  name: MyString
-  description: MyText
-
-two:
-  lesson_id: 1
-  name: MyString
-  description: MyText
+class QuestionTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

@@ -1,4 +1,4 @@
-<%= form_for @lecture, :html => { :multipart => true } do |form| %>
+<%= form_for @question, :html => { :multipart => true } do |form| %>
 	subject name<br>
 	<%= form.text_field :name %> 
 	<br>
@@ -6,6 +6,10 @@
 	<%= form.text_field :description %> 
 	<br>
 	<%= form.file_field :soundfile %>
+	<br>
+	<br>
+	answer number<br>
+	<%= form.text_field :answer %>
 	<br>
 	<%= form.submit "submit" %>
 <% end %>

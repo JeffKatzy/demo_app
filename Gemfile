@@ -23,6 +23,7 @@ group :development do
 #  gem 'pre-commit'
   gem 'ruby-graphviz'
   gem 'foreman'
+  gem 'annotate'
 end
 
 group :test do

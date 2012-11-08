@@ -5,7 +5,11 @@ DemoApp::Application.routes.draw do
   root :to => "calls#index"
 
   resources :lectures, :only => [:new, :create, :show]
+  resources :questions
+  resources :users
 
+
+  match '/signup', to: 'users#new'  
   match ':controller(/:action(.:format))'
   match ':controller(/:action(/:id(.:format)))'
 end

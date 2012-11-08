@@ -1,11 +1,12 @@
 # == Schema Information
 #
-# Table name: lectures
+# Table name: questions
 #
 #  id                     :integer          not null, primary key
 #  lesson_id              :integer
 #  name                   :string(255)
 #  description            :text
+#  answer                 :integer
 #  created_at             :datetime
 #  updated_at             :datetime
 #  soundfile_file_name    :string(255)
@@ -14,14 +15,13 @@
 #  soundfile_updated_at   :datetime
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+class Question < ActiveRecord::Base
+	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :answer
 
-one:
-  lesson_id: 1
-  name: MyString
-  description: MyText
+	belongs_to :lesson
 
-two:
-  lesson_id: 1
-  name: MyString
-  description: MyText
+	has_attached_file :soundfile,
+     :storage => :s3,
+     :s3_credentials => "#{Rails.root}/config/s3.yml",
+     :path => "/:id/:filename"
+end
