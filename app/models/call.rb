@@ -65,7 +65,7 @@ class Call < ActiveRecord::Base
     # In this state, we should have access to digits
     state :repeat_lecture_or_give_questions do
       event :request_repeat_lecture, :to => :play_lecture
-      event :request_questions, :to => :play_questions
+      event :request_questions,  :to => :play_questions
       response do |x|
         x.Say "You pressed #{digits}. Goodbye."
          if digits == 1
@@ -77,7 +77,7 @@ class Call < ActiveRecord::Base
     end
 
     state :play_questions do
-      event :request_end => :ended
+      event :request_end, :to => :ended
         response do |x|
           x.Say "Now let's play a question."
         end
