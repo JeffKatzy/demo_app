@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
 	has_many :calls
 
 	def initialize_lesson
-      self.recorded_lesson_id ||= 
+      self.lesson_id ||= 
         if Lesson.first
             Lesson.first.id
         else
