@@ -43,12 +43,12 @@ class Call < ActiveRecord::Base
 
     state :determine_current_segment do
       #event :going_to_lecture,  :to => :play_lecture
-      event :going_to_question, :to => :play_question
-      #event  :going_to_lecture,  :to => :play_lecture
+      #event :going_to_question, :to => :play_question
+      event  :going_to_lecture,  :to => :play_lecture
         response do |x|
           x.Say "Determining current segment.  Going to lecture"
-        #  x.Redirect flow_url(:going_to_lecture)
-          x.Redirect flow_url(:going_to_question) 
+          x.Redirect flow_url(:going_to_lecture)
+          #x.Redirect flow_url(:going_to_question) 
       #if user.current_question == 0
         # x.Redirect flow_url(:going_to_lecture)
       # else
