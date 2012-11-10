@@ -18,7 +18,7 @@
 class Question < ActiveRecord::Base
 	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :answer
 
-	belongs_to :lesson
+	belongs_to :lecture
 
 	has_attached_file :soundfile,
      :storage => :s3,

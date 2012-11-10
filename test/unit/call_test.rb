@@ -13,6 +13,8 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  state       :string(255)
+#  digits      :string(255)
+#  user_id     :integer
 #
 
 require 'test_helper'

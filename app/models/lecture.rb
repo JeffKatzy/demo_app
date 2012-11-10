@@ -17,6 +17,8 @@
 class Lecture < ActiveRecord::Base
 	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :soundfile_file_content_type, :soundfile_file_size, :soundfile_updated_at
 	belongs_to :lesson
+	has_many :questions
+	accepts_nested_attributes_for :questions
 
 	has_attached_file :soundfile,
      :storage => :s3,

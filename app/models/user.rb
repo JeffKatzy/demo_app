@@ -6,16 +6,15 @@
 #  name        :string(255)
 #  email       :string(255)
 #  cell_number :string(255)
-#  lesson_id   :integer
 #  created_at  :datetime
 #  updated_at  :datetime
+#  lecture_id  :integer
+#  question_id :integer
 #
 
 class User < ActiveRecord::Base
 	attr_accessible :name, :email, :cell_number
 	after_create :initialize_lesson
-
-	belongs_to :lesson
 	
 	has_many :calls
 

@@ -13,6 +13,8 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  state       :string(255)
+#  digits      :string(255)
+#  user_id     :integer
 #
 
 class Call < ActiveRecord::Base
@@ -42,9 +44,9 @@ class Call < ActiveRecord::Base
     end
 
     state :determine_current_segment do
-      #event :going_to_lecture,  :to => :play_lecture
+      event :going_to_lecture,  :to => :play_lecture
       #event :going_to_question, :to => :play_question
-      event  :going_to_lecture,  :to => :play_lecture
+      
         response do |x|
           x.Say "Determining current segment.  Going to lecture"
           x.Redirect flow_url(:going_to_lecture)

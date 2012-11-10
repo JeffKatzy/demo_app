@@ -1,4 +1,4 @@
-<%= form_for @lecture, :html => { :multipart => true } do |form| %>
+<%= simple_nested_form_for @lecture, :html => { :multipart => true } do |form| %>
 	subject name<br>
 	<%= form.text_field :name %> 
 	<br>
@@ -7,5 +7,11 @@
 	<br>
 	<%= form.file_field :soundfile %>
 	<br>
-	<%= form.submit "submit" %>
+	<%= form.fields_for :questions do |question_form| %>
+		<%= question_form.text_field :name %>
+		<%= question_form.link_to_remove "Remove this question" %>
+	<% end %>
+	<p><%= form.link_to_add "Add a task", :questions %>
+	
+	 <%= form.submit "submit" %>
 <% end %>
