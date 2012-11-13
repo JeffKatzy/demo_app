@@ -24,7 +24,9 @@ class Lecture < ActiveRecord::Base
 	belongs_to :lesson
 	has_many :questions
 	has_many :users
+	has_many :explanations
 	accepts_nested_attributes_for :questions
+	accepts_nested_attributes_for :explanations
 
 	has_attached_file :soundfile,
      :storage => :s3,

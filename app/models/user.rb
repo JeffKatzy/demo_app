@@ -9,7 +9,7 @@
 #  created_at  :datetime
 #  updated_at  :datetime
 #  lecture_id  :integer
-#  lec_quest   :integer
+#  question_id :integer
 #
 
 class User < ActiveRecord::Base

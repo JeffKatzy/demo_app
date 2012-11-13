@@ -30,6 +30,10 @@
 		<%= question_form.text_field :answer %>
 		<br>
 		<br>
+		<%= question_form.label :explanation_soundfile %>
+		<%= question_form.file_field :explanationfile %>
+		<br>
+		<br>
 		<%= question_form.link_to_remove "Remove this question" %>
 	<% end %>
 	<br>

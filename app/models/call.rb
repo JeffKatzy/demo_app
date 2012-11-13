@@ -48,12 +48,12 @@ class Call < ActiveRecord::Base
       event :going_to_question, :to => :play_question
       
         response do |x|
-          x.Say "Determining current segment."
+         # x.Say "Determining current segment."
           if user.on_lecture?
-            x.Say "Going to lecture #{user.lecture.id}"
+            #x.Say "Going to lecture #{user.lecture.id}"
             x.Redirect flow_url(:going_to_lecture)
           else
-            x.Say "Going to question #{user.question.id}"
+            # x.Say "Going to question #{user.question.id}"
             x.Redirect flow_url(:going_to_question)
           end
        end
@@ -65,8 +65,7 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
-          x.Say "This is lecture #{user.lecture.id}.  Ok, the lecture is now finished.  Press 1 to repeat, 
-          or 2 to move on to questions"
+          x.Play user.lecture.soundfile.url
         end
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
         #HOLD_MUSIC.sort_by { rand }.each do |url|
@@ -85,8 +84,9 @@ class Call < ActiveRecord::Base
       event :request_repeat, :to => :determine_current_segment
       event :request_advance,  :to => :advance_user
       response do |x|
-          x.Say "You pressed #{digits}."
+          #x.Say "You pressed #{digits}."
          if digits == "1"
+            x.Say "Ok, we'll repeat this for you."
             x.Redirect flow_url(:request_repeat)
          else
             x.Redirect flow_url(:request_advance)
@@ -98,8 +98,7 @@ class Call < ActiveRecord::Base
       event :submit_answer, :to => :check_if_correct
         response do |x|
           x.Gather :numDigits => '1', :action => flow_url(:submit_answer) do
-            x.Say "Now let's play question #{user.question.id}.  Please submit #{user.question.answer} if 
-            you want to submit the right answer or two if you want to submit the wrong answer."
+            x.Play user.question.soundfile.url
           end
         end
     end
@@ -114,7 +113,6 @@ class Call < ActiveRecord::Base
               x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by 
               #first writing a state that changes current question to the next question.  Then resend to current question.
             else
-              x.Say "You may need a little help. Let's send you to the explanation"
               x.Redirect flow_url(:answer_incorrect)
             end
         end
@@ -123,7 +121,7 @@ class Call < ActiveRecord::Base
     state :question_explanation do
       event :explanation_end, :to => :advance_user
         response do |x|
-          x.Say "This is the explanation."
+          x.Play user.question.explanationfile.url
           x.Redirect flow_url(:explanation_end)
         end
     end
@@ -133,7 +131,7 @@ class Call < ActiveRecord::Base
         response do |x|
           user.advance
           user.save #don't know why this is not working
-          x.Say "We have advanced you to the next part."
+          # x.Say "We have advanced you to the next part."
           x.Redirect flow_url(:advancing_user)  
         end
      end
@@ -156,6 +154,7 @@ class Call < ActiveRecord::Base
     state :ended do
       after(:success) do
         update_attributes(:ended_at => Time.now)
+        #user.update_attributes(:lecture_id => user.lecture.id, :question_id => user.question.id)
       end
     end
 

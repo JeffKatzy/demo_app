@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112194032) do
+ActiveRecord::Schema.define(:version => 20121113200120) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -26,6 +26,18 @@ ActiveRecord::Schema.define(:version => 20121112194032) do
     t.string   "state"
     t.string   "digits"
     t.integer  "user_id"
+  end
+
+  create_table "explanations", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "question_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "soundfile_file_name"
+    t.string   "soundfile_content_type"
+    t.integer  "soundfile_file_size"
+    t.datetime "soundfile_updated_at"
   end
 
   create_table "lectures", :force => true do |t|
@@ -59,6 +71,10 @@ ActiveRecord::Schema.define(:version => 20121112194032) do
     t.integer  "soundfile_file_size"
     t.datetime "soundfile_updated_at"
     t.integer  "lecture_id"
+    t.string   "explanationfile_file_name"
+    t.string   "explanationfile_content_type"
+    t.integer  "explanationfile_file_size"
+    t.datetime "explanationfile_updated_at"
   end
 
   create_table "user_answers", :force => true do |t|
