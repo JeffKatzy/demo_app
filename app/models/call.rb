@@ -98,7 +98,8 @@ class Call < ActiveRecord::Base
       event :submit_answer, :to => :check_if_correct
         response do |x|
           x.Gather :numDigits => '1', :action => flow_url(:submit_answer) do
-            x.Say "Now let's play question #{user.question.id}."
+            x.Say "Now let's play question #{user.question.id}.  Please submit one if 
+            you want to submit the right answer or two if you want to submit the wrong answer."
           end
         end
     end
