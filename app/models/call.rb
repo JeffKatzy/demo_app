@@ -34,7 +34,7 @@ class Call < ActiveRecord::Base
     state :greeting do
       # TODO if user has a current question id, transition to play_question
       # TODO else transition to play_lecture
-      event :greeted, :to => :determine_current_segment
+      event :greeted, :to => :advance_user
 
       response do |x| 
         x.Say "Welcome back! Let's get back to your classes."
