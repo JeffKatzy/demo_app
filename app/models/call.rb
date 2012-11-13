@@ -65,7 +65,7 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
-          x.Say "This is the lecture.  Ok, the lecture is now finished.  Press 1 to repeat, 
+          x.Say "This is lecture #{user.lecture.id}.  Ok, the lecture is now finished.  Press 1 to repeat, 
           or 2 to move on to questions"
         end
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
@@ -98,7 +98,7 @@ class Call < ActiveRecord::Base
       event :submit_answer, :to => :check_if_correct
         response do |x|
           x.Gather :numDigits => '1', :action => flow_url(:submit_answer) do
-            x.Say "Now let's play a question."
+            x.Say "Now let's play question #{user.question.id}."
           end
         end
     end
@@ -128,12 +128,11 @@ class Call < ActiveRecord::Base
     end
 
      state :advance_user do
-        #event :completed_all_questions, :to => :current_lecture
-        #event :completed_a_question, :to => :current_question
         event :advancing_user, :to => :determine_current_segment
         response do |x|
           user.advance
-          x.Say "We will now advance you to the next part."
+          user.save
+          x.Say "We have advanced you to the next part."
           x.Redirect flow_url(:advancing_user)  
         end
      end

@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
  end 
 
   def advance
-    if lecture.nil? || lecture.questions.first.nil? || question == lecture.questions.last #if lecture has no questions or on the last question
+    if lecture.nil? || lecture.questions.first.nil? || question == lecture.questions.last #if user unassigned lecture, lecture has no questions, or on the last question
       advance_lecture_and_set_questions
     else
       advance_questions
