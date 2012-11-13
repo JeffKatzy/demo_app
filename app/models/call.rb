@@ -45,16 +45,17 @@ class Call < ActiveRecord::Base
 
     state :determine_current_segment do
       event :going_to_lecture,  :to => :play_lecture
-      #event :going_to_question, :to => :play_question
+      event :going_to_question, :to => :play_question
       
         response do |x|
-          x.Say "Determining current segment.  Going to lecture"
-          x.Redirect flow_url(:going_to_lecture)
-          #x.Redirect flow_url(:going_to_question) 
-      #if user.current_question == 0
-        # x.Redirect flow_url(:going_to_lecture)
-      # else
-        # x.Redirect flow_url(:going_to_question)
+          x.Say "Determining current segment."
+          if user.on_lecture?
+            x.Say "Going to lecture #{user.lecture.id}"
+            x.Redirect flow_url(:going_to_lecture)
+          else
+            x.Say "Going to question #{user.question.id}"
+            x.Redirect flow_url(:going_to_question)
+          end
        end
     end
 
@@ -131,7 +132,7 @@ class Call < ActiveRecord::Base
         #event :completed_a_question, :to => :current_question
         event :advancing_user, :to => :determine_current_segment
         response do |x|
-          # user.advance
+          user.advance
           x.Say "We will now advance you to the next part."
           x.Redirect flow_url(:advancing_user)  
         end

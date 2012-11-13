@@ -13,6 +13,7 @@
 #  soundfile_content_type :string(255)
 #  soundfile_file_size    :integer
 #  soundfile_updated_at   :datetime
+#  lecture_id             :integer
 #
 
 require 'test_helper'

@@ -15,13 +15,28 @@
 #
 
 class Lecture < ActiveRecord::Base
-	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :soundfile_file_content_type, :soundfile_file_size, :soundfile_updated_at
+	# TODO change to `ordering` attribute
+	default_scope :order => :id
+
+	
+
+	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :soundfile_file_content_type, :soundfile_file_size, :soundfile_updated_at, :questions_attributes
 	belongs_to :lesson
 	has_many :questions
+	has_many :users
 	accepts_nested_attributes_for :questions
 
 	has_attached_file :soundfile,
      :storage => :s3,
      :s3_credentials => "#{Rails.root}/config/s3.yml",
      :path => "/:id/:filename"
+
+
+    def previous
+    	self.class.where("#{self.class.table_name}.id < ?", self.id).last
+    end
+
+    def next
+    	self.class.where("#{self.class.table_name}.id > ?", self.id).first
+    end
 end

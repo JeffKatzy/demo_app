@@ -1,17 +1,40 @@
 <%= simple_nested_form_for @lecture, :html => { :multipart => true } do |form| %>
-	subject name<br>
+	Lecture<br><br>
+	<%= form.label :lecture_name %>
+	<br>
 	<%= form.text_field :name %> 
 	<br>
-	description<br>
+	<%= form.label :lecture_description %>
+	<br>
 	<%= form.text_field :description %> 
+	<br>
+	<%= form.label :lecture_soundfile %>
 	<br>
 	<%= form.file_field :soundfile %>
 	<br>
 	<%= form.fields_for :questions do |question_form| %>
+		<%= question_form.label :question %><br><br>
+		<%= question_form.label :question_name %>
 		<%= question_form.text_field :name %>
+		<br>
+		<br>
+		<%= question_form.label :question_description %>
+		<%= question_form.text_field :description %>
+		<br>
+		<br>
+		<%= question_form.label :question_soundfile %>
+		<%= question_form.file_field :soundfile %>
+		<br>
+		<br>
+		<%= question_form.label :question_answer %>
+		<%= question_form.text_field :answer %>
+		<br>
+		<br>
 		<%= question_form.link_to_remove "Remove this question" %>
 	<% end %>
-	<p><%= form.link_to_add "Add a task", :questions %>
-	
+	<br>
+	<p><%= form.link_to_add "Add a question", :questions %>
+	<br>
+	<br>
 	 <%= form.submit "submit" %>
 <% end %>
