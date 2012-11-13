@@ -21,7 +21,7 @@
 #
 
 class Question < ActiveRecord::Base
-	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :answer, :explanationfile
+	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :answer, :explanationfile, :explanationfile_file_name
 
 	default_scope :order => :id
 
