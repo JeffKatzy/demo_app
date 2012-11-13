@@ -85,8 +85,8 @@ class Call < ActiveRecord::Base
       event :request_repeat, :to => :determine_current_segment
       event :request_advance,  :to => :advance_user
       response do |x|
-          x.Say "You pressed #{digits}. Goodbye."
-         if digits == 1
+          x.Say "You pressed #{digits}."
+         if digits == "1"
             x.Redirect flow_url(:request_repeat)
          else
             x.Redirect flow_url(:request_advance)
@@ -98,7 +98,7 @@ class Call < ActiveRecord::Base
       event :submit_answer, :to => :check_if_correct
         response do |x|
           x.Gather :numDigits => '1', :action => flow_url(:submit_answer) do
-            x.Say "Now let's play question #{user.question.id}.  Please submit one if 
+            x.Say "Now let's play question #{user.question.id}.  Please submit #{user.question.answer} if 
             you want to submit the right answer or two if you want to submit the wrong answer."
           end
         end
@@ -109,7 +109,7 @@ class Call < ActiveRecord::Base
       event :answer_incorrect, :to => :question_explanation
         response do |x|
           x.Say "You pressed #{digits}."
-            if digits == 1 #you will need to write a function that checks if its correct or not
+            if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
               x.Say "Great, that's right.  Now we'll move onto the next question."
               x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by 
               #first writing a state that changes current question to the next question.  Then resend to current question.
@@ -132,7 +132,7 @@ class Call < ActiveRecord::Base
         event :advancing_user, :to => :determine_current_segment
         response do |x|
           user.advance
-          user.save
+          user.save #don't know why this is not working
           x.Say "We have advanced you to the next part."
           x.Redirect flow_url(:advancing_user)  
         end
