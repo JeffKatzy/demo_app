@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
 	attr_accessible :name, :email, :cell_number
   belongs_to :lecture
   belongs_to :question
-	after_create :initialize_lesson
+	after_create :initialize_lecture
   attr_accessor :lec_quest
   
 	
