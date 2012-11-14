@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113200120) do
+ActiveRecord::Schema.define(:version => 20121114214148) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -80,7 +80,6 @@ ActiveRecord::Schema.define(:version => 20121113200120) do
   create_table "user_answers", :force => true do |t|
     t.integer  "question_id"
     t.integer  "user_id"
-    t.integer  "explanation_id"
     t.integer  "value"
     t.datetime "created_at"
     t.datetime "updated_at"

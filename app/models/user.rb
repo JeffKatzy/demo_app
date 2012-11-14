@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   belongs_to :lecture
   belongs_to :question
 	after_create :initialize_lecture
+  has_many :user_answers
   attr_accessor :lec_quest
   
 	
