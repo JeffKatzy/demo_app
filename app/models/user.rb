@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :cell_number
+	attr_accessible :name, :email, :cell_number, :lecture_id
   belongs_to :lecture
   belongs_to :question
 	after_create :initialize_lecture
@@ -57,25 +57,38 @@ class User < ActiveRecord::Base
     if self.lecture.nil?
       self.lecture = Lecture.first
       self.question = nil
+      puts "1"
     else
-      self.lecture = lecture.next
+      if self.lecture.next == nil 
+        initialize_lecture
+        puts "2"
+      else
+        self.lecture = lecture.next
+        puts "3"
+      end
       self.question = nil
+      puts "4"
     end
  end
 
  def advance_questions
     if self.question.nil?
       self.question = self.lecture.questions.first
+      puts "5"
     else
       self.question = question.next_in_lecture
+      puts "6"
     end
  end 
 
   def advance
+    #binding.pry
     if lecture.nil? || lecture.questions.first.nil? || question == lecture.questions.last #if user unassigned lecture, lecture has no questions, or on the last question
       advance_lecture_and_set_questions
+      puts "7"
     else
       advance_questions
+      puts "8"
     end
   end
 end
