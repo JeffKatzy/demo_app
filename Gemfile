@@ -14,6 +14,9 @@ gem 'simple_form'
 gem 'nested_form'
 gem 'pry-rails'
 gem 'pry-nav'
+gem 'googlecharts'
+gem 'bootstrap-sass', '2.0.0'
+gem 'bootstrap-will_paginate', '0.0.5'
 
 
 group :assets do
@@ -38,7 +41,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'rspec'
   gem 'rspec-rails'
-  gem 'mocha'
+  #gem 'mocha'
   gem 'guard'
   gem 'guard-rspec'
   gem 'spork', '~> 0.9.0.rc'

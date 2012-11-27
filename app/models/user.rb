@@ -18,10 +18,27 @@ class User < ActiveRecord::Base
   belongs_to :question
 	after_create :initialize_lecture
   has_many :user_answers
-  attr_accessor :lec_quest
-  
-	
+  has_many :user_lectures
+
+  scope :top_users, select("users.id, count(user_answers.correct) AS user_answers_correct_count").joins(:user_answers).order("user_answers_correct_count DESC")
+
 	has_many :calls
+
+  def current_lecture #create a filter for today's calls, so that it reads, if today's calls are nil
+    if self.calls.last == nil
+      "no audio listened to today"
+    else
+      if self.lecture_id == nil
+        "not started"
+      else
+        Lecture.find(self.lecture_id).name
+      end
+    end
+  end
+
+  def lecture_names_of_answers
+    user_answers.group_by {|a| a.lecture.name }
+  end
 
 	def initialize_lecture
     self.lecture_id ||= 

@@ -12,7 +12,21 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def first
+	end
+
+	def second
+	end
+
 	def show
 		@user = User.find(params[:id])
-	end 
+	end
+
+	def index 
+		@users = User.all
+	end
+
+	def today
+		@users = User.all
+	end
 end

@@ -66,6 +66,8 @@ class Call < ActiveRecord::Base
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
           x.Play user.lecture.soundfile.url
+          user_lecture = user.user_lectures.build(:lecture_id => user.lecture.id)
+          user_lecture.save
         end
         #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
         #HOLD_MUSIC.sort_by { rand }.each do |url|
@@ -108,7 +110,8 @@ class Call < ActiveRecord::Base
       event :answer_incorrect, :to => :question_explanation
         response do |x|
           x.Say "You pressed #{digits}."
-          answer = user.user_answers.build(question_id: user.question.id, value: digits)
+          answer = user.user_answers.build(question_id: user.question.id, value: digits, user_lecture_id: user.user_lectures.last.id)
+          answer.assert_correct
           answer.save
             if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
               x.Say "Great, that's right.  Now we'll move onto the next question."

@@ -1,8 +1,9 @@
 DemoApp::Application.routes.draw do
+  match ':controller(/:action(.:format))'
   post "calls/create"
   post "calls/flow"
   post "calls/exception"
-  root :to => "calls#index"
+  root :to => "users#index"
 
   resources :lectures, :only => [:new, :create, :show]
   resources :questions
@@ -10,7 +11,7 @@ DemoApp::Application.routes.draw do
 
 
   match '/signup', to: 'users#new'  
-  match ':controller(/:action(.:format))'
+  
   match ':controller(/:action(/:id(.:format)))'
 end
 
