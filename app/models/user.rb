@@ -36,10 +36,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def lecture_names_of_answers
-    user_answers.group_by {|a| a.lecture.name }
-  end
-
 	def initialize_lecture
     self.lecture_id ||= 
       if Lecture.first

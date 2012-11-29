@@ -29,7 +29,7 @@ gem 'jquery-rails'
 
 group :development do
   gem 'sqlite3'
-#  gem 'pre-commit'
+  gem 'factory_girl_rails'
   gem 'ruby-graphviz'
   gem 'foreman'
   gem 'annotate'
@@ -39,8 +39,7 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'factory_girl_rails'
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem "rspec-rails", "~> 2.7.0"
   #gem 'mocha'
   gem 'guard'
   gem 'guard-rspec'
