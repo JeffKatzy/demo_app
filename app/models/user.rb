@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :cell_number, :lecture_id
+	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_id
   belongs_to :lecture
   belongs_to :question
 	after_create :initialize_lecture
@@ -24,6 +24,10 @@ class User < ActiveRecord::Base
   scope :top_users, select("users.id, count(user_answers.correct) AS user_answers_correct_count").joins(:user_answers).order("user_answers_correct_count DESC")
 
 	has_many :calls
+
+  def assign_classroom(classroom)
+    self.classroom_id = Classroom.find_by_number(classroom).id
+  end
 
   def current_lecture #create a filter for today's calls, so that it reads, if today's calls are nil
     if self.calls.last == nil

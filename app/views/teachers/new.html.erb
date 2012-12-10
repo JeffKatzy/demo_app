@@ -5,15 +5,15 @@
   <div class="span6 offset3">
     <%= simple_nested_form_for(@teacher) do |f| %>
     <br>
-      <%= f.label :name %>
+      <%= f.label :teacher_name %>
     <br>
       <%= f.text_field :name %>
     <br>
-      <%= f.label :email %>
+      <%= f.label :teacher_email %>
     <br>
       <%= f.text_field :email %>
     <br>
-    <%= f.fields_for :classroom do |classroom_form| %>
+    <%= f.fields_for :classrooms do |classroom_form| %>
       <%= classroom_form.label :classroom_name %>
       <br>
       <%= classroom_form.text_field :name %>
@@ -21,7 +21,14 @@
       <%= classroom_form.label :number %>
       <br>
       <%= classroom_form.number_field :number %>
+      <br>
+    <%= classroom_form.link_to_remove "Remove this classroom" %>
+       <% end %>
+       <br>
+       <p><%= f.link_to_add "Add a classroom", :classrooms %>
+        <br>
       <%= f.submit "Create classroom", class: "btn btn-large btn-primary" %>
-    <% end %>
+    
+  <% end %>
   </div>
 </div>

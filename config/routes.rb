@@ -1,4 +1,6 @@
 DemoApp::Application.routes.draw do
+  get "teachers/new"
+
   get "static_pages/home"
   get "static_pages/help"
 
@@ -11,7 +13,8 @@ DemoApp::Application.routes.draw do
   resources :lectures, :only => [:new, :create, :show]
   resources :questions
   resources :users
-  resources :classroom
+  resources :classrooms
+  resources :teachers
 
   match '/signup', to: 'users#new'  
   

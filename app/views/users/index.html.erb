@@ -145,7 +145,7 @@
 					<div class="thumbnail">		
 							<div class="caption">
 					<div class="row offset3">
-					<%= link_to user.name, users_path, :class => performance(user) %> 
+					<%= link_to user.name, user_path(user), :class => performance(user) %> 
 					</div>
         					<% user.user_lectures.most_recent.each do |lecture| %>
         						<%= link_to lecture.lecture.name, users_path, :class => performance(user) %>

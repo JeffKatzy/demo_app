@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(params[:user])
+		@user.assign_classroom(@user.classroom_id)
 		if @user.save
 			redirect_to @user
 		else
