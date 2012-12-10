@@ -133,33 +133,29 @@
 							<div class="widget-title"><span class="icon"><i class="icon-signal"></i></span><h5>Site Statistics</h5><div class="buttons"><a href="#" class="btn btn-mini"><i class="icon-refresh"></i> Update stats</a></div></div>
 							<div class="widget-content">
 								<div class="row-fluid">
-								<div class="span4">
-									<ul class="site-stats">
-										<li><i class="icon-user"></i><%= link_to "Total Users", "users/first", id: "first_chart", remote: true %> <strong>1433</strong> <small>Total Users</small></li>
-
-										<li><i class="icon-arrow-right"></i><%= link_to "Total Users", "users/second", id: "second_chart", remote: true %> <strong>16</strong> <small>New Users (last week)</small></li>
-										<li class="divider"></li>
-										<li><i class="icon-shopping-cart"></i> <strong>259</strong> <small>Total Shop Items</small></li>
-										<li><i class="icon-tag"></i> <strong>8650</strong> <small>Total Orders</small></li>
-										<li><i class="icon-repeat"></i> <strong>29</strong> <small>Pending Orders</small></li>
-									</ul>
-								</div>
-						<div class="span8">
+						
+						<div class="span12">
 							<div class="chart">
 								<% @users.in_groups_of(4).each do |users| %>
-									<tr>
-										<% @users.each do |user| %>		
-											<li class="span4">
-												<div class="thumbnail">		
-													<div class="caption">
-            											<h5><%= user.name %></h5>
-            											<% if user.name == "Ruth" %>
-        													<p><a href="#" class="btn btn-success">Action</a></p>
-            											<% end %>
-                  									</div>
-                								</div>
-              								</li>
+
+							<tr>
+							<div class= "container">
+					<% @users.each do |user| %>		
+				<li class="span3">
+					<div class="thumbnail">		
+							<div class="caption">
+					<div class="row offset3">
+					<%= link_to user.name, users_path, :class => performance(user) %> 
+					</div>
+        					<% user.user_lectures.most_recent.each do |lecture| %>
+        						<%= link_to lecture.lecture.name, users_path, :class => performance(user) %>
+        					<% end %>
+							</div>
+					
+				</div>
+			</li>
   										<%end%>
+  									</div>
   									</tr>
 								<%end%>
 							</div>

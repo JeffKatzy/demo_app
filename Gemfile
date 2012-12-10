@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails', '3.2.0'
 
 gem 'twilio-ruby'
 gem 'call_center', '~> 0.1.3'
@@ -20,8 +20,8 @@ gem 'bootstrap-will_paginate', '0.0.5'
 
 
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails', "  ~> 3.2.4"
+  gem 'coffee-rails', "~> 3.2.2"
   gem 'uglifier'
 end
 

@@ -12,14 +12,10 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def first
-	end
-
-	def second
-	end
-
 	def show
 		@user = User.find(params[:id])
+		@lectures = @user.user_lectures.find(:all, :order => 'created_at DESC')
+		@lecture_days = @lectures.group_by { |t| t.created_at.beginning_of_day }
 	end
 
 	def index 

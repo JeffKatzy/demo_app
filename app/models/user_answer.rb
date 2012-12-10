@@ -20,14 +20,35 @@ class UserAnswer < ActiveRecord::Base
 
 	scope :incorrect, where(:correct => false)
 	scope :correct, where(:correct => true)
+	scope :recent, lambda { where("created_at > ?", 1.day.ago) }
+
+	def self.grade
+		if percentage_correct == "no answers"
+			"no answers"
+		elsif percentage_correct > 66.66
+			"mastered"
+		elsif percentage_correct.between?(33.33, 66.66) 
+			"passed"
+		else
+			"failed"
+		end
+	end
 
 
 	def self.percentage_correct
-		(correct.count.to_f / count.to_f)*100
+		if count == 0
+			"no answers"
+		else
+			(correct.count.to_f / count)*100
+		end
 	end
 
 	def self.percentage_incorrect
-		(incorrect.count.to_f / count.to_f)*100
+		if count == 0
+			"no answers"
+		else 
+			(incorrect.count.to_f / count.to_f)*100
+		end
 	end
 
 	def lecture_names #for grouping multiple lectures
@@ -37,8 +58,6 @@ class UserAnswer < ActiveRecord::Base
 	def lecture
 		question.lecture
 	end
-
-
 
 	def question
 		Question.find(question_id)

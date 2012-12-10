@@ -14,5 +14,15 @@ class UserLecture < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :lecture
 
+	#scope :recent, lambda {
+    #joins(:user_answers).group("user_lectures.id").merge(UserAnswer.recent)
+  	#}
+  	scope :most_recent, limit(3).order("created_at DESC")
+
 	attr_accessible :lecture_id
+	scope :today, where(:correct => true)
+
+	def completed?
+		lecture.questions.count == user_answers.count	
+	end
 end

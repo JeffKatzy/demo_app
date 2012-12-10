@@ -14,3 +14,10 @@
 #  soundfile_updated_at   :datetime
 #
 
+require 'spec_helper'
+
+describe Lecture do
+	it "has a valid factory" do
+		FactoryGirl.create(:lecture).should be_valid
+	end
+end
