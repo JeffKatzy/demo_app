@@ -35,21 +35,13 @@ class Call < ActiveRecord::Base
       # TODO if user has a current question id, transition to play_question
       # TODO else transition to play_lecture
       event :greeted, :to => :advance_user
-      #event :no_classroom, :to => :gather_classroom_number
 
-      response do |x|
-        if user.classroom_id == nil
-          x.Say "It looks like you are not assigned to a classroom.  Let's take
-          care of that now."
-          x.Redirect flow_url(:greeted)
-        else  
-          x.Say "Welcome back! Let's get back to your classes."
-          x.Redirect flow_url(:greeted)
-        end
+      response do |x| 
+        x.Say "Welcome back! Let's get back to your classes."
+        #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3"
+        x.Redirect flow_url(:greeted)
       end
     end
-
-
 
     state :determine_current_segment do
       event :going_to_lecture,  :to => :play_lecture
@@ -81,6 +73,11 @@ class Call < ActiveRecord::Base
         #HOLD_MUSIC.sort_by { rand }.each do |url|
         #  x.Play url
         #end
+        
+      end
+
+      before(:always) do
+        # TODO make sure the user's current question id is cleared, and his current lecture id is updated
       end
     end
 
