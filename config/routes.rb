@@ -10,10 +10,14 @@ DemoApp::Application.routes.draw do
   post "calls/exception"
   root :to => "static_pages#home"
 
+  resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
   resources :questions
-  resources :users
-  resources :classrooms
+  
+  resources :classrooms do
+    resources :users
+  end
+
   resources :teachers
 
   match '/signup', to: 'users#new'  

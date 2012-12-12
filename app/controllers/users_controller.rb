@@ -19,8 +19,9 @@ class UsersController < ApplicationController
 		@lecture_days = @lectures.group_by { |t| t.created_at.beginning_of_day }
 	end
 
-	def index 
-		@users = User.all
+	def index
+		@classroom = Classroom.find(params[:classroom_id]) 
+		@users = @classroom.users
 	end
 
 	def today

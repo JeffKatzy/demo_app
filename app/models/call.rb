@@ -35,11 +35,49 @@ class Call < ActiveRecord::Base
       # TODO if user has a current question id, transition to play_question
       # TODO else transition to play_lecture
       event :greeted, :to => :advance_user
+      event :no_classroom, :to => :gather_classroom_number
 
-      response do |x| 
-        x.Say "Welcome back! Let's get back to your classes."
-        #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/MARKOVICHAMP-Borghestral.mp3"
-        x.Redirect flow_url(:greeted)
+      response do |x|
+        if user.classroom_id == nil
+          x.Say "It looks like you are not assigned to a classroom.  Let's take
+          care of that now."
+          x.Redirect flow_url(:no_classroom)
+        else  
+          x.Say "Welcome back! Let's get back to your classes."
+          x.Redirect flow_url(:greeted)
+        end
+      end
+    end
+
+    state :gather_classroom_number do
+      event :received_number, :to => :evaluate_classroom_number
+
+      response do |x|
+        x.Gather :numDigits => '3', :action => flow_url(:received_number) do
+          x.Say "Please enter the 3 digit classroom number given by your teacher.
+          If you do not know this number, press 999 to move on."
+        end
+      end
+    end
+
+    state :evaluate_classroom_number do
+      event :no_number, :to => :advance_user
+      event :correct_number, :to => :advance_user
+      event :wrong_number, :to => :gather_classroom_number
+      response do |x|
+        if digits == '999'
+          x.Say "Ok, we'll move on."
+          x.Redirect flow_url(:no_number)
+        elsif user.assign_classroom == nil
+          x.Say "Looks like you entered the wrong classroom number.
+          Let's try it again."
+          x.Redirect flow_url(:wrong_number)
+        else 
+          user.assign_classroom
+          user.save
+            x.Say "Great you are now in the classroom #{user.classroom.name} which is taught by #{user.classroom.teacher.name}"
+            x.Redirect flow_url(:correct_number)
+        end
       end
     end
 
@@ -73,11 +111,6 @@ class Call < ActiveRecord::Base
         #HOLD_MUSIC.sort_by { rand }.each do |url|
         #  x.Play url
         #end
-        
-      end
-
-      before(:always) do
-        # TODO make sure the user's current question id is cleared, and his current lecture id is updated
       end
     end
 
