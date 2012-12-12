@@ -6,12 +6,11 @@ class CallsController < ApplicationController
   def create
     @call = Call.create!(@parsed_params)
     @call.user = User.find_or_create_by_cell_number(@parsed_params["from"])
-    @call.state = "greeting"
+    @call.save
     Rails.logger.warn("Creating call with these parsed params: #{@parsed_params}")
     Rails.logger.warn("Created call: #{@call}")
     Rails.logger.warn("Added user #{@call.user.inspect} to call #{@call.id}")
     render :xml => @call.run(:incoming_call)
-    @call.save
   end
 
   def flow

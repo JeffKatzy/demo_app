@@ -17,6 +17,7 @@ gem 'pry-nav'
 gem 'googlecharts'
 gem 'bootstrap-sass', '2.0.0'
 gem 'bootstrap-will_paginate', '0.0.5'
+gem 'bcrypt-ruby', '3.0.1'
 
 
 group :assets do
