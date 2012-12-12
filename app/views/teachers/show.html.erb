@@ -1,1 +1,11 @@
-<%= @teacher.name %>
+<% provide(:title, @teacher.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= @teacher.name %>
+      </h1>
+      Write a loop for looping through the teacher's classes and then linking to them
+    </section>
+  </aside>
+</div>

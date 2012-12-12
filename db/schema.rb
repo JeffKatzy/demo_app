@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212035841) do
+ActiveRecord::Schema.define(:version => 20121212040641) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -119,7 +119,6 @@ ActiveRecord::Schema.define(:version => 20121212035841) do
     t.integer  "lecture_id"
     t.integer  "question_id"
     t.integer  "classroom_id"
-    t.string   "password_digest"
   end
 
 end
