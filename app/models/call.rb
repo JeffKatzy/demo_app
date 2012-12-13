@@ -24,7 +24,7 @@ class Call < ActiveRecord::Base
 
   attr_accessible :to, :from, :called, :caller
   attr_accessible :account_sid, :call_sid, :call_status, :digits
-
+  before_validation { self.state = "greeting" unless state.present? }
   call_flow :state, :initial => :initial do
 
     state :initial do
@@ -85,7 +85,7 @@ class Call < ActiveRecord::Base
       event :going_to_lecture,  :to => :play_lecture
       event :going_to_question, :to => :play_question
       
-        response do |x|
+      response do |x|
          # x.Say "Determining current segment."
           if user.on_lecture?
             #x.Say "Going to lecture #{user.lecture.id}"
