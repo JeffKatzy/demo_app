@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
 	has_many :calls
 
   def assign_classroom(classroom)
-    self.classroom_id = Classroom.find_by_number(classroom).id
+    if Classroom.find_by_number(classroom) == nil
+      "no classroom"
+    else
+      self.classroom_id = Classroom.find_by_number(classroom).id
+    end
   end
 
   def current_lecture #create a filter for today's calls, so that it reads, if today's calls are nil
