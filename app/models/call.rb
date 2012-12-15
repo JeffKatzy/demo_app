@@ -68,7 +68,7 @@ class Call < ActiveRecord::Base
         if digits == '999'
           x.Say "Ok, we'll move on."
           x.Redirect flow_url(:no_number)
-        elsif user.assign_classroom == "no classroom"
+        elsif user.assign_classroom(digits) == "no classroom"
           x.Say "Looks like you entered the wrong classroom number.
           Let's try it again."
           x.Redirect flow_url(:wrong_number)
