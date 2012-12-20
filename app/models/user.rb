@@ -15,6 +15,8 @@
 
 class User < ActiveRecord::Base
 	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_id
+  scope :incomplete, where("name IS NULL OR email IS NULL")
+
   belongs_to :lecture
   belongs_to :question
 	after_create :initialize_lecture

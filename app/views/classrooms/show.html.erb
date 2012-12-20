@@ -92,32 +92,15 @@
 				<div class="row-fluid">
 					<div class="span12 center" style="text-align: center;">					
 						<ul class="stat-boxes">
+							
 							<li>
-								<div class="left peity_bar_good"><span>2,4,9,7,12,10,12</span>+20%</div>
-								<div class="right">
-									<strong>13/15</strong>
-									  Participated today
+								<div class="left peity_bar_good">
+									<%= render "first" %>
 								</div>
 							</li>
 							<li>
-								<div class="left peity_bar_neutral"><span>20,15,18,14,10,9,9,9</span>0%</div>
-								<div class="right">
-									<strong>11/13</strong>
-									Reaching Benchmarks
-								</div>
-							</li>
-							<li>
-								<div class="left peity_bar_bad"><span>3,5,9,7,12,20,10</span>-50%</div>
-								<div class="right">
-									<strong>10/15</strong>
-									Completed Homework
-								</div>
-							</li>
-							<li>
-								<div class="left peity_line_good"><span>12,6,9,23,14,10,17</span>+70%</div>
-								<div class="right">
-									<strong>8650</strong>
-									Orders
+								<div class="left peity_bar_neutral">
+									<%= render "first" %>
 								</div>
 							</li>
 						</ul>
@@ -139,29 +122,29 @@
 								<% @users.in_groups_of(4, false).each do |users| %>
 
 							<tr>
-							<div class= "container">
+			<div class= "container">
 					<% users.each do |user| %>		
-				<li class="span3">
+				<li class="span2">
 					<div class="thumbnail">		
 							<div class="caption">
 					<div class="row offset3">
-					<%= link_to user.name, classroom_user_path(@classroom, user), :class => performance(user) %> 
+					<%= link_to user.name, user_path(user), :class => performance(user) %> 
 					</div>
         					<% user.user_lectures.most_recent.each do |lecture| %>
         						<%= link_to lecture.lecture.name, users_path, :class => performance(user) %>
         					<% end %>
-							</div>
-					
+							</div>					
+						</div>
+					</li>
+  							<%end%>
 				</div>
-			</li>
-  										<%end%>
-  									</div>
   									</tr>
 								<%end%>
 							</div>
 						</div>	
 					</div>							
 				</div>
+
 			</div>					
 		</div>
 	</div>

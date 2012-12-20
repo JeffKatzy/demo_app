@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212040641) do
+ActiveRecord::Schema.define(:version => 20121212171756) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -91,7 +91,10 @@ ActiveRecord::Schema.define(:version => 20121212040641) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_digest"
+    t.string   "remember_token"
   end
+
+  add_index "teachers", ["remember_token"], :name => "index_teachers_on_remember_token"
 
   create_table "user_answers", :force => true do |t|
     t.integer  "question_id"

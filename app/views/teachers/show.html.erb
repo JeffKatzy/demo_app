@@ -8,6 +8,13 @@
       <% @teacher.classrooms.each do |classroom| %>
       	<%= link_to classroom.name, classroom, class: "btn" %>
       <% end %>
+      <br>
+      <% @teacher.classrooms.each do |classroom| %>
+      	<% classroom.users.incomplete.each do |user| %>
+      	<br>
+      		<%= link_to user.name, edit_user_path(user) %>
+      	<% end %>
+      	<% end %> 
     </section>
   </aside>
 </div>

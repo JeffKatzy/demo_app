@@ -14,9 +14,8 @@ DemoApp::Application.routes.draw do
   resources :lectures, :only => [:new, :create, :show]
   resources :questions
   
-  resources :classrooms do
-    resources :users
-  end
+  resources :classrooms
+  resources :users
 
   resources :teachers
 
