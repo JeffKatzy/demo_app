@@ -19,7 +19,9 @@ DemoApp::Application.routes.draw do
 
   resources :teachers
 
-  match '/signup', to: 'users#new'  
+  match '/signup',  to: 'teachers#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete 
   
   match ':controller(/:action(/:id(.:format)))'
   match ':controller(/:action(.:format))'

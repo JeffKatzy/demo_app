@@ -1,11 +1,48 @@
 <html>
-	<head>
+<head>
 		<title>Ruby on Rails Tutorial Sample App | Help </title>
-	</head>
-	<body>
-		<h1>Help<h1>
-		<p> 
-			Get help on the Rails tutorial
-		</p>
+		<script src="https://assets.yammer.com/platform/yam.js"></script>
+		<script>
+			yam.config({appId: "U37lRTVUMHdWLChS2l0Vmw"})
+		</script>
+</head>
+<body>
+	hello
+	<button onclick='post()'>Post on Yammer!</button>
+	<script>
+		function post(){
+			yam.getLoginStatus( function(response) {
+				if (response.authResponse){
+					yam.request(
+						{ url: "https://www.yammer.com/api/v1/messages.json",
+							method: "POST",
+							data: {"body" : "This post was made using the Yammer API."},
+							success: function (msg) { alert("Post was Successful!: " + msg); },
+							error: function (msg) { alert("Post was unsuccessful..." + msg); }
+						}
+						);
+				}
+				else {
+					yam.login( function (response) { 
+						if (!response.authResponse) {
+							yam.request(
+								{ url: "https://www.yammer.com/api/v1/messages.json"
+								, method: "POST"
+								, data: { "body" : "This Post was Made using the Yammer API."}
+								, success: function (msg) { alert("Post was successful!: " + msg); }
+								, error: function (msg) {alert("Post was Unsuccessful..." + msg); }
+							}
+								);
+
+						}
+					});
+
+				}
+
+			});
+
+		}
+	</script>
+	
 	</body>
 </html>

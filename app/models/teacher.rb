@@ -15,7 +15,16 @@ class Teacher < ActiveRecord::Base
 	validates :password, presence: true, length: { minimum: 5}
 	validates :password_confirmation, presence: true
 
+	before_save :create_remember_token
+
 	has_many :classrooms
 	
 	accepts_nested_attributes_for :classrooms
+
+	private
+	
+		def create_remember_token
+			self.remember_token = SecureRandom.urlsafe_base64
+		end
+
 end

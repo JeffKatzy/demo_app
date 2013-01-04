@@ -5,6 +5,9 @@
       <h1>
         <%= @teacher.name %>
       </h1>
+      Classrooms:
+      <br>
+      <br>
       <% @teacher.classrooms.each do |classroom| %>
       	<%= link_to classroom.name, classroom, class: "btn" %>
       <% end %>
@@ -12,7 +15,10 @@
       <% @teacher.classrooms.each do |classroom| %>
       	<% classroom.users.incomplete.each do |user| %>
       	<br>
-      		<%= link_to user.name, edit_user_path(user) %>
+          incomplete users:
+          <br>
+          <br>
+      		<%= link_to user.cell_number, edit_user_path(user) %>
       	<% end %>
       	<% end %> 
     </section>

@@ -6,4 +6,45 @@
 		<%= form_for(:session, url: sessions_path) do |f| %>
 
 			<%= f.label :email %>
-			<%= f.text  :
+			<%= f.text_field  :email %>
+
+			<%= f.label :password %>
+			<%= f.password_field :password %>
+			<br>
+			<%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+		<% end %>
+		<br>
+			<p>New user? <%= link_to "Sign up now!", signup_path %></p>
+			<a href='#'>Link</a>
+			<button onclick='post()'>Post on Yammer!</button>
+    <script>
+    function post() {
+        yam.getLoginStatus( function(response) {
+            if (response.authResponse) {
+                yam.request(
+                  { url: "https://www.yammer.com/api/v1/messages.json"
+                  , method: "POST"
+                  , data: { "body" : "This Post was Made Using the Yammer API.  Welcome to the Yammer API World."}
+                  , success: function (msg) { alert("Post was Successful!: " + msg); }
+                  , error: function (msg) { alert("Post was Unsuccessful..." + msg); }
+                  }
+                );
+            } else {
+                yam.login( function (response) {
+                  if (!response.authResponse) {
+                    yam.request(
+                      { url: "https://www.yammer.com/api/v1/messages.json"
+                      , method: "POST"
+                      , data: { "body" : "This Post was Made Using the Yammer API.  Welcome to the Yammer API World."}
+                      , success: function (msg) { alert("Post was Successful!: " + msg); }
+                      , error: function (msg) { alert("Post was Unsuccessful..." + msg); }
+                      }
+                    );
+                  }
+                });
+            }
+        });
+    }
+    </script>
+	</div>
+</div>

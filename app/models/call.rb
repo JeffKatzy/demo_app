@@ -43,7 +43,7 @@ class Call < ActiveRecord::Base
           care of that now."
           x.Redirect flow_url(:no_classroom)
         else  
-          x.Say "Welcome back! Let's get back to your classes."
+          x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number two to skip a lecture and move on to questions."
           x.Redirect flow_url(:greeted)
         end
       end
