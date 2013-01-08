@@ -36,15 +36,28 @@ class Call < ActiveRecord::Base
       # TODO else transition to play_lecture
       event :greeted, :to => :advance_user
       event :no_classroom, :to => :gather_classroom_number
+      event :new_uer, :to => :play_demo
 
       response do |x|
-        if user.classroom_id == nil
+        if user.classroom_id == nil && user.lecture_id = nil && user.classroom_id = nil
+          x.Redirect flow_url(:new_user)
+        elsif user.classroom_id == nil
           x.Say "It looks like you are not assigned to a classroom.  Let's take
           care of that now."
           x.Redirect flow_url(:no_classroom)
         else  
-          x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number two to skip a lecture and move on to questions."
+          x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number one to skip a lecture and move on to questions."
           x.Redirect flow_url(:greeted)
+        end
+      end
+    end
+
+    state :play_demo do
+      event :played_demo, :to => :greeting
+
+      response do |x|
+        x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
+            x.play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
     end
