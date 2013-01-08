@@ -9,12 +9,11 @@
           <% if signed_in? %>
                 <li><%= link_to "Profile", current_teacher %></li>
                 <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-              </ul>
-            </li>
+        </ul>
+            
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
-        </ul>
       </nav>
     </div>
   </div>

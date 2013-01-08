@@ -4,7 +4,6 @@ DemoApp::Application.routes.draw do
   get "static_pages/home"
   get "static_pages/help"
 
-  
   post "calls/create"
   post "calls/flow"
   post "calls/exception"
