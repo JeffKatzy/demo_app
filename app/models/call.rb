@@ -59,8 +59,8 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:played_demo) do
-            x.say "Hi Buddy"
-            x.play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
+            x.Say "Hi Buddy"
+            x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
     end
