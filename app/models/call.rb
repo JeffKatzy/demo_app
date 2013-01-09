@@ -40,6 +40,8 @@ class Call < ActiveRecord::Base
 
       response do |x|
         if user.new_user?
+          x.Say "Hi new user"
+          x.Say "Hello again to all my friends"
           x.Redirect flow_url(:new_user)
         elsif user.classroom_id == nil
           x.Say "It looks like you are not assigned to a classroom.  Let's take
@@ -57,6 +59,7 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
+            x.say "Hi Buddy"
             x.play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
