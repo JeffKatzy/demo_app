@@ -61,6 +61,10 @@ class User < ActiveRecord::Base
     question == nil
   end
 
+  def new_user?
+    classroom_id == nil && lecture_id == nil && classroom_id == nil
+  end
+
  def advance_lecture_and_set_questions
     if self.lecture.nil?
       self.lecture = Lecture.first
