@@ -55,7 +55,7 @@ class Call < ActiveRecord::Base
     end
 
     state :play_demo do
-      event :played_demo, :to => :greeting
+      event :played_demo, :to => :advance_user
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:played_demo) do
