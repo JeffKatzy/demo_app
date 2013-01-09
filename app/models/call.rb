@@ -39,7 +39,7 @@ class Call < ActiveRecord::Base
       event :new_uer, :to => :play_demo
 
       response do |x|
-        if user.classroom_id == nil && user.lecture_id = nil && user.classroom_id = nil
+        if user.classroom_id == nil && user.lecture_id == nil && user.classroom_id == nil
           x.Redirect flow_url(:new_user)
         elsif user.classroom_id == nil
           x.Say "It looks like you are not assigned to a classroom.  Let's take
