@@ -58,7 +58,7 @@ class Call < ActiveRecord::Base
       event :played_demo, :to => :greeting
 
       response do |x|
-        x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
+        x.Gather :numDigits => '1', :action => flow_url(:played_demo) do
             x.say "Hi Buddy"
             x.play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
