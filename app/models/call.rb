@@ -41,7 +41,6 @@ class Call < ActiveRecord::Base
       response do |x|
         if user.new_user?
           x.Say "Hi new user"
-          x.Say "Hello again to all my friends"
           x.Redirect flow_url(:new_user)
         elsif user.classroom_id == nil
           x.Say "It looks like you are not assigned to a classroom.  Let's take
@@ -55,15 +54,51 @@ class Call < ActiveRecord::Base
     end
 
     state :play_demo do
-      event :played_demo, :to => :advance_user
+      event :played_demo, :to => :evaluate_demo_number
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:played_demo) do
-            x.Say "Hi Buddy"
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
     end
+
+    state :evaluate_demo_number do
+      event :skip_demo, :to => :advance_user
+      event :correct_number, :to => :correct_demo_response
+
+      response do |x|
+        if digits == '9'
+          x.Redirect flow_url(:skip_demo)
+        elsif digits == '1'
+          x.Redirect flow_url(:correct_number)
+        else
+          x.Redirect flow_url(:incorrect_number)
+        end
+      end
+    end
+
+    state :correct_demo_response do
+      event :finished_demo, :to => :advance_user
+
+      response do |x|
+         x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
+            x.Sms "this is here"
+            x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
+        end
+      end
+    end
+
+    state :incorrect_demo_response do
+      event :finished_demo, :to => :advance_user
+
+      response do |x|
+         x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
+            x.Sms "this is here"
+            x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
+        end
+      end
+    end 
 
     state :gather_classroom_number do
       event :received_number, :to => :evaluate_classroom_number
