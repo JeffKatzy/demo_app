@@ -20,6 +20,13 @@
 class Call < ActiveRecord::Base
   include CallCenter
 
+  @account_sid = 'ACc59c478180144c19b6029ec595f0719f'
+  @auth_token = '2273acfc6ba1c74c14e7e43d3eebe971'
+        # set up a client to talk to the Twilio REST API
+  @client = Twilio::REST::Client.new(@account_sid, @auth_token)
+  @account = @client.account
+
+
   belongs_to :user
 
   attr_accessible :to, :from, :called, :caller
@@ -83,7 +90,9 @@ class Call < ActiveRecord::Base
 
       response do |x|
          x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
-            x.Sms "this is here"
+            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
+           'Hi user.'})
+            puts message 
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
@@ -94,7 +103,9 @@ class Call < ActiveRecord::Base
 
       response do |x|
          x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
-            x.Sms "this is here"
+            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
+           'Hi user.'})
+            puts message
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
