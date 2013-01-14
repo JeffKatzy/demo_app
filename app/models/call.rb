@@ -93,7 +93,7 @@ class Call < ActiveRecord::Base
               @client = Twilio::REST::Client.new(@account_sid, @auth_token)
               @account = @client.account
             message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
-           'Hi user.'})
+           Time.now - Call.last.created_at.to_s})
             puts message 
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
@@ -107,13 +107,13 @@ class Call < ActiveRecord::Base
          x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
 
 
-             @account_sid = 'ACc59c478180144c19b6029ec595f0719f'
+            @account_sid = 'ACc59c478180144c19b6029ec595f0719f'
             @auth_token = '2273acfc6ba1c74c14e7e43d3eebe971'
             # set up a client to talk to the Twilio REST API
             @client = Twilio::REST::Client.new(@account_sid, @auth_token)
             @account = @client.account
             message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
-           'Hi user.'})
+           Time.now - Call.last.created_at.to_s})
             puts message
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
