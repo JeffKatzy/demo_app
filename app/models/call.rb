@@ -93,7 +93,7 @@ class Call < ActiveRecord::Base
               @client = Twilio::REST::Client.new(@account_sid, @auth_token)
               @account = @client.account
             message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
-           Time.now - Call.last.created_at.to_s})
+           (Time.now - Call.last.created_at).round(0).to_s})
             puts message 
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
@@ -113,7 +113,7 @@ class Call < ActiveRecord::Base
             @client = Twilio::REST::Client.new(@account_sid, @auth_token)
             @account = @client.account
             message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
-           Time.now - Call.last.created_at.to_s})
+           (Time.now - Call.last.created_at).round(0).to_s})
             puts message
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
