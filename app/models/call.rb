@@ -19,10 +19,7 @@
 
 class Call < ActiveRecord::Base
   include CallCenter
-
- 
-
-
+  
   belongs_to :user
 
   attr_accessible :to, :from, :called, :caller
@@ -61,7 +58,7 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:played_demo) do
-            x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
+            x.Play "https://s3.amazonaws.com/Sample_MP3_File/demoapp+-+music+ready+-+mini.mp3"
         end
       end
     end
