@@ -19,7 +19,7 @@
 
 class Call < ActiveRecord::Base
   include CallCenter
-  
+
   belongs_to :user
 
   attr_accessible :to, :from, :called, :caller
@@ -39,14 +39,15 @@ class Call < ActiveRecord::Base
       event :new_user, :to => :play_demo
 
       response do |x|
-        if user.new_user?
+        # if user.new_user?
+          # x.Say "Hi new user"
+          #x.Redirect flow_url(:new_user)
+        if user.classroom_id == nil
           x.Say "Hi new user"
-          x.Redirect flow_url(:new_user)
-        elsif user.classroom_id == nil
           x.Say "It looks like you are not assigned to a classroom.  Let's take
           care of that now."
           x.Redirect flow_url(:no_classroom)
-        else  
+        else
           x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number one to skip a lecture and move on to questions."
           x.Redirect flow_url(:greeted)
         end
@@ -89,9 +90,9 @@ class Call < ActiveRecord::Base
               # set up a client to talk to the Twilio REST API
               @client = Twilio::REST::Client.new(@account_sid, @auth_token)
               @account = @client.account
-            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
+            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body =>
            "The call lasted #{(Time.now - Call.last.created_at).round(0).to_s} seconds and you submitted number #{digits}, the right answer."})
-            puts message 
+            puts message
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
@@ -109,13 +110,13 @@ class Call < ActiveRecord::Base
             # set up a client to talk to the Twilio REST API
             @client = Twilio::REST::Client.new(@account_sid, @auth_token)
             @account = @client.account
-            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body => 
+            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body =>
            "The call was #{(Time.now - Call.last.created_at).round(0).to_s} seconds and you submitted number #{digits}, the wrong answer."})
             puts message
             x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
         end
       end
-    end 
+    end
 
     state :gather_classroom_number do
       event :received_number, :to => :evaluate_classroom_number
@@ -140,11 +141,11 @@ class Call < ActiveRecord::Base
           x.Say "Looks like you entered the wrong classroom number.
           Let's try it again."
           x.Redirect flow_url(:wrong_number)
-        else 
+        else
           user.assign_classroom(digits)
           user.save
-            x.Say "Great you are now in the 
-            classroom #{user.classroom.name} which is 
+            x.Say "Great you are now in the
+            classroom #{user.classroom.name} which is
             taught by #{user.classroom.teacher.name}"
             x.Redirect flow_url(:correct_number)
         end
@@ -154,7 +155,7 @@ class Call < ActiveRecord::Base
     state :determine_current_segment do
       event :going_to_lecture,  :to => :play_lecture
       event :going_to_question, :to => :play_question
-      
+
       response do |x|
          # x.Say "Determining current segment."
           if user.on_lecture?
@@ -168,7 +169,7 @@ class Call < ActiveRecord::Base
     end
 
     state :play_lecture do
-      
+
       event :lecture_finished, :to => :repeat_or_advance
 
       response do |x|
@@ -218,7 +219,7 @@ class Call < ActiveRecord::Base
           answer.save
             if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
               x.Say "Great, that's right.  Now we'll move onto the next question."
-              x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by 
+              x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by
               #first writing a state that changes current question to the next question.  Then resend to current question.
             else
               x.Redirect flow_url(:answer_incorrect)
@@ -240,18 +241,18 @@ class Call < ActiveRecord::Base
           user.advance
           user.save #don't know why this is not working
           # x.Say "We have advanced you to the next part."
-          x.Redirect flow_url(:advancing_user)  
+          x.Redirect flow_url(:advancing_user)
         end
      end
 
 
 
-    #write logic for 
-      #if question is correct, and 
-        # if there is another question, 
+    #write logic for
+      #if question is correct, and
+        # if there is another question,
             # go to the next question
         # if there is not another question
-          # go to congrats, 
+          # go to congrats,
             #and do you want to go to another lecture
       # if question is incorrect, play explanation
         # then play next question
