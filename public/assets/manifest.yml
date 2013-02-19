@@ -63,5 +63,6 @@ select2.png: select2-c71a049a66f2b1ba987ddfe23c9b3d8b.png
 select2x2.png: select2x2-e14f9e470ecfefa2b358c7d48a3739eb.png
 spinner.gif: spinner-7b82212be58bb777d2802398507bf460.gif
 sprite.png: sprite-27a9025a33daae0cb445728b2d161f42.png
-application.js: application-8415b514fbd30e1df6db9a7b921b3f2f.js
-application.css: application-5aa00c80bddbd603d72ec62eb3f09e00.css
+application.js: application-4573daa0ce9d03a4921518b4766aad7b.js
+application.css: application-f6ca7a9de3468b3da214866f10e9a205.css
+jquery.min.map: jquery.min-0633f0a59e3d0cd55ac3518f228b2893.map
