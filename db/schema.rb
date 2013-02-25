@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121212171756) do
+ActiveRecord::Schema.define(:version => 20130224215101) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -21,11 +21,18 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
     t.string   "call_sid"
     t.string   "call_status"
     t.string   "caller"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "state"
     t.string   "digits"
     t.integer  "user_id"
+  end
+
+  create_table "classroom_designations", :force => true do |t|
+    t.integer  "classroom_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "classrooms", :force => true do |t|
@@ -40,8 +47,8 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
     t.string   "name"
     t.text     "description"
     t.integer  "question_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "soundfile_file_name"
     t.string   "soundfile_content_type"
     t.integer  "soundfile_file_size"
@@ -52,8 +59,8 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
     t.integer  "lesson_id"
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
     t.string   "soundfile_file_name"
     t.string   "soundfile_content_type"
     t.integer  "soundfile_file_size"
@@ -63,8 +70,8 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
   create_table "lessons", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "questions", :force => true do |t|
@@ -72,8 +79,8 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
     t.string   "name"
     t.text     "description"
     t.integer  "answer"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "soundfile_file_name"
     t.string   "soundfile_content_type"
     t.integer  "soundfile_file_size"
@@ -100,16 +107,16 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
     t.integer  "question_id"
     t.integer  "user_id"
     t.integer  "value"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
     t.boolean  "correct"
     t.integer  "user_lecture_id"
   end
 
   create_table "user_lectures", :force => true do |t|
     t.integer  "lecture_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
 
@@ -117,8 +124,8 @@ ActiveRecord::Schema.define(:version => 20121212171756) do
     t.string   "name"
     t.string   "email"
     t.string   "cell_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "lecture_id"
     t.integer  "question_id"
     t.integer  "classroom_id"

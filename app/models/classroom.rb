@@ -12,7 +12,7 @@
 
 class Classroom < ActiveRecord::Base
 	attr_accessible :name, :number
-
-	has_many :users
+  has_many :classroom_designations
+	has_many :users, :through => :classroom_designations
 	belongs_to :teacher
 end

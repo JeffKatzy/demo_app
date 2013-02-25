@@ -12,7 +12,7 @@ DemoApp::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
   resources :questions
-  
+
   resources :classrooms
   resources :users
 
@@ -20,8 +20,9 @@ DemoApp::Application.routes.draw do
 
   match '/signup',  to: 'teachers#new'
   match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete 
-  
+  match '/new_classroom', to: 'classrooms#new_teacher_classroom'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   match ':controller(/:action(/:id(.:format)))'
   match ':controller(/:action(.:format))'
 end

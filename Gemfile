@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.11'
 
 gem 'twilio-ruby'
 gem 'call_center', '~> 0.1.3'
@@ -15,10 +15,9 @@ gem 'nested_form'
 gem 'pry-rails'
 gem 'pry-nav'
 gem 'googlecharts'
-gem 'bootstrap-sass', '2.0.0'
-gem 'bootstrap-will_paginate', '0.0.5'
-gem 'bcrypt-ruby', '3.0.1'
-
+gem 'bcrypt-ruby'
+gem 'pg'
+gem 'jquery-rails'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.2.4"
@@ -27,14 +26,21 @@ group :assets do
   gem 'compass-rails'
 end
 
-gem 'jquery-rails'
-
 group :development do
-  gem 'sqlite3'
+
   gem 'factory_girl_rails'
   gem 'ruby-graphviz'
   gem 'foreman'
   gem 'annotate'
+
+  gem 'pry-rails'
+  gem 'pry-debugger'
+  gem 'pry-stack_explorer'
+
+  gem 'quiet_assets'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
 
 group :test do
@@ -51,6 +57,3 @@ group :test do
   gem 'faker'
 end
 
-group :production do
-  gem 'pg'
-end

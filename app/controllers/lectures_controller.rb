@@ -1,4 +1,5 @@
 class LecturesController < ApplicationController
+	layout 'pages'
 	def new
 		@lecture = Lecture.new
 	end

@@ -14,7 +14,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_id
+	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_ids
   scope :incomplete, where("name IS NULL OR email IS NULL")
 
   belongs_to :lecture
@@ -22,7 +22,8 @@ class User < ActiveRecord::Base
 	after_create :initialize_lecture
   has_many :user_answers
   has_many :user_lectures
-  belongs_to :classroom
+  has_many :classroom_designations
+  has_many :classrooms, :through => :classroom_designations
 
   scope :top_users, select("users.id, count(user_answers.correct) AS user_answers_correct_count").joins(:user_answers).order("user_answers_correct_count DESC")
 
@@ -49,7 +50,7 @@ class User < ActiveRecord::Base
   end
 
 	def initialize_lecture
-    self.lecture_id ||= 
+    self.lecture_id ||=
       if Lecture.first
           Lecture.first.id
       else
@@ -71,7 +72,7 @@ class User < ActiveRecord::Base
       self.question = nil
       #puts "1"
     else
-      if self.lecture.next == nil 
+      if self.lecture.next == nil
         initialize_lecture
        # puts "2"
       else
@@ -91,7 +92,7 @@ class User < ActiveRecord::Base
       self.question = question.next_in_lecture
      # puts "6"
     end
- end 
+ end
 
   def advance
     #binding.pry

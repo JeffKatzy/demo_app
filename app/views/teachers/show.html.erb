@@ -1,26 +1,59 @@
-<% provide(:title, @teacher.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @teacher.name %>
-      </h1>
-      Classrooms:
-      <br>
-      <br>
+
+<!-- End Navigation -->
+
+      <div class="row">
+
+  <!-- Side Bar -->
+
+        <div class="four mobile-four columns">
+
+          <img src="http://placehold.it/500x500&text=Logo">
+
+          <div class="hide-for-small panel">
+            <h3><%= @teacher.name %></h3>
+            <h5 class="subheader">Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.
+            </h5>
+          </div>
+
+          <a href=<%= edit_teacher_path(@teacher) %>>
+          <div class="panel callout radius" align="center">
+            <h6>Edit Profile</h6>
+          </div>
+          </a>
+
+        </div>
+
+    <!-- End Side Bar -->
+
+
+    <!-- Thumbnails -->
       <% @teacher.classrooms.each do |classroom| %>
-      	<%= link_to classroom.name, classroom, class: "btn" %>
+        <div class="eight columns">
+          <div class="row">
+
+          <a href=<%= classroom_path(classroom) %> >
+            <div class="four mobile-two columns">
+              <img src="http://placehold.it/1000x1000&text=Thumbnail">
+
+              <div class="panel">
+                <h5><%= classroom.name %></h5>
+                <h6 class="subheader"><%= "#{classroom.users.count} registered students." %></h6>
+              </div>
+            </div>
+          </a>
       <% end %>
-      <br>
-      <% @teacher.classrooms.each do |classroom| %>
-      	<% classroom.users.incomplete.each do |user| %>
-      	<br>
-          incomplete users:
-          <br>
-          <br>
-      		<%= link_to user.cell_number, edit_user_path(user) %>
-      	<% end %>
-      	<% end %> 
-    </section>
-  </aside>
-</div>
+
+      <a href="/new_classroom" >
+        <div class="four mobile-two columns">
+          <!-- <img src="http://placehold.it/1000x1000&text=Thumbnail"> -->
+          <div class="button">
+            <h5>Add New Classroom</h5>
+          </div>
+        </div>
+      </a>
+
+    <!-- End Managed By -->
+
+          </div>
+        </div>
+      </div>

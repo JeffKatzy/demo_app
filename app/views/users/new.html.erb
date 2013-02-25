@@ -1,8 +1,7 @@
 <% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
-
 <div class="row">
-  <div class="span6 offset3">
+  <div class="row six columns offset-by-three">
+    <h1>New Student</h1>
     <%= form_for(@user) do |f| %>
     <br>
       <%= f.label :name %>
@@ -13,14 +12,18 @@
     <br>
       <%= f.text_field :email %>
     <br>
-      <%= f.label :number %>
+      <%= f.label :cell_number %>
     <br>
       <%= f.text_field :cell_number %>
-    <br>
-      <%= f.label :classroom_number %>
-      <%= f.number_field :classroom_id %>
-    <br>
-      <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+      <% if @current_teacher.present? %>
+        <%= render 'users/checkboxes' %>
+      <% else %>
+        <%= f.label :classroom_number %>
+        <%= f.number_field :classroom_id %>
+        <br>
+      <% end %>
+        <br>
+      <%= f.submit "Create new student", class: "button" %>
     <% end %>
   </div>
 </div>

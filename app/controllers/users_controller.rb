@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	def new 
+  layout 'pages'
+	def new
 		@user = User.new
 	end
 
@@ -7,7 +8,11 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		@user.assign_classroom(@user.classroom_id)
 		if @user.save
-			redirect_to @user
+      if @current_teacher.present?
+        redirect_to @current_teacher
+      else
+			 redirect_to @user
+      end
 		else
 			render 'new'
 		end
@@ -20,12 +25,13 @@ class UsersController < ApplicationController
 	end
 
 	def index
-		@classroom = Classroom.find(params[:classroom_id]) 
+		@classroom = Classroom.find(params[:classroom_id])
 		@users = @classroom.users
 	end
 
 	def edit
 		@user = User.find(params[:id])
+    render 'new'
 	end
 
 	 def update

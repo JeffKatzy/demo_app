@@ -10,7 +10,7 @@ module SessionsHelper
 	end
 
 	def current_teacher
-		@current_teacher  ||= Teacher.find_by_remember_token(cookies[:remember_token])
+		@current_teacher ||= Teacher.find_by_remember_token(cookies[:remember_token])
 	end
 
 	def signed_in?
@@ -18,7 +18,7 @@ module SessionsHelper
 	end
 
 	def sign_out
-    	self.current_teacher = nil
-    	cookies.delete(:remember_token)
-  	end
+  	self.current_teacher = nil
+  	cookies.delete(:remember_token)
+	end
 end

@@ -1,0 +1,29 @@
+<!-- Header and Nav -->
+
+<div class="row">
+  <div class="three columns">
+    <h1><img src="http://placehold.it/400x100&text=Logo" /></h1>
+  </div>
+  <div class="nine columns">
+    <ul class="nav-bar right">
+      <li class="active" class="support tag"><%= link_to('Yakbat', root_path) %></li>
+      <li class="has-flyout">
+        <%= link_to('Browse Music', '#') %>
+        <a href="#" class="flyout-toggle"><span></span></a>
+        <ul class="flyout">
+          <li><%= link_to('Artists', '#') %></li>
+          <li><%= link_to('Albums', '#') %></li>
+          <li><%= link_to('Genres', '#') %></li>
+        </ul>
+      <li>
+      <%== intellinav %>
+      <!-- <li><%= link_to('Yakbat', root_path) %></li>
+      <li><%= link_to('create account', '#') %> </li>
+      <li><%= link_to('login', '#') %></li>
+      <li><%= @auth.try(:name) %></li>
+      <li><%= link_to('Logout', '#', :method => :delete, :confirm => "Are you sure?") %></li> -->
+    </ul>
+  </div>
+</div>
+
+<!-- End Header and Nav -->
