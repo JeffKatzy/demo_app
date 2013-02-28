@@ -6,8 +6,8 @@
 #  name                   :string(255)
 #  description            :text
 #  question_id            :integer
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  soundfile_file_name    :string(255)
 #  soundfile_content_type :string(255)
 #  soundfile_file_size    :integer

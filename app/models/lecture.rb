@@ -6,8 +6,8 @@
 #  lesson_id              :integer
 #  name                   :string(255)
 #  description            :text
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
 #  soundfile_file_name    :string(255)
 #  soundfile_content_type :string(255)
 #  soundfile_file_size    :integer
@@ -17,8 +17,6 @@
 class Lecture < ActiveRecord::Base
 	# TODO change to `ordering` attribute
 	default_scope :order => :id
-
-	
 
 	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :soundfile_file_content_type, :soundfile_file_size, :soundfile_updated_at, :questions_attributes
 	belongs_to :lesson

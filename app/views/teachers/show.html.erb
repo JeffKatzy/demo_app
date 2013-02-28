@@ -5,7 +5,7 @@
 
   <!-- Side Bar -->
 
-        <div class="four mobile-four columns">
+        <div class="three mobile-four columns">
 
           <img src="http://placehold.it/500x500&text=Logo">
 
@@ -27,21 +27,39 @@
 
 
     <!-- Thumbnails -->
-      <% @teacher.classrooms.each do |classroom| %>
+
+ <dl class="tabs contained nine columns">
+  <dt><%= "#{@user.name}'s' performance "%></dt>
+  <dd class="active"><a href="#simpleContained1">Current</a></dd>
+  <dd class="hide-for-small"><a href="#simpleContained2">Today</a></dd>
+  <dd class="hide-for-small"><a href="#simpleContained3">Overall</a></dd>
+</dl>
+<ul class="tabs-content contained nine columns">
+  <li class="active" id="simpleContained1Tab">
+      <dl class="vertical tabs pill two columns">
+        <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
+        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical3">Time per lecture</a></dd>
+      </dl>
+  </li>
+  <li id="simpleContained2Tab">This is simple tab 2s content. Now you see it!</li>
+  <li id="simpleContained3Tab">This is simple tab 3s content.</li>
+</ul>
+      <% @user.user_answers.each do |user| %>
         <div class="eight columns">
           <div class="row">
 
-          <a href=<%= classroom_path(classroom) %> >
+          <a href=<%= user_answer_path(user_answer) %> >
             <div class="four mobile-two columns">
-              <img src="http://placehold.it/1000x1000&text=Thumbnail">
 
               <div class="panel">
-                <h5><%= classroom.name %></h5>
-                <h6 class="subheader"><%= "#{classroom.users.count} registered students." %></h6>
+                <h6 class="subheader"><%= "Correct Answers" %></h6>
               </div>
             </div>
           </a>
       <% end %>
+
+      <!-- Thumbnails -->
 
       <a href="/new_classroom" >
         <div class="four mobile-two columns">

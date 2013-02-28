@@ -2,23 +2,23 @@ module UsersHelper
 
 	def performance(user)
 		if user.user_answers.grade == "mastered"
-			"btn btn-success span11"
+			"button radius success"
 		elsif user.user_answers.grade == "passed"
-			"btn btn-warning span11"
+			"button radius"
 		elsif user.user_answers.grade == "failed"
-			"btn btn-danger span11"
+			"button radius alert"
 		elsif user.user_answers.grade == "no answers"
-			"btn span11"
+			"panel radius"
 		end
 	end
 
 	def correct?(answer)
 		if answer.correct? == true
-			"btn btn-success"
+			"button radius success"
 		elsif answer.correct? == false
-			"btn btn-danger"
+			"button radius alert"
 		else
-			"btn"
+			"button radius"
 		end
 	end
 end

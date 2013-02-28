@@ -10,8 +10,8 @@
 #  call_sid    :string(255)
 #  call_status :string(255)
 #  caller      :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #  state       :string(255)
 #  digits      :string(255)
 #  user_id     :integer
