@@ -23,6 +23,6 @@ class UserLecture < ActiveRecord::Base
 	scope :today, where(:correct => true)
 
 	def completed?
-		lecture.questions.count == user_answers.count	
+		lecture.questions.count == user_answers.count
 	end
 end

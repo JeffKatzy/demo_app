@@ -15,8 +15,10 @@
 class UserAnswer < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :user_lecture
+	belongs_to :question
 	validates :user_id, presence: true
 	attr_accessible :value, :question_id, :correct, :user_lecture_id
+	before_save :assert_correct
 
 	scope :incorrect, where(:correct => false)
 	scope :correct, where(:correct => true)
@@ -27,7 +29,7 @@ class UserAnswer < ActiveRecord::Base
 			"no answers"
 		elsif percentage_correct > 66.66
 			"mastered"
-		elsif percentage_correct.between?(33.33, 66.66) 
+		elsif percentage_correct.between?(33.33, 66.66)
 			"passed"
 		else
 			"failed"
@@ -46,7 +48,7 @@ class UserAnswer < ActiveRecord::Base
 	def self.percentage_incorrect
 		if count == 0
 			"no answers"
-		else 
+		else
 			(incorrect.count.to_f / count.to_f)*100
 		end
 	end

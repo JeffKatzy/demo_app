@@ -66,78 +66,197 @@ lec5 = Lecture.create(name: "Circle Area", description: "Pi radius squared")
 lec6 = Lecture.create(name: "Pentagon Area", description: "length times width")
 
 lec1.lesson = less1
+lec1.save
 lec2.lesson = less1
+lec2.save
 lec3.lesson = less1
+lec3.save
 lec4.lesson = less2
+lec4.save
 lec5.lesson = less2
+lec5.save
 lec6.lesson = less2
+lec6.save
 
 q1.lecture = lec1
-q1.lesson = less1
-q2.lecture = lec2
-q2.lesson = less1
-q3.lecture = lec3
-q3.lesson = less1
-q4.lecture = lec4
-q4.lesson = less2
-q5.lecture = lec5
-q5.lesson = less2
+q1.save
+q2.lecture = lec1
+q2.save
+q3.lecture = lec2
+q3.save
+q4.lecture = lec2
+q4.save
+q5.lecture = lec2
+q5.save
 
-ul1 = UserLecture.create(lecture_id: 1)
-ul2 = UserLecture.create(lecture_id: 1)
-ul3 = UserLecture.create(lecture_id: 1)
-ul4 = UserLecture.create(lecture_id: 2)
-ul5 = UserLecture.create(lecture_id: 2)
-ul6 = UserLecture.create(lecture_id: 2, user_id: 3)
+u1.lecture = lec1
+u1.save
+u2.lecture = lec1
+u2.save
+u3.lecture = lec2
+u3.save
+
+
+u1.question = q1
+u1.save
+u2.question = q2
+u2.save
+u3.question = q3
+u3.save
+
+ul1 = UserLecture.create
+ul2 = UserLecture.create
+ul3 = UserLecture.create
+ul4 = UserLecture.create
+ul5 = UserLecture.create
+ul6 = UserLecture.create
+
+ul1.lecture = lec1
+ul2.lecture = lec1
+ul3.lecture = lec1
+ul4.lecture = lec2
+ul5.lecture = lec2
+ul6.lecture = lec2
 
 ul1.user = u1
+ul1.save
 ul2.user = u2
+ul2.save
 ul3.user = u3
-ul4.user = u4
-ul5.user = u5
-ul6.user = u6
+ul3.save
+ul4.user = u1
+ul4.save
+ul5.user = u2
+ul5.save
+ul6.user = u3
+ul6.save
 
-ans1 = UswerAnswer.create(question_id: 1, value: 1, user_lecture_id: 1)
-ans2 = UswerAnswer.create(question_id: 2, value: 3, user_lecture_id: 1)
-ans3 = UswerAnswer.create(question_id: 3, value: 2, user_lecture_id: 2)
-ans4 = UswerAnswer.create(question_id: 4, value: 4, user_lecture_id: 2)
-ans5 = UswerAnswer.create(question_id: 5, value: 5, user_lecture_id: 3)
+ans1 = UserAnswer.create(value: 1)
+ans2 = UserAnswer.create(value: 3)
+ans3 = UserAnswer.create(value: 2)
+ans4 = UserAnswer.create(value: 4)
+ans5 = UserAnswer.create(value: 5)
+
+ans1.question = q1
+ans1.save
+ans2.question = q2
+ans2.save
+ans3.question = q3
+ans3.save
+ans4.question = q4
+ans4.save
+ans5.question = q5
+ans5.save
 
 ans1.user = u1
+ans1.save
 ans2.user = u1
+ans2.save
 ans3.user = u1
+ans3.save
 ans4.user = u1
+ans4.save
 ans5.user = u1
+ans5.save
 
-ans6 = UswerAnswer.create(user_id: 2, question_id: 1, value: 5, user_lecture_id: 1)
-ans7 = UswerAnswer.create(user_id: 2, question_id: 2, value: 1, user_lecture_id: 1)
-ans8 = UswerAnswer.create(user_id: 2, question_id: 3, value: 3, user_lecture_id: 2)
-ans9 = UswerAnswer.create(user_id: 2, question_id: 4, value: 4, user_lecture_id: 2)
-ans10 = UswerAnswer.create(user_id: 2, question_id: 5, value: 5, user_lecture_id: 3)
+ans1.user_lecture = ul1
+ans1.save
+ans2.user_lecture = ul1
+ans2.save
+ans3.user_lecture = ul4
+ans3.save
+ans4.user_lecture = ul4
+ans4.save
+ans5.user_lecture = ul4
+ans5.save
+
+ans6 = UserAnswer.create(value: 5)
+ans7 = UserAnswer.create(value: 1)
+ans8 = UserAnswer.create(value: 3)
+ans9 = UserAnswer.create(value: 4)
+ans10 = UserAnswer.create(value: 5)
+
+ans6.question = q1
+ans6.save
+ans7.question = q2
+ans7.save
+ans8.question = q3
+ans8.save
+ans9.question = q4
+ans9.save
+ans10.question = q5
+ans10.save
+
+ans6.user_lecture = ul2
+ans6.save
+ans7.user_lecture = ul2
+ans7.save
+ans8.user_lecture = ul5
+ans8.save
+ans9.user_lecture = ul5
+ans9.save
+ans10.user_lecture = ul5
+ans10.save
 
 ans6.user = u2
+ans6.save
 ans7.user = u2
+ans7.save
 ans8.user = u2
+ans8.save
 ans9.user = u2
+ans9.save
 ans10.user = u2
+ans10.save
 
-ans11 = UswerAnswer.create(user_id: 3, question_id: 1, value: 1, user_lecture_id: 1)
-ans12 = UswerAnswer.create(user_id: 3, question_id: 2, value: 2, user_lecture_id: 1)
-ans13 = UswerAnswer.create(user_id: 3, question_id: 3, value: 3, user_lecture_id: 2)
-ans14 = UswerAnswer.create(user_id: 3, question_id: 4, value: 4, user_lecture_id: 2)
-ans15 = UswerAnswer.create(user_id: 3, question_id: 5, value: 1, user_lecture_id: 3)
+ans11 = UserAnswer.create(value: 1)
+ans12 = UserAnswer.create(value: 2)
+ans13 = UserAnswer.create(value: 3)
+ans14 = UserAnswer.create(value: 4)
+ans15 = UserAnswer.create(value: 1)
+
+ans11.question = q1
+ans11.save
+ans12.question = q2
+ans12.save
+ans13.question = q3
+ans13.save
+ans14.question = q4
+ans14.save
+ans15.question = q5
+ans15.save
 
 ans11.user = u3
+ans11.save
 ans12.user = u3
+ans12.save
 ans13.user = u3
+ans13.save
 ans14.user = u3
+ans14.save
 ans15.user = u3
+ans15.save
 
-cl1 = Classroom.create(teacher_id: 1, name: "Physics", number: 777)
+ans11.user_lecture = ul3
+ans11.save
+ans12.user_lecture = ul3
+ans12.save
+ans13.user_lecture = ul6
+ans13.save
+ans14.user_lecture = ul6
+ans14.save
+ans15.user_lecture = ul6
+ans15.save
+
+
+
+cl1 = Classroom.create(name: "Physics", number: 777)
 t1 = Teacher.create(name: "Mrs. Katz", email: "ruthiteach@gmail.com", password: "tryit", password_confirmation: "tryit")
 
-
+cl1.teacher = t1
 cl1.users = [u1, u2, u3]
+cl1.save
+
 
 
 

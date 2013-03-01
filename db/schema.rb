@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227012928) do
+ActiveRecord::Schema.define(:version => 20130228013444) do
 
   create_table "calls", :force => true do |t|
     t.string   "to"
@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(:version => 20130227012928) do
   end
 
   create_table "questions", :force => true do |t|
-    t.integer  "lesson_id"
     t.string   "name"
     t.text     "description"
     t.integer  "answer"
