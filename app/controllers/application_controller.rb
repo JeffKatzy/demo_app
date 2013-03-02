@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
 
   def current_teacher
-    @current_teacher ||= Teacher.find_by_remember_token(cookies[:remember_token])
+    @current_teacher ||= Teacher.find_by_remember_token(cookies[:remember_token]) if cookies[:remember_token]
   end
 
   def authentication
