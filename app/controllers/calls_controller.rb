@@ -9,7 +9,7 @@ class CallsController < ApplicationController
     @call.save
     Rails.logger.warn("Creating call with these parsed params: #{@parsed_params}")
     Rails.logger.warn("Created call: #{@call}")
-    Rails.logger.warn("Added user #{@call.user.inspect} to call #{@call.id}")
+    Rails.logger.warn("Added user to call #{@call.id}")
     render :xml => @call.run(:incoming_call)
   end
 

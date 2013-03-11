@@ -5,7 +5,17 @@
     <ul class="nav-bar">
       <li class="active" class="support tag"><%= link_to('Yakbat', root_path) %></li>
 
+    <% if signed_in? %>
+      <li class="has-flyout">
+        <%= link_to('My Classrooms', teacher_path(@auth) ) %>
+        <a href="#" class="flyout-toggle"><span></span></a>
+        <ul class="flyout">
+          <%== classroomnav %>
+          <li><%= link_to('Add Classroom', '/new_classroom') %></li>
 
+        </ul>
+      </li>
+    <% end %>
 
       <%== intellinav %>
     </ul>
