@@ -39,9 +39,9 @@
         <dd><a href="#vertical2">Number Completed</a></dd>
         <dd><a href="#vertical3">Time per lecture</a></dd>
       </dl>
-      <div class="ten columns" id="containerjeff">
+      <div id="container">
             <% @users.each do |user| %>
-          <div class="four columns percent_correct panel">
+          <div class="percent_correct element">
               <h6 class="subheader"><%= link_to user.name, user %></h6>
               <h6 class="name"><%= user.name %></h6>
           </div>
