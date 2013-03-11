@@ -5,7 +5,7 @@
     <ul class="nav-bar">
       <li class="active" class="support tag"><%= link_to('Yakbat', root_path) %></li>
 
-    <% if current_teacher.present? %>
+    <% if signed_in? %>
       <li class="has-flyout">
         <%= link_to('My Classrooms', teacher_path(@auth) ) %>
         <a href="#" class="flyout-toggle"><span></span></a>
