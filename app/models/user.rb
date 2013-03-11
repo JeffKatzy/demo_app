@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_ids
+	attr_accessible :name, :email, :cell_number, :lecture_id
   scope :incomplete, where("name IS NULL OR email IS NULL")
 
   belongs_to :lecture
@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def new_user?
-    classroom_id == nil && lecture_id == nil && classroom_id == nil
+    classroom_id == nil && lecture_id == nil && classrooms == []
   end
 
  def advance_lecture_and_set_questions
