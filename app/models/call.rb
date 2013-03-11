@@ -28,20 +28,23 @@ class Call < ActiveRecord::Base
   call_flow :state, :initial => :initial do
 
     state :initial do
+      Rails.logger.warn("in initial")
      event :incoming_call, :to => :greeting
     end
 
     state :greeting do
       # TODO if user has a current question id, transition to play_question
       # TODO else transition to play_lecture
+      Rails.logger.warn("in greeting")
       event :greeted, :to => :advance_user
       event :no_classroom, :to => :gather_classroom_number
       event :new_user, :to => :play_demo
 
       response do |x|
-        # if user.new_user?
-          # x.Say "Hi new user"
-          #x.Redirect flow_url(:new_user)
+         if user.new_user?
+          Rails.logger.warn("in new user")
+           x.Say "Hi new user"
+          x.Redirect flow_url(:no_classroom)
         if user.classroom_id == nil
           x.Say "Hi new user"
           x.Say "It looks like you are not assigned to a classroom.  Let's take
