@@ -1,8 +1,6 @@
 
 <!-- End Navigation -->
 
-      <div class="row">
-
   <!-- Side Bar -->
 
         <div class="three mobile-four columns">
@@ -35,27 +33,75 @@
 </dl>
 <ul class="tabs-content contained nine columns">
   <li class="active" id="simpleContained1Tab">
+    <div class="row">
       <dl class="vertical tabs pill two columns">
         <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
         <dd><a href="#vertical2">Topic</a></dd>
         <dd><a href="#vertical3">Time per lecture</a></dd>
       </dl>
-      <% @user.user_answers.each do |user| %>
-        <div class="eight columns">
-          <div class="row">
+      <div class="ten columns percent_correct">
+            <% @current_lectures.each do |user_lecture| %>
 
-          <a href=<%= user_answer_path(user_answer) %> >
-            <div class="four mobile-two columns">
-
-              <div class="panel">
-                <h6 class="subheader"><%= "Correct Answers" %></h6>
-              </div>
+          <div class="four columns">
+            <div class="panel <%= performance(user_lecture) %>">
+              <h6 class="subheader"><%= user_lecture.lecture.name %></h6>
             </div>
-          </a>
-      <% end %>
+          </div>
+            <% end %>
+      </div>
+
+      <div class="ten columns topic">
+        <% @current_lectures.each do |user_lecture| %>
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= user_lecture.lecture.name %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="ten columns time_per_lecture">
+        <% @current_lectures.each do |user_lecture| %>
+
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= user_lecture.lecture.name %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
   </li>
-  <li id="simpleContained2Tab">This is simple tab 2s content. Now you see it!</li>
-  <li id="simpleContained3Tab">This is simple tab 3s content.</li>
+
+  <li id="simpleContained2Tab">
+    <dl class="vertical tabs pill two columns">
+      <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
+      <dd><a href="#vertical2">Topic</a></dd>
+      <dd><a href="#vertical3">Time per lecture</a></dd>
+    </dl>
+    <% @todays_lectures.each do |user_lecture| %>
+          <div class="four columns">
+            <div class="panel <%= performance(user_lecture) %>">
+              <h6 class="subheader"><%= user_lecture.lecture.name %></h6>
+            </div>
+          </div>
+    <% end %>
+  </li>
+  <li id="simpleContained3Tab">
+    <dl class="vertical tabs pill two columns">
+      <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
+      <dd><a href="#vertical2">Topic</a></dd>
+      <dd><a href="#vertical3">Time per lecture</a></dd>
+    </dl>
+    <% @lectures.each do |user_lecture| %>
+          <div class="four columns">
+            <div class="panel <%= performance(user_lecture) %>">
+              <h6 class="subheader"><%= user_lecture.lecture.name %></h6>
+            </div>
+          </div>
+    <% end %>
+  </li>
 </ul>
 
 

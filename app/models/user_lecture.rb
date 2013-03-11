@@ -13,14 +13,16 @@ class UserLecture < ActiveRecord::Base
 	has_many :user_answers
 	belongs_to :user
 	belongs_to :lecture
+  default_scope order('created_at DESC')
 
 	#scope :recent, lambda {
     #joins(:user_answers).group("user_lectures.id").merge(UserAnswer.recent)
   	#}
-  	scope :most_recent, limit(3).order("created_at DESC")
+  scope :correct, where(:correct => true)
+  scope :today, lambda { where("created_at > ?", 1.day.ago) }
+  scope :current, lambda { where("created_at > ?", 1.hour.ago) }
 
 	attr_accessible :lecture_id
-	scope :today, where(:correct => true)
 
 	def completed?
 		lecture.questions.count == user_answers.count

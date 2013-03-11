@@ -29,46 +29,26 @@
     <!-- Thumbnails -->
 
  <dl class="tabs contained nine columns">
-  <dt><%= "#{@user.name}'s' performance "%></dt>
-  <dd class="active"><a href="#simpleContained1">Current</a></dd>
-  <dd class="hide-for-small"><a href="#simpleContained2">Today</a></dd>
-  <dd class="hide-for-small"><a href="#simpleContained3">Overall</a></dd>
+  <dt> My classrooms</dt>
+  <dt><%= link_to "Add new classroom +", '/new_classroom' %></dt>
 </dl>
 <ul class="tabs-content contained nine columns">
   <li class="active" id="simpleContained1Tab">
-      <dl class="vertical tabs pill two columns">
-        <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
-        <dd><a href="#vertical2">Topic</a></dd>
-        <dd><a href="#vertical3">Time per lecture</a></dd>
-      </dl>
-  </li>
-  <li id="simpleContained2Tab">This is simple tab 2s content. Now you see it!</li>
-  <li id="simpleContained3Tab">This is simple tab 3s content.</li>
-</ul>
-      <% @user.user_answers.each do |user| %>
-        <div class="eight columns">
-          <div class="row">
-
-          <a href=<%= user_answer_path(user_answer) %> >
-            <div class="four mobile-two columns">
-
+    <div class="row">
+      <div class="ten columns percent_correct">
+      <% @auth.classrooms.each do |classroom| %>
+            <div class="four columns">
               <div class="panel">
-                <h6 class="subheader"><%= "Correct Answers" %></h6>
+                <h6 class="subheader"><%= link_to classroom.name, classroom %></h6>
               </div>
             </div>
-          </a>
       <% end %>
-
+      </div>
+    </div>
+  </li>
+</ul>
       <!-- Thumbnails -->
 
-      <a href="/new_classroom" >
-        <div class="four mobile-two columns">
-          <!-- <img src="http://placehold.it/1000x1000&text=Thumbnail"> -->
-          <div class="button">
-            <h5>Add New Classroom</h5>
-          </div>
-        </div>
-      </a>
 
     <!-- End Managed By -->
 

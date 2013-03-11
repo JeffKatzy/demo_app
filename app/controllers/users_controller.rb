@@ -20,8 +20,9 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
-		@lectures = @user.user_lectures.find(:all, :order => 'created_at DESC')
-		@lecture_days = @lectures.group_by { |t| t.created_at.beginning_of_day }
+		@current_lectures = @user.user_lectures.current
+		@todays_lectures = @user.user_lectures.today
+    @lectures = @user.user_lectures
 	end
 
 	def index

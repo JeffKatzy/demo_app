@@ -1,8 +1,6 @@
 
 <!-- End Navigation -->
 
-      <div class="row">
-
   <!-- Side Bar -->
 
         <div class="three mobile-four columns">
@@ -10,16 +8,14 @@
           <!-- <img src="http://placehold.it/500x500&text=Logo"> -->
 
           <div class="hide-for-small panel">
-            <h3><%= @classroom.name %></h3>
-            <h5><%= link_to("Teacher: #{@classroom.teacher.name}", @current_teacher) %></h5>
-            <h5><%= "Number: #{@classroom.number}" %></h5>
+
             <h5 class="subheader">Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.
             </h5>
           </div>
 
           <a href=<%= edit_classroom_path(@classroom)%>>
           <div class="panel callout radius" align="center">
-            <h6>Edit Classroom</h6>
+            <h6>Edit Classroom Info</h6>
           </div>
           </a>
 
@@ -29,80 +25,139 @@
 
 
     <!-- Thumbnails -->
-  <dl class="tabs contained nine columns">
-    <dt><%= "#{@classroom.name}'s' performance "%></dt>
-    <dd class="active"><a href="#simpleContained1">Current Lecture</a></dd>
-    <dd class="hide-for-small"><a href="#simpleContained2">Today</a></dd>
-    <dd class="hide-for-small"><a href="#simpleContained3">Overall</a></dd>
-  </dl>
-  <ul class="tabs-content contained nine columns">
-    <li class="active" id="simpleContained1Tab">
-        <li class="active" id="vertical1Tab">
-          <%= render '/classrooms/verticaltabs1' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 1
-        </li>
-        <li class="active" id="vertical2Tab">
-          <%= render '/classrooms/verticaltabs1' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 2
-        </li>
-        <li class="active" id="vertical3Tab">
-          <%= render '/classrooms/verticaltabs1' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 3
-        </li>
-    </li>
-    <li id="simpleContained2Tab">
-      <%= render '/classrooms/verticaltabs2' %>
-      <%= render '/classrooms/grid' %>
-        <li class="active" id="vertical4Tab">
-          <%= render '/classrooms/verticaltabs2' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 4
-        </li>
-        <li class="active" id="vertical5Tab">
-          <%= render '/classrooms/verticaltabs2' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 5
-        </li>
-        <li class="active" id="vertical6Tab">
-          <%= render '/classrooms/verticaltabs2' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 6
-        </li>
-    </li>
-    <li id="simpleContained3Tab">
-      <%= render '/classrooms/verticaltabs3' %>
-      <%= render '/classrooms/grid' %>
-        <li class="active" id="vertical7Tab">
-          <%= render '/classrooms/verticaltabs3' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 7
-        </li>
-        <li class="active" id="vertical8Tab">
-          <%= render '/classrooms/verticaltabs3' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 8
-        </li>
-        <li class="active" id="vertical9Tab">
-          <%= render '/classrooms/verticaltabs3' %>
-          <%= render '/classrooms/grid'%>
-          Hello from tab 9
-        </li>
-    </li>
-  </ul>
+<dl class="tabs contained nine columns">
+  <dt> Student Performance </dt>
+  <dd class="active"><a href="#simpleContained1">Current</a></dd>
+  <dd class="hide-for-small"><a href="#simpleContained2">Today</a></dd>
+  <dd class="hide-for-small"><a href="#simpleContained3">Overall</a></dd>
+</dl>
+<ul class="tabs-content contained nine columns">
+  <li class="active" id="simpleContained1Tab">
+    <div class="row">
+      <dl class="vertical tabs pill two columns">
+        <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
+        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical3">Time per lecture</a></dd>
+      </dl>
+      <div class="ten columns percent_correct">
+            <% @users.each do |user| %>
 
-<!-- Thumbnails -->
-
-      <a href=<%= new_user_path %> >
-        <div class="four mobile-two columns">
-          <!-- <img src="http://placehold.it/1000x1000&text=Thumbnail"> -->
-          <div class="button">
-            <h5>Add New Student</h5>
+          <div class="four columns">
+            <div class="panel <%= performance(user) %>">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
           </div>
-        </div>
-      </a>
+            <% end %>
+      </div>
+
+      <div class="ten columns topic">
+        <% @users.each do |user| %>
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="ten columns time_per_lecture">
+        <% @users.each do |user| %>
+
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </li>
+
+  <li class="active" id="simpleContained2Tab">
+    <div class="row">
+      <dl class="vertical tabs pill two columns">
+        <dd class="active"><a href="#vertical1">Percent2 Correct</a></dd>
+        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical3">Time per lecture</a></dd>
+      </dl>
+      <div class="ten columns percent_correct">
+            <% @users.each do |user| %>
+
+          <div class="four columns">
+            <div class="panel <%= performance(user) %>">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+            <% end %>
+      </div>
+
+      <div class="ten columns topic">
+        <% @users.each do |user| %>
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="ten columns time_per_lecture">
+        <% @users.each do |user| %>
+
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </li>
+
+  <li class="active" id="simpleContained3Tab">
+    <div class="row">
+      <dl class="vertical tabs pill two columns">
+        <dd class="active"><a href="#vertical1">Percent3 Correct</a></dd>
+        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical3">Time per lecture</a></dd>
+      </dl>
+      <div class="ten columns percent_correct">
+            <% @users.each do |user| %>
+
+          <div class="four columns">
+            <div class="panel <%= performance(user) %>">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+            <% end %>
+      </div>
+
+      <div class="ten columns topic">
+        <% @users.each do |user| %>
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="ten columns time_per_lecture">
+        <% @users.each do |user| %>
+
+          <div class="four columns">
+            <div class="panel">
+              <h6 class="subheader"><%= link_to user.name, user %></h6>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </li>
+
 
     <!-- End Managed By -->
 

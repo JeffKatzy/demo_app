@@ -1,0 +1,55 @@
+body {
+  padding-top: 60px;
+}
+
+form {
+  width: 80%;
+}
+
+dl.vertical.tabs.two.columns dd a{
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  vertical-align: center;
+}
+
+#grid{
+  padding-left: 5%;
+}
+
+#simpleContained1Tab{
+  overflow: auto;
+}
+
+#simpleContained2Tab{
+  overflow: auto;
+}
+
+#simpleContained3Tab{
+  overflow: auto;
+}
+
+.passed{
+  background-color: rgb(112, 232, 203)
+}
+
+.panel{
+  text-align: center;
+  height: 100%;
+}
+
+.time_per_lecture{
+  display: none;
+}
+
+.topic{
+  display: none;
+}
+
+#simpleContained3Tab {
+  display: none;
+}
+
+#simpleContained2Tab {
+  display: none;
+}

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :current_teacher
+  before_filter :current_teacher, :authentication
   include SessionsHelper
 
   def current_teacher
@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authentication
-    @auth = Teacher.find(session[:teacher_id]) if session[:teacher_id].present?
+    @auth ||= Teacher.find_by_remember_token(cookies[:remember_token]) if cookies[:remember_token]
   end
 
   def check_if_admin

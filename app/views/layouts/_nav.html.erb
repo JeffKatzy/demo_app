@@ -7,15 +7,19 @@
   <div class="nine columns">
     <ul class="nav-bar right">
       <li class="active" class="support tag"><%= link_to('Yakbat', root_path) %></li>
+
+    <% if current_teacher %>
       <li class="has-flyout">
-        <%= link_to('Browse Music', '#') %>
+        <%= link_to('My Classrooms', teacher_path(@auth) ) %>
         <a href="#" class="flyout-toggle"><span></span></a>
         <ul class="flyout">
-          <li><%= link_to('Artists', '#') %></li>
-          <li><%= link_to('Albums', '#') %></li>
-          <li><%= link_to('Genres', '#') %></li>
+          <%== classroomnav %>
+          <li><%= link_to('Add Classroom', '/new_classroom') %></li>
+
         </ul>
-      <li>
+      </li>
+    <% end %>
+
       <%== intellinav %>
       <!-- <li><%= link_to('Yakbat', root_path) %></li>
       <li><%= link_to('create account', '#') %> </li>

@@ -16,3 +16,5 @@
 //= require 'foundation/javascripts/modernizr.foundation.js'
 //= require 'foundation/javascripts/foundation.min.js'
 //= require 'foundation/javascripts/app.js'
+//= require 'demo_app'
+//= require 'jquery.isotope.min.js'

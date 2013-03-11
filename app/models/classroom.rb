@@ -11,7 +11,7 @@
 #
 
 class Classroom < ActiveRecord::Base
-	attr_accessible :name, :number
+	attr_accessible :name, :number, :teacher_id
   has_many :classroom_designations
 	has_many :users, :through => :classroom_designations
 	belongs_to :teacher

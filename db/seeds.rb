@@ -40,10 +40,13 @@
 #  answer                       :integer
 #  lecture_id                   :integer
 
+Question.delete_all
 User.delete_all
+Lesson.delete_all
+Lecture.delete_all
 UserAnswer.delete_all
 UserLecture.delete_all
-
+Teacher.delete_all
 
 q1 = Question.create(name: "What is five plus five", description: "press 1 for 10", answer: 1)
 q2 = Question.create(name: "What is 5 times 5", description: "press 2 for 25", answer: 2)
@@ -95,7 +98,6 @@ u2.lecture = lec1
 u2.save
 u3.lecture = lec2
 u3.save
-
 
 u1.question = q1
 u1.save
@@ -247,8 +249,6 @@ ans14.user_lecture = ul6
 ans14.save
 ans15.user_lecture = ul6
 ans15.save
-
-
 
 cl1 = Classroom.create(name: "Physics", number: 777)
 t1 = Teacher.create(name: "Mrs. Katz", email: "ruthiteach@gmail.com", password: "tryit", password_confirmation: "tryit")

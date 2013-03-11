@@ -11,12 +11,7 @@ DemoApp::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
-  resources :questions
-
-  resources :classrooms
-  resources :users
-
-  resources :teachers
+  resources :questions, :classrooms, :users, :teachers, :user_answers, :user_lectures
 
   match '/signup',  to: 'teachers#new'
   match '/signin',  to: 'sessions#new'

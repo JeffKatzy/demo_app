@@ -22,7 +22,10 @@ class UserAnswer < ActiveRecord::Base
 
 	scope :incorrect, where(:correct => false)
 	scope :correct, where(:correct => true)
-	scope :recent, lambda { where("created_at > ?", 1.day.ago) }
+	scope :today, lambda { where("created_at > ?", 1.day.ago) }
+	scope :current, lambda { where("created_at > ?", 1.hour.ago) }
+	default_scope order('created_at DESC')
+
 
 	def self.grade
 		if percentage_correct == "no answers"

@@ -7,7 +7,8 @@ layout 'pages'
 	def create
 		@classroom = Classroom.new(params[:classroom])
 		if @classroom.save
-			redirect_to @classrooms
+			@auth.classrooms << @classroom
+			redirect_to @auth
 		else
 			render 'new'
 		end
