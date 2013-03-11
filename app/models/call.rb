@@ -45,7 +45,7 @@ class Call < ActiveRecord::Base
           Rails.logger.warn("in new user")
            x.Say "Hi new user"
           x.Redirect flow_url(:no_classroom)
-        if user.classroom_id == nil
+        elsif user.classroom_id == nil
           x.Say "Hi new user"
           x.Say "It looks like you are not assigned to a classroom.  Let's take
           care of that now."
