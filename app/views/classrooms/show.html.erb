@@ -36,16 +36,14 @@
     <div class="row">
       <dl class="vertical tabs pill two columns">
         <dd class="active"><a href="#vertical1">Percent Correct</a></dd>
-        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical2">Number Completed</a></dd>
         <dd><a href="#vertical3">Time per lecture</a></dd>
       </dl>
-      <div class="ten columns percent_correct">
+      <div class="ten columns" id="containerjeff">
             <% @users.each do |user| %>
-
-          <div class="four columns">
-            <div class="panel <%= performance(user) %>">
+          <div class="four columns percent_correct panel">
               <h6 class="subheader"><%= link_to user.name, user %></h6>
-            </div>
+              <h6 class="name"><%= user.name %></h6>
           </div>
             <% end %>
       </div>
@@ -78,7 +76,7 @@
     <div class="row">
       <dl class="vertical tabs pill two columns">
         <dd class="active"><a href="#vertical1">Percent2 Correct</a></dd>
-        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical2">Number Correct</a></dd>
         <dd><a href="#vertical3">Time per lecture</a></dd>
       </dl>
       <div class="ten columns percent_correct">
@@ -120,16 +118,15 @@
     <div class="row">
       <dl class="vertical tabs pill two columns">
         <dd class="active"><a href="#vertical1">Percent3 Correct</a></dd>
-        <dd><a href="#vertical2">Topic</a></dd>
+        <dd><a href="#vertical2">Number Completed</a></dd>
         <dd><a href="#vertical3">Time per lecture</a></dd>
       </dl>
       <div class="ten columns percent_correct">
             <% @users.each do |user| %>
-
-          <div class="four columns">
-            <div class="panel <%= performance(user) %>">
-              <h6 class="subheader"><%= link_to user.name, user %></h6>
-            </div>
+            <div class="four columns">
+              <div class="panel <%= performance(user) %>">
+                <h6 class="subheader"><%= link_to user.name, user %></h6>
+              </div>
           </div>
             <% end %>
       </div>

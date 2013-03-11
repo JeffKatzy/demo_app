@@ -1,5 +1,6 @@
 body {
-  padding-top: 60px;
+  background: white;
+  padding-top: 0px;
 }
 
 form {
@@ -30,7 +31,11 @@ dl.vertical.tabs.two.columns dd a{
 }
 
 .passed{
-  background-color: rgb(112, 232, 203)
+  background-color: rgb(112, 232, 203);
+}
+
+.green{
+  background-color: green;
 }
 
 .panel{
