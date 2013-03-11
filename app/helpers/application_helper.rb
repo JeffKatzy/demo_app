@@ -18,7 +18,7 @@ module ApplicationHelper
   def classroomnav
     links = ""
 
-    if @auth
+    if @auth.present?
       @auth.classrooms.each do |classroom|
         links += "<li>#{link_to(classroom.name, classroom)}</li>"
       end
