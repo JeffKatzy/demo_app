@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
   end
 
   def new_user?
-    classroom_id == nil && lecture_id == nil && classrooms == []
+    lecture_id == nil && classrooms == []
   end
 
  def advance_lecture_and_set_questions
