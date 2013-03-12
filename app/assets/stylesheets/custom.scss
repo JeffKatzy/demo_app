@@ -1,11 +1,16 @@
-#mybody {
-  background: red;
+body {
+  background: gray;
   padding-top: 0px;
-  background-color: red;
+  background-color: gray;
+  height: 100%
 }
 
 form {
   width: 80%;
+}
+
+.red {
+  background: red;
 }
 
 dl.vertical.tabs.two.columns dd a{
@@ -113,8 +118,7 @@ dl.vertical.tabs.two.columns dd a{
 }
 
 /* required for containers to inherit vertical size from window */
-html,
-body {
+html {
   height: 100%;
 }
 
@@ -176,6 +180,4 @@ body {
   color: white;
 }
 
-.red {
-  background: red;
-}
+

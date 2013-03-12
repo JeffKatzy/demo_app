@@ -4,10 +4,10 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		@teacher = Teacher.find_by_email(params[:session][:email].downcase)
-		if @teacher && @teacher.authenticate(params[:session][:password])
-			sign_in @teacher
-			redirect_to @teacher
+		@teacher = Teacher.where(:email => params[:session][:email]).first
+		if @teacher.present? && @teacher.authenticate(params[:session][:password])
+			session[:teacher_id] = @teacher.id
+			redirect_to(root_path)
 			flash[:success] = "Welcome to the Sample App!"
 		else
 			flash.now[:error] = 'Invalid email/password combination'
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 	end
 
 	def destroy
-		sign_out
-		redirect_to root_url
+		session[:teacher_id] = nil
+		redirect_to root_path
 	end
 end
