@@ -145,11 +145,11 @@ class Call < ActiveRecord::Base
           Let's try it again."
           x.Redirect flow_url(:wrong_number)
         else
-          user.assign_classroom(digits)
+          classroom = user.assign_classroom(digits)
           user.save
             x.Say "Great you are now in the
-            classroom #{user.classroom.name} which is
-            taught by #{user.classroom.teacher.name}"
+            classroom #{classroom.try(:name)} which is
+            taught by #{classroom.teacher.try(:name)}"
             x.Redirect flow_url(:correct_number)
         end
       end

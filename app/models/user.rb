@@ -32,8 +32,10 @@ class User < ActiveRecord::Base
     if Classroom.find_by_number(classroom) == nil
       "no classroom"
     else
-      classrooms << Classroom.find_by_number(classroom)
+      classroom = Classroom.find_by_number(classroom)
+      classrooms << classroom
     end
+    classroom
   end
 
   def current_lecture #create a filter for today's calls, so that it reads, if today's calls are nil
