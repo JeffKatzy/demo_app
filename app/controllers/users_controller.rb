@@ -6,12 +6,11 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(params[:user])
-		@user.assign_classroom(@user.classroom_id)
 		if @user.save
       if @auth.present?
         redirect_to @auth
       else
-			 redirect_to @user
+			 redirect_to @auth
       end
 		else
 			render 'new'

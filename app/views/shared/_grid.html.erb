@@ -1,0 +1,21 @@
+<div id="container">
+  <% @users.each do |user| %>
+    <% user_lectures = user.lectures %>
+    <% if user_lectures.present? %>
+      <div class="percent_correct element <%= performance(lecture) %>">
+          <h6 class="subheader"><%= name_number(user) %></h6>
+          <h6 class="name"><%= user.name %></h6>
+          <h6 class="weight"><%= user.lecture.user_answers.percent_correct %></h6>
+          <h6 class="lecture name"><%= user_lectures.try(:lecture).try(:name) if lectures = user.user_lectures.current.last %></h6>
+          <h6 class="number"><%= user.name %></h6>
+      </div>
+    <% else %>
+      <div class="percent_correct element default_color">
+          <h6 class="symbol"><%= name_number(user) %></h6>
+          <h6 class="username"><%= user.name %></h6>
+          <h6 class="name"><%= rand(100) %></h6>
+          <h6 class="percentage"> 0/0 correct </h6>
+      </div>
+    <% end %>
+  <% end %>
+</div>

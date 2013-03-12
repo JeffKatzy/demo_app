@@ -1,0 +1,7 @@
+<div class="percent_correct element">
+  <h6 class="subheader"><%= name_number(user) %></h6>
+  <h6 class="name"><%= user.name %></h6>
+  <h6 class="weight"><%= current_lecture.user_answers.percent_correct %></h6>
+  <h6 class="lecture name"><%= user.user_lectures.current.last.try(:lecture).try(:name) %></h6>
+  <h6 class="number"><%= user.name %></h6>
+</div>

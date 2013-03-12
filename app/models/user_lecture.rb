@@ -27,4 +27,5 @@ class UserLecture < ActiveRecord::Base
 	def completed?
 		lecture.questions.count == user_answers.count
 	end
+    # map{|lecture| lecture.user_answers }.flatten.map(&:correct).count(true) / map{|lecture| lecture.user_answers }.flatten.map(&:correct).count
 end

@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :cell_number, :lecture_id
+	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_ids
   scope :incomplete, where("name IS NULL OR email IS NULL")
 
   belongs_to :lecture
@@ -27,6 +27,19 @@ class User < ActiveRecord::Base
   scope :top_users, select("users.id, count(user_answers.correct) AS user_answers_correct_count").joins(:user_answers).order("user_answers_correct_count DESC")
 
 	has_many :calls
+
+
+  def lecture_percentage_correct
+    user_lectures.map(&:user_answers).flatten.map(&:correct).count(true) * 100 / user_lectures.map(&:user_answers).flatten.count if !user_lectures.empty?
+  end
+
+  def current_percentage_correct
+    user_lectures.current.last.try(:user_answers).flatten.map(&:correct).count(true) * 100 / user_lectures.map(&:user_answers).flatten.count if !user_lectures.current.empty?
+  end
+
+  def lecture_percentage_correct_today
+    user_lectures.today.map(&:user_answers).flatten.map(&:correct).count(true) * 100 / user_lectures.today.map(&:user_answers).flatten.count if !user_lectures.today.empty?
+  end
 
   def assign_classroom(classroom)
     if Classroom.find_by_number(classroom) == nil
