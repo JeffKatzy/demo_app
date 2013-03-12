@@ -15,7 +15,7 @@
       <%= f.label :cell_number %>
     <br>
       <%= f.text_field :cell_number %>
-      <% if @current_teacher.present? %>
+      <% if @auth.present? %>
         <%= render 'users/checkboxes' %>
       <% else %>
         <%= f.label :classroom_number %>

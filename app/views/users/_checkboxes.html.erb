@@ -1,5 +1,5 @@
 <h3> Add to your classrooms </h3>
-<% @current_teacher.classrooms.each do |classroom| %>
+<% @auth.classrooms.each do |classroom| %>
   <%=  classroom.name %>
   <%= check_box_tag 'user[classroom_ids][]', classroom.id, classroom.in?(@user.classrooms.to_a) %>
 <% end %>

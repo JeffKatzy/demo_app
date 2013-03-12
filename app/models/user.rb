@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     if Classroom.find_by_number(classroom) == nil
       "no classroom"
     else
-      self.classroom_id = Classroom.find_by_number(classroom).id
+      classrooms << Classroom.find_by_number(classroom)
     end
   end
 

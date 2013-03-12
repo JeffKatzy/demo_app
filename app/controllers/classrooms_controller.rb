@@ -38,13 +38,13 @@ layout 'pages'
 	end
 
 	def new_teacher_classroom
-		@classroom = @current_teacher.classrooms.build
+		@classroom = @auth.classrooms.build
 	end
 
 	def create_teacher_classroom
-		@classroom = @current_teacher.classrooms.build(params[:classroom])
+		@classroom = @auth.classrooms.build(params[:classroom])
 		if @classroom.save
-			redirect_to @current_teacher
+			redirect_to @auth
 		else
 			render 'new'
 		end

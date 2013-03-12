@@ -8,8 +8,8 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		@user.assign_classroom(@user.classroom_id)
 		if @user.save
-      if @current_teacher.present?
-        redirect_to @current_teacher
+      if @auth.present?
+        redirect_to @auth
       else
 			 redirect_to @user
       end
