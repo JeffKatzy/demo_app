@@ -47,6 +47,7 @@ Lecture.delete_all
 UserAnswer.delete_all
 UserLecture.delete_all
 Teacher.delete_all
+Classroom.delete_all
 
 q1 = Question.create(name: "What is five plus five", description: "press 1 for 10", answer: 1)
 q2 = Question.create(name: "What is 5 times 5", description: "press 2 for 25", answer: 2)
