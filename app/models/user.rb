@@ -30,15 +30,30 @@ class User < ActiveRecord::Base
 
 
   def lecture_percentage_correct
-    user_lectures.map(&:user_answers).flatten.map(&:correct).count(true) * 100 / user_lectures.map(&:user_answers).flatten.count if !user_lectures.empty?
+      user_answers = user_lectures.map(&:user_answers)
+    if user_answers.present?
+      user_answers.flatten.map(&:correct).count(true) * 100 / user_answers.flatten.count
+    else
+      0
+    end
   end
 
   def current_percentage_correct
-    user_lectures.current.last.try(:user_answers).flatten.map(&:correct).count(true) * 100 / user_lectures.map(&:user_answers).flatten.count if !user_lectures.current.empty?
+    user_answers = user_lectures.current.last.try(:user_answers)
+    if user_answers.present?
+      user_answers.flatten.map(&:correct).count(true) * 100 / user_answers.flatten.count
+    else
+      0
+    end
   end
 
   def lecture_percentage_correct_today
-    user_lectures.today.map(&:user_answers).flatten.map(&:correct).count(true) * 100 / user_lectures.today.map(&:user_answers).flatten.count if !user_lectures.today.empty?
+    user_answers = user_lectures.today.map(&:user_answers)
+    if user_answers.present?
+      user_answers.flatten.map(&:correct).count(true) * 100 / user_answers.flatten.count
+    else
+      0
+    end
   end
 
   def assign_classroom(classroom)
