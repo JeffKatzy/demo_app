@@ -51,7 +51,7 @@ class Call < ActiveRecord::Base
           care of that now."
           x.Redirect flow_url(:no_classroom)
         else
-          x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number one to skip a lecture and move on to questions."
+          x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number one to repeat a lecture or the two to skip a lecture and move on to questions."
           x.Redirect flow_url(:greeted)
         end
       end
@@ -134,7 +134,6 @@ class Call < ActiveRecord::Base
 
     state :evaluate_classroom_number do
       event :no_number, :to => :advance_user
-      event :correct_number, :to => :advance_user
       event :wrong_number, :to => :gather_classroom_number
       response do |x|
         if digits == '999'
@@ -150,7 +149,7 @@ class Call < ActiveRecord::Base
             x.Say "Great you are now in the
             classroom #{classroom.try(:name)} which is
             taught by #{classroom.teacher.try(:name)}"
-            x.Redirect flow_url(:correct_number)
+            x.Redirect flow_url(:no_number)
         end
       end
     end
