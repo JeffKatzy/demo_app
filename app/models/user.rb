@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   end
 
   def current_percentage_correct
-    user_answers = user_lectures.current.last.try(:user_answers)
+    user_answers_current
     if (user_answers.try(:flatten).try(:count) != 0) && (user_answers.try(:flatten).try(:count) != nil)
       user_answers.try(:flatten).map(&:correct).count(true) * 100 / user_answers.try(:flatten).count
     else
@@ -48,10 +48,32 @@ class User < ActiveRecord::Base
   end
 
   def lecture_percentage_correct_today
-    user_answers = user_lectures.today.map(&:user_answers)
+    user_answers_today
     if (user_answers.try(:flatten).try(:count) != 0) && (user_answers.try(:flatten).try(:count) != nil)
       user_answers.flatten.map(&:correct).count(true) * 100 / user_answers.try(:flatten).count
     else
+      0
+    end
+  end
+
+  def user_answers_today
+    user_answers = user_lectures.today.map(&:user_answers)
+  end
+
+  def user_answers_current
+    user_answers = user_lectures.current.last.try(:user_answers)
+  end
+
+  def user_answers_current_count
+    answers = user_answers_current.try(:count)
+    if answers.nil? || user_answers_current.try(:empty?)
+      0
+    end
+  end
+
+  def user_answers_today_count
+    answers = user_answers_today.try(:count)
+    if answers.nil? || user_answers_today.try(:empty?)
       0
     end
   end

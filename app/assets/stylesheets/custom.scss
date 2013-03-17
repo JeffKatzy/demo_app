@@ -8,15 +8,15 @@ form {
 }
 
 .green{
-  background-color: green;
+  background-color: #70E878;
 }
 
 .red {
-  background-color: red;
+  background-color: #FF5B5B;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #FFE96B;
 }
 
 .default_color {
@@ -50,6 +50,15 @@ dl.vertical.tabs.two.columns dd a{
   background-color: rgb(112, 232, 203);
 }
 
+.symbol a{
+  color: white;
+  padding-left: 10%
+}
+
+.tabs-content{
+  background-color: #3E454C;
+
+}
 
 .panel{
   text-align: center;
@@ -152,6 +161,7 @@ html {
 .element * {
   position: absolute;
   margin: 0;
+  padding: 5px;
 }
 
 
@@ -193,7 +203,7 @@ html {
   font-size: 1.05em;
 }
 
-.element .percentage {
+.element .number_complete {
   font-size: 0.9em;
   left: 0.5em;
   bottom: 0.5em;

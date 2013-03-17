@@ -39,7 +39,6 @@ class UserAnswer < ActiveRecord::Base
 		end
 	end
 
-
 	def self.percentage_correct
 		if count == 0
 			"no answers"

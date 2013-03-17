@@ -165,6 +165,7 @@ class Call < ActiveRecord::Base
             x.Redirect flow_url(:going_to_lecture)
           else
             # x.Say "Going to question #{user.question.id}"
+
             x.Redirect flow_url(:going_to_question)
           end
        end
@@ -172,18 +173,15 @@ class Call < ActiveRecord::Base
 
     state :play_lecture do
 
-      event :lecture_finished, :to => :repeat_or_advance
+      event :lecture_finished, :exito => :repeat_or_advance
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
-          x.Play user.lecture.soundfile.url
           user_lecture = user.user_lectures.build(:lecture_id => user.lecture.id)
+          x.Play user.lecture.soundfile.url
+          user_lecture.end_time = Time.now
           user_lecture.save
         end
-        #x.Play "http://com.twilio.music.classical.s3.amazonaws.com/Mellotroniac_-_Flight_Of_Young_Hearts_Flute.mp3",
-        #HOLD_MUSIC.sort_by { rand }.each do |url|
-        #  x.Play url
-        #end
       end
     end
 

@@ -7,6 +7,7 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  user_id    :integer
+#  end_time   :datetime
 #
 
 class UserLecture < ActiveRecord::Base
@@ -14,6 +15,7 @@ class UserLecture < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :lecture
   default_scope order('created_at DESC')
+  attr_accessible :end_time
 
 	#scope :recent, lambda {
     #joins(:user_answers).group("user_lectures.id").merge(UserAnswer.recent)
