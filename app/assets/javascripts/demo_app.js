@@ -1,14 +1,14 @@
 $(function(){
-  setLayout();
+  // setLayout();
    sortData();
    $('.percent_correct').click(sortPercentCorrect);
-   $('.number_completed').click(sortNumberComplete);
-   $('.tab').click(setLayout);
+    $('.number_completed').click(sortNumberComplete);
+   // $('.tab').click(setLayout);
 });
 
 
 function setLayout(){
-  $('.container').isotope({ layoutMode : 'fitRows' });
+  $('#container1').isotope({ layoutMode : 'fitRows' });
   // $('#container1').isotope({ layoutMode : 'fitRows' });
   // $('#container2').isotope({ layoutMode : 'fitRows' });
   // $('#container3').isotope({ layoutMode : 'fitRows' });
@@ -16,11 +16,16 @@ function setLayout(){
 
 function sortData(){
    $('.container').isotope({
-  getSortData : {
+    getSortData : {
     name : function ( $elem ) {
-    return parseInt( $elem.find('.name').text(), 10 );
+      console.log($elem.find('.name').text());
+      return parseInt( $elem.find('.name').text(), 10 );
+      },
+
+      symbol : function ( $elem ) {
+      return $elem.find('.number_complete').text();
+      }
     }
-  }
   });
 }
 

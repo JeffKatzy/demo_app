@@ -49,4 +49,7 @@ layout 'pages'
 			render 'new'
 		end
 	end
+
+	def test
+	end
 end

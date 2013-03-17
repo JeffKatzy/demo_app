@@ -41,14 +41,14 @@
         <dd><a href="#vertical3">Time per lecture</a></dd>
       </dl>
 
-      <div class="container" id="conatainer1">
+      <div class="container" id="container1">
         <% @users.each do |user| %>
           <% current_lecture = user.user_lectures.current.last %>
           <% if current_lecture.present? %>
             <div class="percent_correct element <%= evaluate(user.current_percentage_correct) %>">
                 <h6 class="symbol"><%= name_number(user) %></h6>
                 <h6 class="name"><%= current_lecture.user_answers.percent_correct %></h6>
-                <h6 class="lecture name"><%= user.user_lectures.current.last.try(:lecture).try(:name) %></h6>
+                <h6 class="lecture_name"><%= user.user_lectures.current.last.try(:lecture).try(:name) %></h6>
                 <h6 class="number"><%= user.name %></h6>
                 <h6 class="number_complete"> user.user_answers_current_count </h6>
             </div>

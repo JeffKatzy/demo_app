@@ -9,6 +9,7 @@ DemoApp::Application.routes.draw do
   post "calls/exception"
   root :to => "static_pages#home"
 
+  get '/test' => 'classrooms#test'
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
   resources :questions, :classrooms, :users, :teachers, :user_answers, :user_lectures
