@@ -104,18 +104,22 @@
           <% @users.each do |user| %>
             <% lectures = user.user_lectures %>
             <% if lectures.present? %>
-              <div class="percent_correct element <%=  evaluate(user.lecture_percentage_correct) %>">
-                <h6 class="symbol"><%= name_number(user) %></h6>
-                <h6 class="name"><%= user.lecture_percentage_correct %></h6>
-                <h6 class="number_complete"> <%= user.user_answers.try(:count) %></h6>
-              </div>
+              <a href = <%= user_path(user) %> >
+                <div class="percent_correct element <%=  evaluate(user.lecture_percentage_correct) %>">
+                  <h6 class="symbol"><%= name_number(user) %></h6>
+                  <h6 class="name"><%= user.lecture_percentage_correct %></h6>
+                  <h6 class="number_complete"> <%= user.user_answers.try(:count) %></h6>
+                </div>
+              </a>
             <% else %>
-              <div class="percent_correct element <%= evaluate(user.lecture_percentage_correct) %>">
-                <h6 class="symbol"><%= name_number(user) %></h6>
-                <h6 class="username"><%= user.name %></h6>
-                <h6 class="name"><%= user.lecture_percentage_correct %></h6>
-                <h6 class="number_complete"> <%= user.user_answers.try(:count) %></h6>
-              </div>
+              <a href = <%= user_path(user) %> >
+                <div class="percent_correct element <%= evaluate(user.lecture_percentage_correct) %>">
+                  <h6 class="symbol"><%= name_number(user) %></h6>
+                  <h6 class="username"><%= user.name %></h6>
+                  <h6 class="name"><%= user.lecture_percentage_correct %></h6>
+                  <h6 class="number_complete"> <%= user.user_answers.try(:count) %></h6>
+                </div>
+              </a>
               <% end %>
             <% end %>
           </div>
