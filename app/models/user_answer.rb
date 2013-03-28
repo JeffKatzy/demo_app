@@ -41,7 +41,7 @@ class UserAnswer < ActiveRecord::Base
 
 	def self.percentage_correct
 		if count == 0
-			"no answers"
+			0
 		else
 			(correct.count.to_f / count)*100
 		end

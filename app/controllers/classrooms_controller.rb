@@ -17,6 +17,7 @@ layout 'pages'
 	def show
 		@classroom = Classroom.find(params[:id])
 		@users = @classroom.users
+		@answers = UserAnswer.today.where(user_id: @users.map(&:id))
 	end
 
 	def index
@@ -50,6 +51,22 @@ layout 'pages'
 		end
 	end
 
-	def test
+	def demo
+		@classroom = Classroom.find(5)
+		@users = @classroom.users
+		@answers = UserAnswer.today.where(user_id: @users.map(&:id))
+	end
+
+	def getinfo
+		@classroom = Classroom.find(params[:classroom])
+		@users = @classroom.users
+		user_ids = @users.map(&:id)
+		if params[:attr] == 'current'
+			@answers = UserAnswer.current.where(user_id: user_ids)
+		elsif params[:attr] == 'today'
+			@answers = UserAnswer.today.where(user_id: user_ids)
+		else params[:attr] == 'overall'
+			@answers = UserAnswer.where(user_id: user_ids )
+		end
 	end
 end

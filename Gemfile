@@ -18,6 +18,8 @@ gem 'googlecharts'
 gem 'bcrypt-ruby'
 gem 'pg'
 gem 'jquery-rails'
+gem 'haml'
+
 
 group :assets do
   gem 'sass-rails', "  ~> 3.2.4"

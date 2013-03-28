@@ -10,8 +10,9 @@ module ApplicationHelper
       links += "<li>#{link_to('edit profile', edit_teacher_path(@auth))}</li>"
       links += "<li>#{link_to('Logout ' + @auth.name + ' - ', signout_path, :method => 'delete')}</li>"
     else
-      "<li>#{link_to('Create Account', new_teacher_path)}</li>" +
-      "<li>#{link_to('Signin', signin_path)}</li>"
+      "<li>#{link_to('Register', new_teacher_path, :id => 'register_btn')}</li>" +
+      "<li>#{link_to('Signin', signin_path, :remote => true, :id => 'login_btn')}</li>" +
+      "<li>#{link_to('Demo', '/classrooms/5')}</li>"
     end
   end
 

@@ -1,15 +1,8 @@
 DemoApp::Application.routes.draw do
-  get "teachers/new"
-
-  get "static_pages/home"
-  get "static_pages/help"
-
-  post "calls/create"
-  post "calls/flow"
-  post "calls/exception"
+  get '/classrooms/getinfo' => 'classrooms#getinfo'
   root :to => "static_pages#home"
 
-  get '/test' => 'classrooms#test'
+  get '/demo' => 'classrooms#demo'
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
   resources :questions, :classrooms, :users, :teachers, :user_answers, :user_lectures

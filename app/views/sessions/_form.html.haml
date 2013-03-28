@@ -1,0 +1,7 @@
+#login_form.login_form
+  =form_for(:session, url: sessions_path) do |f|
+    = f.label :teacher_email
+    = f.text_field  :email
+    = f.label :teacher_password
+    = f.password_field :password
+    = f.submit "Sign in", class: "button"

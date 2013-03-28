@@ -12,7 +12,6 @@
         <ul class="flyout">
           <%== classroomnav %>
           <li><%= link_to('Add Classroom', '/new_classroom') %></li>
-
         </ul>
       </li>
     <% end %>
@@ -20,6 +19,11 @@
       <%== intellinav %>
     </ul>
   </div>
+</div>
+<div class="row">
+<div class="three columns"></div>
+<div class="one column" id='login_btn_nav'><%= render :partial=> 'sessions/form' %></div>
+<div class="eight columns"></div>
 </div>
 
 <!-- End Header and Nav -->

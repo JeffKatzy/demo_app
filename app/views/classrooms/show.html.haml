@@ -1,0 +1,19 @@
+.three.mobile-four.columns
+  <!-- <img src="http://placehold.it/500x500&text=Logo"> -->
+  .hide-for-small.panel
+    %h5.subheader
+      Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.
+    =link_to edit_classroom_path(@classroom)
+  .panel.callout.radius
+    %h6 Edit Classroom Info
+%dl.tabs.contained.nine.columns#tab_grid
+  %dt Student Performance
+  %dt= link_to "Add new student", new_user_path
+  %dd#current.active.tab.upper.navcont
+    = link_to 'Current', "#simpleContained1"
+  %dd#today.hide-for-small.tab.upper.navcont
+    = link_to 'Today', "#simpleContained2"
+  %dd#overall.hide-for-small.tab.upper.navcont
+    = link_to 'Overall', "#simpleContained3"
+%ul.tabs-content.contained.nine.columns#other
+  = render :partial => 'grid', :locals => { :users => @users, :classroom => @classroom, :answers => @answers }

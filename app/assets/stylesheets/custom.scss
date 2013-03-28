@@ -1,3 +1,37 @@
+
+
+.login_form {
+  width: 300px;
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(115, 103, 102, .8);
+  border-radius: 4%;
+  z-index: 999;
+  display: none;
+}
+
+.register_form {
+  width: 300px;
+  position: absolute;
+  right: 0;
+  padding: 10px;
+  background-color: rgba(115, 103, 102, .8);
+  border-radius: 4%;
+  z-index: 888;
+}
+
+#login_btn_nav {
+  position: relative;
+  right: 0;
+}
+
+.login_form label {
+  color: #fff;
+}
+
+
+
 body {
   padding-top: 0px;
   height: 100%
@@ -55,7 +89,7 @@ dl.vertical.tabs.two.columns dd a{
   background-color: rgb(112, 232, 203);
 }
 
-.symbol a{
+.name a{
   color: white;
   padding-left: 10%
 }
@@ -230,6 +264,7 @@ html {
   color: #FFF;
 }
 .element.large .symbol {
+  padding-top: none;
   font-size: 4.5em;
 }
 
@@ -237,10 +272,16 @@ html {
   color: #000;
 }
 
-.element .name {
-  left: 0.5em;
-  bottom: 1.6em;
-  font-size: 1.05em;
+.element .percentage_correct {
+  right: 1.5em;
+  bottom: .5em;
+  font-size: .9em;
+}
+
+.element .lecture_name {
+  right: 1.5em;
+  top: 3.2em;
+  font-size: .9em;
 }
 
 .username {

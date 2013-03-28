@@ -1,0 +1,18 @@
+%li.active#simpleContained1Tab
+  .row
+    %dl.vertical.tabs.pill.two.columns
+      %dd.active#percent_correct
+        = link_to "Percent Correct", "#vertical1"
+      %dd#number_completed
+        = link_to "Number Completed", "#vertical2"
+      %dd#time
+        = link_to "Time per lecture", "#vertical3"
+    .container#container1{:'data-classroom' => @classroom.id}
+      - @users.each do |user|
+        - answers = @answers.where(user_id: user.id)
+        .percent_correct.element{:class => "#{evaluate(answers.percentage_correct)}"}
+          %h6.name= name_number(user)
+          %h6.percentage_correct= answers.percentage_correct
+          %h6.lecture_name= answers.try(:last).try(:lecture).try(:name)
+          %h6.number_complete= answers.count
+

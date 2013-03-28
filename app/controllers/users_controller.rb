@@ -24,6 +24,8 @@ class UsersController < ApplicationController
     @lectures = @user.user_lectures
 	end
 
+
+
 	def index
 		@classroom = Classroom.find(params[:classroom_id])
 		@users = @classroom.users
