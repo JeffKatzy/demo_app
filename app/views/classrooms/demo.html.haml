@@ -8,11 +8,6 @@
 %dl.tabs.contained.nine.columns#tab_grid
   %dt Student Performance
   %dt= link_to "Add new student", new_user_path
-  %dd#current.active.tab.upper.navcont
-    = link_to 'Current', "#simpleContained1"
-  %dd#today.hide-for-small.tab.upper.navcont
-    = link_to 'Today', "#simpleContained2"
-  %dd#overall.hide-for-small.tab.upper.navcont
-    = link_to 'Overall', "#simpleContained3"
+  = render 'classrooms/tabs'
 %ul.tabs-content.contained.nine.columns#other
   = render :partial => 'grid_demo', :locals => { :users => @users, :classroom => @classroom, :answers => @answers }

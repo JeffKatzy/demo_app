@@ -5,10 +5,10 @@ layout 'pages'
 	end
 
 	def create
+
 		@classroom = Classroom.new(params[:classroom])
 		if @classroom.save
 			@auth.classrooms << @classroom
-			redirect_to @auth
 		else
 			render 'new'
 		end
@@ -18,10 +18,11 @@ layout 'pages'
 		@classroom = Classroom.find(params[:id])
 		@users = @classroom.users
 		@answers = UserAnswer.today.where(user_id: @users.map(&:id))
+		@user = User.new
 	end
 
 	def index
-		@classroom = Classroom.all
+		@classrooms = @auth.classrooms
 	end
 
 	def edit
@@ -51,7 +52,11 @@ layout 'pages'
 		end
 	end
 
+	def cancel
+	end
+
 	def demo
+		@demo = true
 		@classroom = Classroom.find(5)
 		@users = @classroom.users
 		@answers = UserAnswer.today.where(user_id: @users.map(&:id))

@@ -6,14 +6,34 @@
     =link_to edit_classroom_path(@classroom)
   .panel.callout.radius
     %h6 Edit Classroom Info
-%dl.tabs.contained.nine.columns#tab_grid
-  %dt Student Performance
-  %dt= link_to "Add new student", new_user_path
-  %dd#current.active.tab.upper.navcont
-    = link_to 'Current', "#simpleContained1"
-  %dd#today.hide-for-small.tab.upper.navcont
-    = link_to 'Today', "#simpleContained2"
-  %dd#overall.hide-for-small.tab.upper.navcont
-    = link_to 'Overall', "#simpleContained3"
+.nine.columns#tab_grid
+  %dl.tabs.contained
+    %dt Student Performance
+    %dt
+      = link_to 'Add new student', "#", :'data-reveal-id' => "myModal"
+    %dd#current.active.tab.upper.navcont
+      = link_to 'Current', "#simpleContained1"
+    %dd#today.hide-for-small.tab.upper.navcont
+      = link_to 'Today', "#simpleContained2"
+    %dd#overall.hide-for-small.tab.upper.navcont
+      = link_to 'Overall', "#simpleContained3"
 %ul.tabs-content.contained.nine.columns#other
   = render :partial => 'grid', :locals => { :users => @users, :classroom => @classroom, :answers => @answers }
+#myModal.reveal-modal
+  %h2 Add Student
+  = form_for @user, :url => users_path, :remote => true do |f|
+    .row
+      = f.hidden_field :classroom_id, :value => @classroom.id
+      .small-3.columns
+        = f.text_field :name, :placeholder => 'Name'
+      .small-3.columns
+        = f.text_field :email, :placeholder => 'Email'
+      .small-3.columns
+        = f.text_field :cell_number, :placeholder => 'Cell Number'
+      .small-3.columns
+        = f.submit "Create", :class => 'button expand postfix'
+  %a.close-reveal-modal &#215;
+
+
+
+

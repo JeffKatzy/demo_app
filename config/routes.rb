@@ -2,6 +2,9 @@ DemoApp::Application.routes.draw do
   get '/classrooms/getinfo' => 'classrooms#getinfo'
   root :to => "static_pages#home"
 
+  get 'classrooms/cancel' => 'classrooms#cancel'
+  get 'users/cancel' => 'users#cancel'
+
   get '/demo' => 'classrooms#demo'
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]

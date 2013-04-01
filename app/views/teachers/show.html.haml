@@ -1,0 +1,25 @@
+.row
+  .three.mobile-four.columns
+    %img(src="http://placehold.it/500x500&text=Logo")
+      .hide-for-small.panel
+        %h3=@auth.name
+        %h5.subheader Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Donec dignissim nibh fermentum odio ornare sagittis.
+    .panel.callout.radius= link_to 'Edit Profile', edit_teacher_path(@auth)
+  %dl.tabs.contained.nine.columns
+    %dt My classrooms
+    %dt
+      = link_to 'Add new classroom +', "#", :'data-reveal-id' => "myModal"
+  %ul.tabs-content.contained.nine.columns
+    %li.active
+      .row
+        .ten.columns.percent_correct#classroom_grid
+          = render 'teachers/tabs_content'
+#myModal.reveal-modal
+  %h2 Add Classroom
+  = form_for @classroom, :remote => true do |f|
+    .row
+      .small-3.columns
+        = f.text_field :name, :placeholder => 'Name'
+      .small-3.columns
+        = f.submit "Create", :class => 'button expand postfix'
+  %a.close-reveal-modal &#215;

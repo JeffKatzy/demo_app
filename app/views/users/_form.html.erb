@@ -1,0 +1,21 @@
+<div id="user_form" >
+  <div class="row">
+    <%= form_for @user, :url => users_path, :remote => true do |f| %>
+    <div class="small-3 columns">
+        <%= f.text_field :name, :placeholder => 'Name' %>
+    </div>
+    <div class="small-3 columns">
+        <%= f.text_field :email, :placeholder => 'Email' %>
+    </div>
+    <div class="small-3 columns">
+        <%= f.text_field :cell_number, :placeholder => 'Cell Number' %>
+    </div>
+    <div class="small-3 columns">
+      <%= f.submit "Create", :class => 'button expand postfix' %>
+    </div>
+      <% end %>
+    <div class="small-3 columns" id="cancel_btn" >
+      <%= link_to "Cancel", users_cancel_path, :remote => true %>
+    </div>
+  </div>
+</div>

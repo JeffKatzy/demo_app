@@ -1,6 +1,11 @@
+#user
+{
+  position: relative;
+  top: 35px;
+  left: 170px;
+}
 
-
-.login_form {
+#login_form {
   width: 300px;
   position: absolute;
   right: 0;
@@ -11,14 +16,34 @@
   display: none;
 }
 
-.register_form {
+#user_form {
+  position: absolute;
+  right: 0;
+  padding-top: 5px;
+  padding-left: 3px;
+  background-color: rgba(115, 103, 102, .8);
+  border-radius: 4%;
+  z-index: 999;
+}
+
+
+#cancel_btn {
+  padding-left: -100px
+}
+
+#register_form {
   width: 300px;
   position: absolute;
   right: 0;
   padding: 10px;
   background-color: rgba(115, 103, 102, .8);
   border-radius: 4%;
-  z-index: 888;
+  z-index: 999;
+  display: none;
+}
+
+#inputter {
+  padding-left: 40px;
 }
 
 #login_btn_nav {
@@ -75,14 +100,7 @@ dl.vertical.tabs.two.columns dd a{
 
 #simpleContained1Tab{
   overflow: auto;
-}
-
-#simpleContained2Tab{
-  overflow: auto;
-}
-
-#simpleContained3Tab{
-  overflow: auto;
+  min-height: 485px;
 }
 
 .passed{

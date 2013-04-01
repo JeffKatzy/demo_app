@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def authentication
     @auth = Teacher.find(session[:teacher_id]) if session[:teacher_id].present?
   end
+
+  def reset_demo
+    @demo = false
+  end
 end

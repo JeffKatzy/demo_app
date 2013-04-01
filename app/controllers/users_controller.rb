@@ -1,20 +1,17 @@
 class UsersController < ApplicationController
   layout 'pages'
-	def new
+
+  def new
 		@user = User.new
 	end
 
 	def create
-		@user = User.new(params[:user])
-		if @user.save
-      if @auth.present?
-        redirect_to @auth
-      else
-			 redirect_to @auth
-      end
-		else
-			render 'new'
-		end
+    @user = User.create(name: params[:user][:name], email: params[:user][:email], cell_number: params[:user][:cell_number])
+    @classroom = Classroom.find(params[:user][:classroom_id].to_i)
+    @user.classrooms << @classroom
+    @user.save
+    @users = @classroom.users
+    @answers = UserAnswer.today.where(user_id: @users.map(&:id))
 	end
 
 	def show
@@ -23,8 +20,6 @@ class UsersController < ApplicationController
 		@todays_lectures = @user.user_lectures.today
     @lectures = @user.user_lectures
 	end
-
-
 
 	def index
 		@classroom = Classroom.find(params[:classroom_id])
@@ -36,12 +31,16 @@ class UsersController < ApplicationController
     render 'new'
 	end
 
-	 def update
-    		@user = User.find(params[:id])
-    	if @user.update_attributes(params[:user])
-      		redirect_to @user
-    	else
-      		render 'edit'
-    	end
-  	end
+	def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      	redirect_to @user
+    else
+      render 'edit'
+    end
+	end
+
+  def cancel
+  end
+
 end

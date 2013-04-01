@@ -29,8 +29,12 @@ class TeachersController < ApplicationController
 		end
 	end
 
+	def cancel
+	end
+
 	def show
 		@teacher = Teacher.find(params[:id])
+		@classroom = Classroom.new
 	end
 
 	def index

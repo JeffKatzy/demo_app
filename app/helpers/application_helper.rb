@@ -3,16 +3,14 @@ module ApplicationHelper
     links = ""
 
     if @auth.present?
-      "<li>#{link_to('logout' + @auth.name, signin_path, :method => :delete) }</li>"
-      # if @auth.is_admin
-        # links += "<li>#{link_to("Show Users", users_path)}</li>"
-      # end
-      links += "<li>#{link_to('edit profile', edit_teacher_path(@auth))}</li>"
-      links += "<li>#{link_to('Logout ' + @auth.name + ' - ', signout_path, :method => 'delete')}</li>"
+      links += wrap(link_to('edit profile', edit_teacher_path(@auth)))
+
+      links += wrap(link_to('Logout ' + @auth.name + ' - ', signout_path, :method => 'delete'))
+    elsif @demo.present?
     else
-      "<li>#{link_to('Register', new_teacher_path, :id => 'register_btn')}</li>" +
-      "<li>#{link_to('Signin', signin_path, :remote => true, :id => 'login_btn')}</li>" +
-      "<li>#{link_to('Demo', '/classrooms/5')}</li>"
+      links += wrap(link_to('Register', new_teacher_path, :remote => true, :id => 'register_btn'))
+      links += wrap(link_to('Signin', signin_path, :remote => true, :id => 'login_btn'))
+      links += wrap(link_to('Demo', demo_path))
     end
   end
 
@@ -25,7 +23,7 @@ module ApplicationHelper
 
     if @auth.present?
       @auth.classrooms.each do |classroom|
-        links += "<li>#{link_to(classroom.name, classroom)}</li>"
+        links += wrap(link_to(classroom.name, classroom))
       end
     end
      links
@@ -37,6 +35,10 @@ module ApplicationHelper
 
   def is_admin
     @auth.present? && @auth.is_admin
+  end
+
+  def wrap(link)
+    "<li>#{link}</li>"
   end
 
 end

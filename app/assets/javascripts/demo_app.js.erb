@@ -1,8 +1,8 @@
 $(function(){
    sortData();
-   $('#percent_correct').on('click', sortPercentCorrect);
-    $('#number_completed').on('click', sortNumberComplete);
-    $('#tab_grid').on('click', 'dd', getinfo);
+    $('body').on('click', '#percent_correct', sortPercentCorrect);
+    $('body').on('click', '#number_completed', sortNumberComplete);
+    $('body').on('click', '.navcont', getinfo);
 });
 
 function deleteClass(){
@@ -14,8 +14,8 @@ function getinfo(){
   var attr = $(this).attr('id');
   console.log(attr);
   deleteClass('active');
-  $('#' + attr).addClass('active')
-  var classroom = $('#container1').data('classroom')
+  $(this).addClass('active')
+  var classroom = $('#container').data('classroom')
   $.ajax({
     dataType: 'script',
     type: 'GET',
@@ -27,34 +27,35 @@ function getinfo(){
 
 }
 
-
 function setLayout(){
-  $('#container1').isotope({ layoutMode : 'fitRows' });
+  $('#container').isotope({ layoutMode : 'fitRows' });
 }
 
 function sortData(){
-   $('.container').isotope({
+   $('#container').isotope({
     getSortData : {
     percentage_correct : function ( $elem ) {
       console.log($elem.find('.percentage_correct').text());
       return parseInt( $elem.find('.percentage_correct').text(), 10 );
       },
 
-      symbol : function ( $elem ) {
-      return $elem.find('.number_complete').text();
+    number_complete : function ( $elem ) {
+      return parseInt($elem.find('.number_complete').text(), 10);
       }
     }
   });
 }
 
-  function sortPercentCorrect(){
+function sortPercentCorrect(){
     console.log('hello');
-  $('.container').isotope({ sortBy : 'percentage_correct', sortAscending : false });
+    sortData();
+    $('#container').isotope({ sortBy : 'percentage_correct', sortAscending : false });
   }
 
   function sortNumberComplete(){
     console.log('helloone');
-  $('.container').isotope({ sortBy : 'number_complete', sortAscending : false });
+    sortData();
+    $('#container').isotope({ sortBy : 'number_complete', sortAscending : false });
   }
 
 

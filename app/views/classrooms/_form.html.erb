@@ -1,0 +1,16 @@
+<div class="row collapse">
+  <div class="small-4 columns">
+    <%= form_for @classroom, :url => classrooms_path, :remote => true do |f| %>
+    <label for="right-label" class="right">Name</label>
+  </div>
+  <div id="inputter" class="small-4 columns">
+      <%= f.text_field :name %>
+  </div>
+  <div class="small-2 columns">
+    <%= f.submit "Create", :class => 'button expand postfix' %>
+  </div>
+    <% end %>
+  <div class="small-2 columns" id="cancel_btn" >
+    <%= link_to "Cancel", classrooms_cancel_path, :remote => true %>
+  </div>
+</div>
