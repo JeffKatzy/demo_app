@@ -17,6 +17,11 @@ class CallsController < ApplicationController
     render :xml => @call.run(params[:event])
   end
 
+  def fallback
+    find_call
+    Rails.logger.warn("in fallback, about to update #{@call.to_s} with these parsed params: #{@parsed_params}")
+  end
+
   private
 
   def parse_params

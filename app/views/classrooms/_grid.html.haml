@@ -9,10 +9,6 @@
         = link_to "Time per lecture", "#vertical3"
     #container{:'data-classroom' => @classroom.id}
       - @users.each do |user|
-        - answers = @answers.where(user_id: user.id)
-        .percent_correct.element{:class => "#{evaluate(answers.percentage_correct)}"}
-          %h6.name= name_number(user)
-          %h6.percentage_correct= answers.percentage_correct
-          %h6.lecture_name= answers.try(:last).try(:lecture).try(:name)
-          %h6.number_complete= answers.count
+        %div{ :class => user.name }
+          = render :partial => 'users/user', :locals => { :user => user, :user_answers => @answers }
 

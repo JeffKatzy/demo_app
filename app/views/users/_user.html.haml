@@ -1,0 +1,6 @@
+- answers = user_answers.where(user_id: user.id)
+.percent_correct.element{:class => "#{evaluate(answers.percentage_correct)}"}
+  %h6.name= name_number(user)
+  %h6.percentage_correct= answers.percentage_correct
+  %h6.lecture_name= answers.try(:last).try(:lecture).try(:name)
+  %h6.number_complete= answers.count
