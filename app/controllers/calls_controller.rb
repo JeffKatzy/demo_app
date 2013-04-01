@@ -21,6 +21,7 @@ class CallsController < ApplicationController
   def update_classroom_view
     find_call
     @user = @call.user
+    Rails.logger.warn("In the update classroom view action.  Calling action to add #{@user} to #{@call}")
   end
 
   private
