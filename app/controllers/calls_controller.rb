@@ -2,7 +2,7 @@ class CallsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :parse_params
   before_filter :find_and_update_call, :only => [:flow, :destroy]
-  before_filter :update_classroom_view
+  before_filter :update_classroom_view, :only => [:flow]
 
   def create
     @call = Call.create!(@parsed_params)
