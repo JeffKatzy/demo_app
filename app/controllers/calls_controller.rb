@@ -2,6 +2,7 @@ class CallsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :parse_params
   before_filter :find_and_update_call, :only => [:flow, :destroy]
+  before_filter :update_classroom_view
 
   def create
     @call = Call.create!(@parsed_params)
@@ -17,9 +18,9 @@ class CallsController < ApplicationController
     render :xml => @call.run(params[:event])
   end
 
-  def fallback
+  def update_classroom_view
     find_call
-    Rails.logger.warn("in fallback, about to update #{@call.to_s} with these parsed params: #{@parsed_params}")
+    @user = @call.user
   end
 
   private

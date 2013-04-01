@@ -22,6 +22,8 @@ class Call < ActiveRecord::Base
 
   belongs_to :user
 
+  scope :today, lambda { where("created_at > ?", 1.day.ago) }
+
   attr_accessible :to, :from, :called, :caller
   attr_accessible :account_sid, :call_sid, :call_status, :digits
   before_validation { self.state = "greeting" unless state.present? }
@@ -133,6 +135,7 @@ class Call < ActiveRecord::Base
     end
 
     state :evaluate_classroom_number do
+      event :found_number, :to => :adding_user
       event :no_number, :to => :advance_user
       event :wrong_number, :to => :gather_classroom_number
       response do |x|
@@ -149,8 +152,16 @@ class Call < ActiveRecord::Base
             x.Say "Great you are now in the
             classroom #{classroom.try(:name)} which is
             taught by #{classroom.teacher.try(:name)}"
-            x.Redirect flow_url(:no_number)
+            x.Redirect flow_url(:found_number)
         end
+      end
+    end
+
+    state :adding_user do
+      event :advance_user, :to => :advance_user
+      #Need this so that event is marked as adding the user
+      response do |x|
+        x.Redirect flow_url(:advance_user)
       end
     end
 
@@ -245,18 +256,6 @@ class Call < ActiveRecord::Base
         end
      end
 
-
-
-    #write logic for
-      #if question is correct, and
-        # if there is another question,
-            # go to the next question
-        # if there is not another question
-          # go to congrats,
-            #and do you want to go to another lecture
-      # if question is incorrect, play explanation
-        # then play next question
-      # end
 
 
 
