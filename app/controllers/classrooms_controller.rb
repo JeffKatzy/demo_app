@@ -60,6 +60,7 @@ layout 'pages'
 		@classroom = Classroom.find(5)
 		@users = @classroom.users
 		@answers = UserAnswer.today.where(user_id: @users.map(&:id))
+		@user = User.new
 	end
 
 	def getinfo
