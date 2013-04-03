@@ -18,19 +18,19 @@ class CallsController < ApplicationController
     render :xml => @call.run(params[:event])
   end
 
-  def update_classroom_view
-    find_call
-    @user = @call.user
-    Rails.logger.warn("In the update classroom view action.  Calling action to add #{@user} to #{@call}")
-    if @call.state == 'found_number'
-      $('#container').append('')
+  # def update_classroom_view
+  #   find_call
+  #   @user = @call.user
+    # Rails.logger.warn("In the update classroom view action.  Calling action to add #{@user} to #{@call}")
+    # if @call.state == 'found_number'
+    #   $('#container').append('')
       # append div with class = to set name
       #then append a partial with the right info
-    else
-      #render javascript to update existing students.
-      #empty the class, and then append the partial inside of it.
-    end
-  end
+    # else
+    #   #render javascript to update existing students.
+    #   #empty the class, and then append the partial inside of it.
+    # end
+  # end
 
   private
 
