@@ -6,9 +6,8 @@
     %button.tiny.button.round.inactive.embossed#analytics
       = image_tag('noun/chart.svg', :class => 'charticon')
       Analytics
-  .large-1.column
-    = link_to '+ Add student', "#", :'data-reveal-id' => "myModal", :class => 'tiny button round alert shadow'
 %ul.tabs-content.contained.twelve.columns#other
+  #add_student= link_to '+ Add student', "#", :'data-reveal-id' => "myModal", :class => 'tiny button round alert embossed'
   = render :partial => 'grid', :locals => { :users => @users, :classroom => @classroom, :answers => @answers }
 #myModal.reveal-modal
   %h2 Add Student

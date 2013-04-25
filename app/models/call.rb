@@ -111,10 +111,10 @@ class Call < ActiveRecord::Base
          # x.Say "Determining current segment."
           if user.on_lecture?
             #x.Say "Going to lecture #{user.lecture.id}"
+            #to rewrite on lecture as, if assignment.user_lectures.empty? (we only have one lecture per assignment.)
             x.Redirect flow_url(:going_to_lecture)
           else
             # x.Say "Going to question #{user.question.id}"
-
             x.Redirect flow_url(:going_to_question)
           end
        end
@@ -122,7 +122,7 @@ class Call < ActiveRecord::Base
 
     state :play_lecture do
 
-      event :lecture_finished, :exito => :repeat_or_advance
+      event :lecture_finished, :to => :repeat_or_advance
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do

@@ -12,9 +12,20 @@ ul {
     left: 10%;
 }
 
+#chart {
+  position: absolute;
+  left: 20%;
+  top: 0%;
+}
+
 .top-bar {
   background-color: rgb(64, 64, 64);
   margin-bottom: 0px;
+}
+
+#add_student {
+  position: absolute;
+  right: 29%;
 }
 
 .embossed {
@@ -29,7 +40,7 @@ ul {
     width: 25%;
     margin-right: auto;
     background: none;
-    border-bottom: 2px solid orange;
+    border-bottom: 2px solid #404040;
 }
 
 .top-bar ul>li a:not(.button) {

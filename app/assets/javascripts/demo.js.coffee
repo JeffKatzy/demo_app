@@ -33,6 +33,7 @@ window.app =
     $(".user_#{data.user} .number_correct").text(new_number_correct)
     $(".user_#{data.user} .percentage_correct").text(new_percentage)
   analytics_view: ->
+    $('#add_student').hide()
     $('.element .percentage_correct').hide()
     $('.element .number_complete').hide()
     $(".element").css('margin', '0px')
@@ -40,9 +41,9 @@ window.app =
     $(".element").animate({"height": "25px"}, "fast", -> $("#container").isotope( 'reloadItems' ).isotope({ layoutMode : 'straightDown' });)
     $(".element").addClass('active_student')
     $('.element').first().children('.name').click()
-    $('dl').slideToggle()
+    $('dl').slideUp()
   live_view: ->
-    $('#chart').slideToggle()
+    $('#chart').slideUp()
     $('.element').children('.name').children('a').css('background', 'rgb(64, 64, 64)').css('color', 'white')
     $('.element .percentage_correct').show()
     $('.element .number_complete').show()
@@ -50,7 +51,8 @@ window.app =
     $(".element").css('border', 'none')
     $(".element").animate({"height": "70px"}, "fast", -> $("#container").isotope( 'reloadItems' ).isotope({ layoutMode : 'masonry' });)
     $(".element").removeClass('active_student')
-    $('dl').slideToggle()
+    $('dl').slideDown()
+    $('#add_student').show()
   show_graph: ->
     user_id = $(this).children('.data').data('user_id')
     $('.element').children('.name').children('a').css('background', 'rgb(64, 64, 64)').css('color', 'white')
@@ -70,5 +72,7 @@ window.app =
       xkey: 'y',
       ykeys: ['a'],
       labels: ['Percent Correct']
+  reload: ->
+    console.log('reload')
 
 $(document).ready(app.ready)

@@ -29,6 +29,40 @@ class User < ActiveRecord::Base
 
 	has_many :calls
 
+  def register(content_received)
+      user = User.find(self.id)
+    if user.name.nil? && content_received.downcase.match(/name/).nil?
+        message = "Looks like you are not registered.  Please text the word 'name' followed by your name to register."
+        Text.send_text_to(user.cell_number, message)
+    elsif user.name == nil && content_received.downcase.match(/name/)
+      user.name = content_received.downcase.split(/name/).delete_if(&:empty?).join(" ").strip
+      user.save
+      message = "Thanks #{user.name}, you are now registered."
+      Text.send_text_to(user.cell_number, message)
+    end
+  end
+
+  def text_assignments
+    user = User.find(self.id)
+    assignments = user.assignments.order(:created_at).limit(5)
+    if assignments.present?
+      message = ""
+      assignments.each_with_index do |assignment, index|
+        message += "#{index + 1}. #{assignment.lecture.name}" + "\n"
+      end
+      Text.send_text_to(user.cell_number, message)
+    else
+      message = "You have no more assignments!"
+      Text.send_text_to(user.cell_number, message)
+    end
+  end
+
+  def add_user_to_classroom(random, user)
+    classroom = Classroom.find_by_random(random)
+    user.classrooms << classroom if user.classrooms.exclude?(classroom)
+    body = "You are now registered for #{classroom.name} class."
+    Text.send_text_to(user.cell_number, body)
+  end
 
   def lecture_percentage_correct
       user_answers = user_lectures.map(&:user_answers)
