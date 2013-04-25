@@ -1,4 +1,6 @@
 class SmsController < ApplicationController
+  skip_before_filter :verify_authenticity_token
+
   def create
     @sms = Sms.create(:incoming_number => params['From'], :content_received => params['Body'].downcase)
     user = User.where(cell_number: params['From']).first
