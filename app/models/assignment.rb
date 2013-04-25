@@ -1,6 +1,6 @@
 class Assignment < ActiveRecord::Base
   attr_accessible :classroom_id, :lecture_id, :user_id, :completed
-
+  has_one :call
   belongs_to :lecture
   belongs_to :classroom
   belongs_to :user

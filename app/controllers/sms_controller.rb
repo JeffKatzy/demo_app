@@ -16,8 +16,9 @@ class SmsController < ApplicationController
     elsif session[:state] == "choosing hw"
       chosen_hw = @sms.content_received.match(/\d/).to_s[0].to_i
       assignment = user.assignments.incomplete.order(:created_at).limit(5)[chosen_hw - 1]
-      session[:assignment_id] = assignment.id
-      #Here need to write functino for calling the user.
+      # session[:assignment_id] = assignment.id
+      assignment = Assignment.find(assignment.id)
+      redirect_to "calls/create/#{assignment.id}"
     else
       message = "You did not enter a valid text.  Please type 'projects' to see your current assignments, or 'class' followed by the classroom number to enter a classroom."
       Text.send_text_to(user.cell_number, message)

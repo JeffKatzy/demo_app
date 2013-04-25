@@ -21,7 +21,7 @@ class Call < ActiveRecord::Base
   include CallCenter
 
   belongs_to :user
-
+  belongs_to :assignment
   scope :today, lambda { where("created_at > ?", 1.day.ago) }
 
   attr_accessible :to, :from, :called, :caller
