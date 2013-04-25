@@ -31,10 +31,10 @@ class User < ActiveRecord::Base
 
   def register(content_received)
       user = User.find(self.id)
-    if user.name.nil? && content_received.downcase.match(/name/).nil?
+    if content_received.downcase.match(/name/).nil?
         message = "Looks like you are not registered.  Please text the word 'name' followed by your name to register."
         Text.send_text_to(user.cell_number, message)
-    elsif user.name == nil && content_received.downcase.match(/name/)
+    elsif content_received.downcase.match(/name/)
       user.name = content_received.downcase.split(/name/).delete_if(&:empty?).join(" ").strip
       user.save
       message = "Thanks #{user.name}, you are now registered."
