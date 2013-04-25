@@ -1,0 +1,12 @@
+%nav.top-bar#navbar
+  %ul.left
+    %li.name= link_to 'Yakbat', root_path
+  %ul.rest
+    %li= link_to 'Register', new_teacher_path, remote: true, id: 'register_btn'
+    %li= link_to 'Signin', signin_path, remote: true, id: 'login_btn'
+    %li= link_to 'Demo', demo_path
+= if @demo != true && @auth.nil?
+  #register_btn_nav
+    = render 'teachers/form'
+  #login_btn_nav
+    = render 'sessions/form'

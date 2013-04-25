@@ -1,21 +1,14 @@
-.three.mobile-four.columns
-  <!-- <img src="http://placehold.it/500x500&text=Logo"> -->
-  .hide-for-small.panel
-    %h5.subheader
-      Dial 215-874-6778 and enter classroom code 777 to try!
-  .panel.callout.radius
-    %h6 Edit Classroom Info
-.nine.columns#tab_grid
-  %dl.tabs.contained
-    %dt
-      = link_to 'Add new student', "#", :'data-reveal-id' => "myModal"
-    %dd#current.active.tab.upper.navcont
-      = link_to 'Current', "#simpleContained1"
-    %dd#today.hide-for-small.tab.upper.navcont
-      = link_to 'Today', "#simpleContained2"
-    %dd#overall.hide-for-small.tab.upper.navcont
-      = link_to 'Overall', "#simpleContained3"
-%ul.tabs-content.contained.nine.columns#other
+%nav.top-bar#classbar
+  %ul.left
+    %button.tiny.button.round.blue.inactive.embossed#live
+      = image_tag('noun/camera.svg', :class => 'camera')
+      Live
+    %button.tiny.button.round.inactive.embossed#analytics
+      = image_tag('noun/chart.svg', :class => 'charticon')
+      Analytics
+  .large-1.column
+    = link_to '+ Add student', "#", :'data-reveal-id' => "myModal", :class => 'tiny button round alert shadow'
+%ul.tabs-content.contained.twelve.columns#other
   = render :partial => 'grid', :locals => { :users => @users, :classroom => @classroom, :answers => @answers }
 #myModal.reveal-modal
   %h2 Add Student
@@ -31,4 +24,3 @@
       .small-3.columns
         = f.submit "Create", :class => 'button expand postfix'
   %a.close-reveal-modal &#215;
-

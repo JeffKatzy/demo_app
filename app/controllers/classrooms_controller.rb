@@ -5,7 +5,6 @@ layout 'pages'
 	end
 
 	def create
-
 		@classroom = Classroom.new(params[:classroom])
 		if @classroom.save
 			@auth.classrooms << @classroom
@@ -57,11 +56,22 @@ layout 'pages'
 
 	def demo
 		@demo = true
-		@classroom = Classroom.find(5)
+		@classroom = Classroom.find(15)
 		@users = @classroom.users
-		@answers = UserAnswer.today.where(user_id: @users.map(&:id))
+		@answers = UserAnswer.where(user_id: @users.map(&:id))
 		@user = User.new
 	end
+
+	def chart
+		user = User.find(params[:user_id])
+		render :json => user.user_lectures.each_with_index.map {|ul, i| { :a => ul.user_answers.percentage_correct, :y => "#{ul.lecture.name}", label: "#{ul.user.name}" }}
+  end
+
+  def assignments
+  	@current_classroom = Classroom.find(params[:id])
+  	@current_assignments = @current_classroom.assignments.map { |a| a.lecture }
+  	@available_assignments = Lecture.all - @current_classroom.assignments
+  end
 
 	def getinfo
 		@classroom = Classroom.find(params[:classroom])

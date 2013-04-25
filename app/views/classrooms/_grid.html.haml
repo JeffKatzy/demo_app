@@ -1,14 +1,18 @@
 %li.active#simpleContained1Tab
   .row
-    %dl.vertical.tabs.pill.two.columns
+    %dl.vertical.four.columns
       %dd.active#percent_correct.vert_tab
-        = link_to "Percent Correct", "#vertical1"
+        %button.tiny.button.round.embossed
+          Percent Correct
       %dd#number_completed.vert_tab
-        = link_to "Number Completed", "#vertical2"
+        %button.tiny.button.round.embossed
+          Number Completed
       %dd#time.vert_tab
-        = link_to "Time per lecture", "#vertical3"
+        %button.tiny.button.round.embossed
+          Time per lecture
     #container{:'data-classroom' => @classroom.id}
       - @users.each do |user|
         %div{ :class => user.name }
           = render :partial => 'users/user', :locals => { :user => user, :user_answers => @answers }
+    #chart
 

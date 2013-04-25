@@ -1,5 +1,6 @@
 DemoApp::Application.routes.draw do
   get '/classrooms/getinfo' => 'classrooms#getinfo'
+  get 'classrooms/chart/:user_id' => 'classrooms#chart'
   root :to => "static_pages#home"
 
   get 'classrooms/cancel' => 'classrooms#cancel'
@@ -8,8 +9,10 @@ DemoApp::Application.routes.draw do
   get '/demo' => 'classrooms#demo'
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
-  resources :questions, :classrooms, :users, :teachers, :user_answers, :user_lectures
-
+  resources :questions, :users, :teachers, :user_answers, :user_lectures
+  resources :classrooms do
+    get 'assignments', :on => :member
+  end
   match '/signup',  to: 'teachers#new'
   match '/signin',  to: 'sessions#new'
   match '/new_classroom', to: 'classrooms#new_teacher_classroom'

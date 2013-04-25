@@ -15,4 +15,10 @@ class Classroom < ActiveRecord::Base
   has_many :classroom_designations
 	has_many :users, :through => :classroom_designations
 	belongs_to :teacher
+  has_many :assignments
+
+  def classroom_push(answer)
+    Pusher["classroom_#{self.id}"].trigger('update_student_answer', {
+      user: answer.user.id, question: answer.question.id, correct: answer.correct, total_lecture_questions: answer.question.lecture.questions.count })
+  end
 end

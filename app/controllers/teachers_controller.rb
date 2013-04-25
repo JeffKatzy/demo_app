@@ -35,6 +35,8 @@ class TeachersController < ApplicationController
 	def show
 		@teacher = Teacher.find(params[:id])
 		@classroom = Classroom.new
+		@current_classroom = @teacher.classrooms.first
+		@available_assignments = Lecture.all
 	end
 
 	def index

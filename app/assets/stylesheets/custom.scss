@@ -1,3 +1,196 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
+
+ul {
+  list-style-type: none;
+}
+
+#analytics {
+    left: 40%;
+}
+#live {
+    left: 10%;
+}
+
+.top-bar {
+  background-color: rgb(64, 64, 64);
+  margin-bottom: 0px;
+}
+
+.embossed {
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+}
+
+
+#classbar {
+    padding-top: 5px;
+    width: 25%;
+    margin-right: auto;
+    background: none;
+    border-bottom: 2px solid orange;
+}
+
+.top-bar ul>li a:not(.button) {
+  border: none;
+  background: none;
+}
+
+#class_list {
+  padding-top: 12px;
+}
+
+.chart rect {
+  stroke: white;
+  fill: steelblue;
+}
+
+div.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override height later */
+    background-color: teal;
+}
+
+
+.bar {
+    display: inline-block;
+    width: 20px;
+    height: 75px;   /* We'll override height later */
+    background-color: blue;
+}
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: blue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+
+body
+{
+background-color: rgb(217, 217, 217);
+}
+
+
+nav {
+  color: white;
+}
+
+dl.vertical.four.columns {
+  width: 100px;
+  border: line solid black;
+}
+
+#time, #number_completed, #percent_correct {
+  padding: 20px 0px;
+  width: 80px
+}
+
+.tiny.button.round {
+  background-color: rgb(255, 91, 91);
+  color: black;
+  border: none;
+}
+
+.camera {
+  max-height: 12px;
+}
+
+.charticon {
+    max-height: 12px;
+}
+
+.row {
+  margin-left: 0px;
+}
+
+.row.sorting{
+  font-family: lucida;
+  color: #1a1a1a;
+  font-size: 13px;
+}
+
+#chart{
+  width: 450px;
+  height: 300px;
+  position: top;
+  top: 25px;
+  right: 200px;
+  position: absolute;
+  // display: none;
+}
+
+#navbar{
+  position: absolute;
+  bottom: 20px;
+  padding: 10px;
+  background-color: rgba(17, 17, 17, 0.9);
+}
+
+.name:hover, .rest li:hover
+{
+  background: transparent !important;
+  color: red !important;
+}
+
+.name a {
+  color: white;
+  padding-left: 50px;
+  padding-right: 80px;
+  font-size: 12px;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 3px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: rgb(64, 64, 64)
+}
+
+.element .name {
+  width: 0px;
+  height: 0px;
+  padding: 0px;
+}
+
+.rest {
+  color: white;
+  font-size: 30px;
+  padding-left: 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#navbar ul > li {
+  float: left;
+  padding-left: 20px;
+}
+
+#mybody {
+  background: url(home/Homepage.jpg) no-repeat center top fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#front{
+  margin: 0px;
+  width: 100%;
+}
+
+#headerWrapper {
+  bottom: 15px;
+  position: absolute;
+  z-index: 999;
+  background-color: rgba(17, 17, 17, 0.9);
+  width: 100%;
+  padding: 30px 35px;
+}
+
 #user
 {
   position: relative;
@@ -8,23 +201,14 @@
 #login_form {
   width: 300px;
   position: absolute;
-  right: 0;
+  top: 30px;
+  left: 30px;
   padding: 10px;
-  background-color: rgba(115, 103, 102, .8);
-  border-radius: 4%;
+  background-color: rgba(17, 17, 17, 0.9);
   z-index: 999;
   display: none;
 }
 
-#user_form {
-  position: absolute;
-  right: 0;
-  padding-top: 5px;
-  padding-left: 3px;
-  background-color: rgba(115, 103, 102, .8);
-  border-radius: 4%;
-  z-index: 999;
-}
 
 
 #cancel_btn {
@@ -34,12 +218,16 @@
 #register_form {
   width: 300px;
   position: absolute;
-  right: 0;
-  padding: 10px;
-  background-color: rgba(115, 103, 102, .8);
-  border-radius: 4%;
+  left: 30px;
+  top: 30px;
+  padding: 30px;
+  background-color: rgba(17, 17, 17, 0.9);
   z-index: 999;
   display: none;
+}
+
+#navbuttons {
+  margin: 0px;
 }
 
 #inputter {
@@ -83,6 +271,12 @@ form {
   background-color: #FFE96B;
 }
 
+.inactive {
+  background-color: gray;
+  border: black;
+  color: black;
+}
+
 .default_color {
   background-color: #888;
 }
@@ -101,21 +295,15 @@ dl.vertical.tabs.two.columns dd a{
 #simpleContained1Tab{
   overflow: auto;
   min-height: 485px;
+  border: none;
+  padding-left: 0px;
 }
 
 .passed{
   background-color: rgb(112, 232, 203);
 }
 
-.name a{
-  color: white;
-  padding-left: 10%
-}
 
-.tabs-content{
-  background-color: #3E454C;
-
-}
 
 .panel{
   text-align: center;
@@ -131,13 +319,13 @@ dl.vertical.tabs.two.columns dd a{
   display: none;
 }
 
-#simpleContained3Tab {
-  display: none;
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 3px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 3px #ccc;
+  box-shadow:         3px 3px 5px 3px #ccc;
 }
 
-#simpleContained2Tab {
-  display: none;
-}
+
 
 
 /**** Isotope Filtering ****/
@@ -195,6 +383,8 @@ html {
   height: 100%;
 }
 
+
+
 #container {
   padding: 5px;
   margin-bottom: 20px;
@@ -202,24 +392,34 @@ html {
   min-height: 300px;
 }
 
+#available_assignments {
+  border: 2px solid black;
+  height: 500px;
+}
+
+#current_assignments {
+  border: 2px solid black;
+  height: 500px;
+}
+
+
 .element {
-  width: 110px;
-  height: 110px;
-  margin: 5px;
+  margin: 20px;
+  margin-bottom: 0px;
+    width: 145px;
+    height: 70px;
   float: left;
   overflow: hidden;
   position: relative;
-  // background: #888;
-  color: #222;
-  -webkit-border-top-right-radius: 1.2em;
-      -moz-border-radius-topright: 1.2em;
-          border-top-right-radius: 1.2em;
 }
+
 .element * {
   position: absolute;
   margin: 0;
   padding: 5px;
 }
+
+
 
 
 .variable-sizes .element.width2 { width: 230px; }
@@ -263,15 +463,13 @@ html {
 .element .number_complete {
   font-size: 0.9em;
   left: 0.5em;
-  bottom: 0.5em;
+  bottom: .5em;
 }
 
-.element .number {
-  font-size: 1.25em;
-  font-weight: bold;
-  color: hsla(0,0%,0%,.5);
+.element .percentage_correct {
+  bottom: .5em;
+  font-size: 0.9em;
   right: 0.5em;
-  top: 0.5em;
 }
 
 .element .symbol {
@@ -290,18 +488,16 @@ html {
   color: #000;
 }
 
-.element .percentage_correct {
-  right: 1.5em;
-  bottom: .5em;
-  font-size: .9em;
-}
-
 .element .lecture_name {
-  right: 1.5em;
-  top: 3.2em;
-  font-size: .9em;
+  top: 2em;
+  font-size: 10px;
+  padding-top: 4px;
+  margin: 0px;
+  text-align: center;
+  width: 100%;
 }
 
 .username {
   display: none;
 }
+

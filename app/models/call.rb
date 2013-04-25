@@ -59,69 +59,7 @@ class Call < ActiveRecord::Base
       end
     end
 
-    state :play_demo do
-      event :played_demo, :to => :evaluate_demo_number
 
-      response do |x|
-        x.Gather :numDigits => '1', :action => flow_url(:played_demo) do
-            x.Play "https://s3.amazonaws.com/Sample_MP3_File/demoapp+-+music+ready+-+mini.mp3"
-        end
-      end
-    end
-
-    state :evaluate_demo_number do
-      event :skip_demo, :to => :advance_user
-      event :correct_number, :to => :correct_demo_response
-
-      response do |x|
-        if digits == '9'
-          x.Redirect flow_url(:skip_demo)
-        elsif digits == '1'
-          x.Redirect flow_url(:correct_number)
-        else
-          x.Redirect flow_url(:incorrect_number)
-        end
-      end
-    end
-
-    state :correct_demo_response do
-      event :finished_demo, :to => :advance_user
-
-      response do |x|
-         x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
-
-             @account_sid = 'ACc59c478180144c19b6029ec595f0719f'
-              @auth_token = '2273acfc6ba1c74c14e7e43d3eebe971'
-              # set up a client to talk to the Twilio REST API
-              @client = Twilio::REST::Client.new(@account_sid, @auth_token)
-              @account = @client.account
-            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body =>
-           "The call lasted #{(Time.now - Call.last.created_at).round(0).to_s} seconds and you submitted number #{digits}, the right answer."})
-            puts message
-            x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
-        end
-      end
-    end
-
-    state :incorrect_demo_response do
-      event :finished_demo, :to => :advance_user
-
-      response do |x|
-         x.Gather :numDigits => '1', :action => flow_url(:finished_demo) do
-
-
-            @account_sid = 'ACc59c478180144c19b6029ec595f0719f'
-            @auth_token = '2273acfc6ba1c74c14e7e43d3eebe971'
-            # set up a client to talk to the Twilio REST API
-            @client = Twilio::REST::Client.new(@account_sid, @auth_token)
-            @account = @client.account
-            message = @account.sms.messages.create({:from => '+12159872011', :to => '+1' + '2154997415', :body =>
-           "The call was #{(Time.now - Call.last.created_at).round(0).to_s} seconds and you submitted number #{digits}, the wrong answer."})
-            puts message
-            x.Play "https://s3.amazonaws.com/Sample_MP3_File/video.mp3"
-        end
-      end
-    end
 
     state :gather_classroom_number do
       event :received_number, :to => :evaluate_classroom_number
@@ -228,6 +166,8 @@ class Call < ActiveRecord::Base
           answer = user.user_answers.build(question_id: user.question.id, value: digits, user_lecture_id: user.user_lectures.last.id)
           answer.assert_correct
           answer.save
+          classroom = user.classrooms.first #assign random classroom
+          classroom.classrom_push(answer)
             if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
               x.Say "Great, that's right.  Now we'll move onto the next question."
               x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by

@@ -1,6 +1,16 @@
-- answers = user_answers.where(user_id: user.id)
-.percent_correct.element{:class => "#{evaluate(answers.percentage_correct)}"}
-  %h6.name= name_number(user)
-  %h6.percentage_correct= answers.percentage_correct
-  %h6.lecture_name= answers.try(:last).try(:lecture).try(:name)
-  %h6.number_complete= answers.count
+- user_class = "user_#{user.id}"
+- current_lecture = user.user_lectures.last
+- lecture_answers = current_lecture.user_answers if current_lecture
+-answers = user.user_answers
+%div{ :class => user_class }
+  .percent_correct.shadow.element{:class => "#{evaluate(answers.percentage_correct)}" }
+    %h6.name= name_number(user)
+    - if current_lecture.present?
+      %h6.percentage_correct= lecture_answers.percentage_correct
+      %h6.number_complete= lecture_answers.count
+      .row.lecture_name
+        = current_lecture.lecture.name
+      .data{:'data-number_complete' => lecture_answers.count, :'data-number_correct' => lecture_answers.correct.count, :'data-user_id' => user.id }
+
+
+

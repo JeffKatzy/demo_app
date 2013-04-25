@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
   <meta charset="utf-8" />
@@ -14,146 +11,19 @@
   <!-- <title>Welcome to Foundation | Homepage</title> -->
   <title>Yakbat</title>
   <%= stylesheet_link_tag  "application", :media => "all" %>
+
   <%= javascript_include_tag "application" %>
+  <script src="http://js.pusher.com/2.0/pusher.min.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
   <%= csrf_meta_tags %>
 
 
-  <!-- Included CSS Files (Uncompressed) -->
-  <!--
-  <link rel="stylesheet" href="stylesheets/foundation.css">
-  -->
 
-  <!-- Included CSS Files (Compressed)
-  <link rel="stylesheet" href="stylesheets/foundation.min.css">
-  <link rel="stylesheet" href="stylesheets/app.css">
-  <script src="javascripts/modernizr.foundation.js"></script>
-  -->
 </head>
 <body id="mybody">
-<!-- Header and Nav -->
-
-<%= render 'layouts/nav' %>
-
-<!-- End Header and Nav -->
-<!-- Body -->
-<% if flash[:notice].present? %>
-  <div class='row'>
-    <div class="five columns alert-box alert">
-      <%= flash[:notice] %>
-    </div>
-    <div class='seven columns'></div>
-  </div>
-<% end %>
-
-<div class='row'>
-  <div class="twelve columns">
-    <%= yield %>
-  </div>
-</div>
-
-  <!-- First Band (Slider) -->
-  <!-- The Orbit slider is initialized at the bottom of the page by calling .orbit() on #slider -->
-
-  <div class="row">
-    <div class="twelve columns">
-      <div id="slider">
-        <!-- <img src="http://placehold.it/1000x400&text=[img 1]" /> -->
-        <img src="http://cdn.c.photoshelter.com/img-get/I0000e1MBnPmPOl4/s/860/860/Slumdog-Millionaire-Salaam-Mumbai-India-Alex-Masi-16.jpg" />
-      </div>
-
-      <hr />
-    </div>
-  </div>
-
-
-  <!-- Three-up Content Blocks -->
-
-  <div class="row">
-
-    <div class="four columns">
-      <img src="http://static5.businessinsider.com/image/4c5318a97f8b9a534b6a0100/frugal-saving-cheap.jpg" />
-      <h4>$5/month</h4>
-      <p>Includes full length audio lectures and slides.</p>
-    </div>
-
-    <div class="four columns">
-      <img src=" http://classic.makesweet.com/mixer/designs/icon_board-1071.jpg"/>
-      <h4>Personalized</h4>
-      <p>Students are given extra help if they answer a question wrong.</p>
-    </div>
-
-    <div class="four columns">
-      <img src="http://www.informatica2k.com/img/clipart-srv.jpg" />
-      <h4>Data tracking</h4>
-      <p>All the information on your classroom's performance, in an easy to read format.</p>
-    </div>
-
-  </div>
-
-
-  <!-- Call to Action Panel -->
-
-
-  <!-- Footer -->
-
-  <%= render 'layouts/footer' %>
-
-  <!-- Included JS Files (Uncompressed) -->
-  <!--
-
-  <script src="javascripts/jquery.js"></script>
-
-  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
-
-  <script src="javascripts/jquery.foundation.forms.js"></script>
-
-  <script src="javascripts/jquery.event.move.js"></script>
-
-  <script src="javascripts/jquery.event.swipe.js"></script>
-
-  <script src="javascripts/jquery.foundation.reveal.js"></script>
-
-  <script src="javascripts/jquery.foundation.orbit.js"></script>
-
-  <script src="javascripts/jquery.foundation.navigation.js"></script>
-
-  <script src="javascripts/jquery.foundation.buttons.js"></script>
-
-  <script src="javascripts/jquery.foundation.tabs.js"></script>
-
-  <script src="javascripts/jquery.foundation.tooltips.js"></script>
-
-  <script src="javascripts/jquery.foundation.accordion.js"></script>
-
-  <script src="javascripts/jquery.placeholder.js"></script>
-
-  <script src="javascripts/jquery.foundation.alerts.js"></script>
-
-  <script src="javascripts/jquery.foundation.topbar.js"></script>
-
-  <script src="javascripts/jquery.foundation.joyride.js"></script>
-
-  <script src="javascripts/jquery.foundation.clearing.js"></script>
-
-  <script src="javascripts/jquery.foundation.magellan.js"></script>
-
-  -->
-
-  <!-- Included JS Files (Compressed)
-  <script src="javascripts/jquery.js"></script>
-  <script src="javascripts/foundation.min.js"></script>
-
-  Initialize JS Plugins
-  <script src="javascripts/app.js"></script>
-  -->
-
-  <script type="text/javascript">
-     $(window).load(function() {
-         $('#slider').orbit({
-           bulletThumbs: true, directionalNav: true, animation: 'fade'
-         });
-     });
-  </script>
-
+  <%= yield %>
 </body>
 </html>
+
+
+

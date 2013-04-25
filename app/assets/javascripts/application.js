@@ -1,20 +1,17 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
-//
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
-//
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// the compiled file.
-//
-// WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
-// GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
 //= require jquery_ujs
 //= require jquery_nested_form
-//= require 'foundation/javascripts/modernizr.foundation.js'
-//= require 'foundation/javascripts/foundation.min.js'
-//= require 'foundation/javascripts/app.js'
-//= require 'demo_app'
-//= require 'jquery.isotope.min.js'
+//= require jquery-ui
+//= require demo_app
+//= require demo.js
+//= require foundation/javascripts/modernizr.foundation
+//= require foundation/javascripts/foundation.min
+//= require foundation/javascripts/app
+//= require jquery.isotope.min
+//= require 'morris/spec/vendor/raphael-2.1.0.min.js'
+//= require 'morris/morris.js'
+//= require sugar.js
+//= require d3.v3.js
+//= require moment.js
+

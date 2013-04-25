@@ -49,14 +49,15 @@ function sortData(){
 function sortPercentCorrect(){
     console.log('hello');
     sortData();
-    $('#container').isotope({ sortBy : 'percentage_correct', sortAscending : false });
+    $('#container').isotope( 'reloadItems' ).isotope({ sortBy : 'percentage_correct', sortAscending : false });
   }
 
   function sortNumberComplete(){
     console.log('helloone');
     sortData();
-    $('#container').isotope({ sortBy : 'number_complete', sortAscending : false });
+    $('#container').isotope( 'reloadItems' ).isotope({ sortBy : 'number_complete', sortAscending : false });
   }
+
 
 
 

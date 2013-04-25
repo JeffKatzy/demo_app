@@ -1,0 +1,9 @@
+= @current_classroom.name
+.row
+  .six.columns#current_assignments
+    Hello
+  .six.columns#available_assignments
+    %ul
+      - @available_assignments.each do |assignment|
+        %li.draggable= assignment.name
+  #draggable

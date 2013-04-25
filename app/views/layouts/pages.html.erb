@@ -15,6 +15,7 @@
   <title>Yakbat</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <script src="http://js.pusher.com/2.0/pusher.min.js" type="text/javascript"></script>
   <%= csrf_meta_tags %>
 
 
@@ -33,9 +34,7 @@
 
   <%= render 'layouts/nav' %>
 
-  <div class='row'>
-    <div class="twelve columns"><%= yield %></div>
-  </div>
+    <%= yield %>
   <!-- Footer -->
 
 <%= render 'layouts/footer' %>

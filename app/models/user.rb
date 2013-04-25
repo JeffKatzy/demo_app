@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   has_many :user_lectures
   has_many :classroom_designations
   has_many :classrooms, :through => :classroom_designations
+  has_many :assignments
 
   scope :top_users, select("users.id, count(user_answers.correct) AS user_answers_correct_count").joins(:user_answers).order("user_answers_correct_count DESC")
 

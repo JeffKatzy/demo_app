@@ -2,7 +2,6 @@ class CallsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   before_filter :parse_params
   before_filter :find_and_update_call, :only => [:flow, :destroy]
-  before_filter :update_classroom_view, :only => [:flow]
 
   def create
     @call = Call.create!(@parsed_params)
@@ -17,20 +16,6 @@ class CallsController < ApplicationController
   def flow
     render :xml => @call.run(params[:event])
   end
-
-  # def update_classroom_view
-  #   find_call
-  #   @user = @call.user
-    # Rails.logger.warn("In the update classroom view action.  Calling action to add #{@user} to #{@call}")
-    # if @call.state == 'found_number'
-    #   $('#container').append('')
-      # append div with class = to set name
-      #then append a partial with the right info
-    # else
-    #   #render javascript to update existing students.
-    #   #empty the class, and then append the partial inside of it.
-    # end
-  # end
 
   private
 

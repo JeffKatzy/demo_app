@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
-
 gem 'twilio-ruby'
 gem 'call_center', '~> 0.1.3'
 gem 'clockwork'
@@ -19,6 +18,7 @@ gem 'bcrypt-ruby'
 gem 'pg'
 gem 'jquery-rails'
 gem 'haml'
+gem 'pusher'
 
 
 group :assets do

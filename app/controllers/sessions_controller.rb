@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
 		@teacher = Teacher.where(:email => params[:session][:email]).first
 		if @teacher.present? && @teacher.authenticate(params[:session][:password])
 			session[:teacher_id] = @teacher.id
-			redirect_to(root_path)
+			redirect_to @teacher
 			flash[:success] = "Welcome to the Sample App!"
 		else
 			flash.now[:error] = 'Invalid email/password combination'
