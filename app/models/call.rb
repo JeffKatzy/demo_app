@@ -25,7 +25,7 @@ class Call < ActiveRecord::Base
   scope :today, lambda { where("created_at > ?", 1.day.ago) }
 
   attr_accessible :to, :from, :called, :caller
-  attr_accessible :account_sid, :call_sid, :call_status, :digits
+  attr_accessible :account_sid, :call_sid, :call_status, :digits, :assignment_id
   before_validation { self.state = "greeting" unless state.present? }
   call_flow :state, :initial => :initial do
 
