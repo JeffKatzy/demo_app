@@ -4,7 +4,6 @@ class CallsController < ApplicationController
   before_filter :find_and_update_call, :only => [:flow, :destroy]
 
   def create
-    binding.pry
     @call = Call.create!(@parsed_params)
     @call.user = User.find_or_create_by_cell_number(@parsed_params["from"])
     @call.save
