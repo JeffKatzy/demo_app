@@ -54,6 +54,7 @@ window.app =
     $('dl').slideDown()
     $('#add_student').show()
   show_graph: ->
+    $('#chart').show()
     user_id = $(this).children('.data').data('user_id')
     $('.element').children('.name').children('a').css('background', 'rgb(64, 64, 64)').css('color', 'white')
     $(this).children('.name').children('a').css('background', 'rgb(242, 232, 92)').css('color', 'black')

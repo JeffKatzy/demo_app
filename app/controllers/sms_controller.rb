@@ -19,11 +19,9 @@ class SmsController < ApplicationController
       session[:assignment_id] = assignment.id
       #Here need to write functino for calling the user.
     else
-      message = "You did not enter a valid response.  Please response with a letter A through Z."
+      message = "You did not enter a valid text.  Please type 'projects' to see your current assignments, or 'class' followed by the classroom number to enter a classroom."
       Text.send_text_to(user.cell_number, message)
       session[:state] = nil
-      session[:homework_id] = nil
-      session[:hw_q_index] = nil
     end
     render :nothing => true
   end
