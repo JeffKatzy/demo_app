@@ -9,7 +9,7 @@
       %h6.percentage_correct= lecture_answers.percentage_correct
       %h6.number_complete= lecture_answers.count
       .row.lecture_name
-        = current_lecture.lecture.name
+        = current_lecture.lecture.name if current_lecture.lecture
       .data{:'data-number_complete' => lecture_answers.count, :'data-number_correct' => lecture_answers.correct.count, :'data-user_id' => user.id }
 
 
