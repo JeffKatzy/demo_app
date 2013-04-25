@@ -1,7 +1,18 @@
 class Assignment < ActiveRecord::Base
-  attr_accessible :classroom_id, :lecture_id, :user_id
+  attr_accessible :classroom_id, :lecture_id, :user_id, :completed
 
   belongs_to :lecture
   belongs_to :classroom
   belongs_to :user
+  has_one :user_lecture
+  scope :complete, where(:completed => true)
+  scope :incomplete, where(:completed => nil)
+
+  def completed?
+    if user_lectures.first && user_lectures.first.(:try).completed?
+      true
+    else
+      false
+    end
+  end
 end

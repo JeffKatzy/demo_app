@@ -44,8 +44,8 @@ class User < ActiveRecord::Base
 
   def text_assignments
     user = User.find(self.id)
-    assignments = user.assignments.order(:created_at).limit(5)
-    if assignments.present?
+    assignments = user.assignments.incomplete.order(:created_at).limit(5)
+    if assignments.incomplete.present?
       message = ""
       assignments.each_with_index do |assignment, index|
         message += "#{index + 1}. #{assignment.lecture.name}" + "\n"

@@ -15,7 +15,7 @@ class SmsController < ApplicationController
       session[:state] = "choosing hw"
     elsif session[:state] == "choosing hw"
       chosen_hw = @sms.content_received.match(/\d/).to_s[0].to_i
-      assignment = user.assignments.order(:created_at).limit(5)[chosen_hw - 1]
+      assignment = user.assignments.incomplete.order(:created_at).limit(5)[chosen_hw - 1]
       session[:assignment_id] = assignment.id
       #Here need to write functino for calling the user.
     else
