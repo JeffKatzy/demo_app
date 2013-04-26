@@ -178,17 +178,16 @@ class Call < ActiveRecord::Base
           if user_lecture.last.user_answers.count.to_i == assignment.lecture.questions.count
             assignment.complete = true
             assignment.save
-
-
-            if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
-              x.Say "Great, that's right.  Now we'll move onto the next question."
-              x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by
-              #first writing a state that changes current question to the next question.  Then resend to current question.
-            else
-              x.Redirect flow_url(:answer_incorrect)
-            end
+          end
+          if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
+            x.Say "Great, that's right.  Now we'll move onto the next question."
+            x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by
+            #first writing a state that changes current question to the next question.  Then resend to current question.
+          else
+            x.Redirect flow_url(:answer_incorrect)
+          end
         end
-    end
+      end
 
     state :question_explanation do
       event :explanation_end, :to => :advance_user
