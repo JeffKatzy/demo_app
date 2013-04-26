@@ -2,3 +2,7 @@
   %ul
     %li.name
       %h1= link_to 'Yakbat', root_url
+    %li.profile
+      = link_to "Profile", teacher_path(@auth)
+    %li.right
+      = link_to "Logout #{@auth.name}", login_path, :method => :delete

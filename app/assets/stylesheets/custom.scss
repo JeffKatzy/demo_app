@@ -1,5 +1,48 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
 
+.title {
+    font-size: 18;
+    font-weight: bold;
+    font-size: 20;
+    padding-bottom: 20px
+}
+
+.right{
+  position: absolute;
+  right: 35px;
+}
+
+.classes {
+  padding-left: 0px
+}
+
+
+.top-bar ul>li:not(.name):hover {
+  background: none;
+}
+
+.top-bar ul>li:not(.name) {
+  font-size: 25px;
+  padding-left: 12px;
+}
+
+.classrooms a:hover {
+    color: rgb(242, 232, 92);
+}
+
+
+.label_complete {
+    font-size: 10px;
+    bottom: -4px;
+    left: 2px;
+}
+
+.label_percent {
+    font-size:10px;
+    bottom: -4px;
+    right: 0px;
+}
+
 .info {
   right: -85%;
   position: absolute;
@@ -8,8 +51,22 @@
   font-size: 18px;
 }
 
+#classroom_name {
+  text-align: center;
+  padding-top: 15px;
+  font-size: 18px;
+}
+
+#assignment_list {
+  padding-top: 32px;
+}
+
+#assignments{
+  padding-top: 20px;
+}
+
 .hover-enter {
-  background: red;
+  color: rgb(242, 232, 92);
 }
 
 .classrooms a{
@@ -64,7 +121,7 @@ ul {
 }
 
 #class_list {
-  padding-top: 12px;
+  padding-top: 67px;
 }
 
 .chart rect {
@@ -424,13 +481,19 @@ html {
 }
 
 #available_assignments {
-  border: 2px solid black;
-  height: 500px;
+  height: 400px;
+  background: rgb(64, 64, 64);
+  text-align: center;
+  padding: 10px;
+  color: white;
 }
 
 #current_assignments {
-  border: 2px solid black;
-  height: 500px;
+  height: 400px;
+  background: rgb(64, 64, 64);
+  color: white;
+  text-align: center;
+  padding: 10px;
 }
 
 
@@ -492,15 +555,15 @@ html {
 }
 
 .element .number_complete {
-  font-size: 0.9em;
-  left: 0.5em;
-  bottom: .5em;
+  font-size: 0.8em;
+  left: 0.2em;
+  bottom: .6em;
 }
 
 .element .percentage_correct {
-  bottom: .5em;
-  font-size: 0.9em;
-  right: 0.5em;
+  bottom: .6em;
+  font-size: 0.8em;
+  right: 0.2em;
 }
 
 .element .symbol {

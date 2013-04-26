@@ -6,6 +6,7 @@ DemoApp::Application.routes.draw do
   get 'calls/create/:assignment_id' => 'calls#create'
   get 'classrooms/cancel' => 'classrooms#cancel'
   get 'users/cancel' => 'users#cancel'
+  delete '/login' => 'sessions#destroy'
 
   get '/demo' => 'classrooms#demo'
   resources :sessions, only: [:new, :create, :destroy]
