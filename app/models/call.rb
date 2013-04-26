@@ -73,6 +73,7 @@ class Call < ActiveRecord::Base
       event :found_number, :to => :adding_user
       event :wrong_number, :to => :gather_classroom_number
       response do |x|
+        @classrooms = self.user.classrooms.uniq
         @classroom = @classrooms[digits - 1]
         if @classroom.present?
           x.Say "Great.  You would like assignments from your #{@classroom.name} class."
