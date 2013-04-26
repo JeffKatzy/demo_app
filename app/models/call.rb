@@ -70,13 +70,28 @@ class Call < ActiveRecord::Base
     end
 
     state :evaluate_classroom_number do
-      event :found_number, :to => :adding_user
+      event :correct_number, :to => :adding_user
       event :wrong_number, :to => :gather_classroom_number
+      event :play_lecture, :to => :play_lecture
+      event :advance_user, :to => :advance_user
       response do |x|
         @classrooms = self.user.classrooms.uniq
         @classroom = @classrooms[digits.to_i - 1]
         if @classroom.present?
           x.Say "Great.  You would like assignments from your #{@classroom.name} class."
+          a = user.assignments.incomplete.select{ |a|  a.classroom_id == @classroom.id  }.first
+          user.assignment_id = a.id
+          if a.user_lecture.nil?
+            user.lecture = a.lecture
+            user.save
+            x.Redirect flow_url(:play_lecture)
+          else
+            user.lecture = a.lecture
+            i = a.user_lecture.user_answers.count.to_i
+            user.question = a.user_lecture.user_answers[i]
+            user.save
+            x.Redirect flow_url(:advance_user)
+          end
           x.Redirect flow_url(:correct_number)
         else
           x.Say "Looks like you entered the wrong classroom number.

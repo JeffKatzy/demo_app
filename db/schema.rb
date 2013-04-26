@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130425185205) do
+ActiveRecord::Schema.define(:version => 20130426034610) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "lecture_id"
@@ -148,10 +148,11 @@ ActiveRecord::Schema.define(:version => 20130425185205) do
     t.string   "name"
     t.string   "email"
     t.string   "cell_number"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.integer  "lecture_id"
     t.integer  "question_id"
+    t.integer  "assignment_id"
   end
 
 end

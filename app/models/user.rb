@@ -13,7 +13,7 @@
 #
 
 class User < ActiveRecord::Base
-	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_ids
+	attr_accessible :name, :email, :cell_number, :lecture_id, :classroom_ids, :assignment_id
   scope :incomplete, where("name IS NULL OR email IS NULL")
 
   belongs_to :lecture
