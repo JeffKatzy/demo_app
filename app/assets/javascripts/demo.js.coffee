@@ -18,22 +18,30 @@ window.app =
     console.log('events binding')
     channel = app.pusher.channels.channels[app.selected_channel]
     channel.bind('update_student_answer', app.update_student_answer)
+    channel.bind('update_student_lecture', app.update_student_lecture)
   update_student_answer: (data) ->
     user_class = ".user_#{data.user} .data"
     correct = data.correct
-    total_questions = data.total_questions
+    total_questions = data.total_lecture_questions
     new_number_complete = $(user_class).data('number_complete') + 1
     old_number_correct = $(user_class).data('number_correct')
     if data.correct
       new_number_correct = old_number_correct + 1
     else
       new_number_correct = old_number_correct
-    new_percentage = (new_number_correct / total_questions) * 100
+    console.log(new_number_correct)
+    console.log(total_questions)
+    new_percentage = (new_number_correct / new_number_complete) * 100
     $(user_class).data("number_complete", new_number_complete)
     $(user_class).data("number_correct", new_number_correct)
     $(".user_#{data.user} .number_complete").text(new_number_complete)
     $(".user_#{data.user} .number_correct").text(new_number_correct)
-    $(".user_#{data.user} .percentage_correct").text(new_percentage)
+    $(".user_#{data.user} .percentage_correct").text(Math.round(new_percentage*10)/10)
+  update_student_lecture: (data) ->
+    console.log(data)
+    user_class = ".user_#{data.user}"
+    lecture = data.user_lecture
+    $(".user_#{data.user} .lecture_name").text(lecture)
   analytics_view: ->
     $('#add_student').hide()
     $('.element .percentage_correct').hide()

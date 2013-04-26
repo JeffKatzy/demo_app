@@ -20,7 +20,12 @@ class Classroom < ActiveRecord::Base
 
   def classroom_push(answer)
     Pusher["classroom_#{self.id}"].trigger('update_student_answer', {
-      user: answer.user.id, question: answer.question.id, correct: answer.correct, total_lecture_questions: answer.question.lecture.questions.count })
+      user: answer.user.id, question: answer.question.id, correct: answer.correct, total_lecture_questions: answer.user_lecture.user_answers.count })
+  end
+
+  def classroom_push_lecture(user_lecture)
+    Pusher["classroom_#{self.id}"].trigger('update_student_lecture', {
+      user: user_lecture.user.id, user_lecture: user_lecture.lecture.name })
   end
 
   def generate_random

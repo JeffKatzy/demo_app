@@ -134,6 +134,9 @@ class Call < ActiveRecord::Base
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
           user_lecture = user.user_lectures.build(:lecture_id => user.lecture.id, :assignment_id => user.assignment_id)
           user_lecture.save
+          assignment = Assignment.find(user.assignment_id)
+          classroom = assignment.classroom
+          classroom.classroom_push_lecture(user_lecture)
           x.Play user.lecture.soundfile.url
           user_lecture.end_time = Time.now
         end
@@ -175,7 +178,7 @@ class Call < ActiveRecord::Base
           assignment = Assignment.find(user.assignment_id)
           classroom = assignment.classroom
           classroom.classroom_push(answer)
-          if user_lecture.last.user_answers.count.to_i == assignment.lecture.questions.count
+          if user.user_lectures.last.user_answers.count.to_i == assignment.lecture.questions.count
             assignment.complete = true
             assignment.save
           end
