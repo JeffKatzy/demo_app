@@ -172,8 +172,14 @@ class Call < ActiveRecord::Base
           answer = user.user_answers.build(question_id: user.question.id, value: digits, user_lecture_id: user.user_lectures.last.id)
           answer.assert_correct
           answer.save
-          classroom = user.classrooms.first #assign random classroom
+          assignment = Assignment.find(user.assignment_id)
+          classroom = assignment.classroom
           classroom.classroom_push(answer)
+          if user_lecture.last.user_answers.count.to_i == assignment.lecture.questions.count
+            assignment.complete = true
+            assignment.save
+
+
             if digits == user.question.answer.to_s #you will need to write a function that checks if its correct or not
               x.Say "Great, that's right.  Now we'll move onto the next question."
               x.Redirect flow_url(:answer_correct) #then send to next question, perhaps by
