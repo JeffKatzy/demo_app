@@ -63,7 +63,7 @@ class Call < ActiveRecord::Base
           x.Say "Go ahead and choose your lessons."
           @classrooms = self.user.classrooms.uniq
           @classrooms.each_with_index do |c, i|
-            x.Say "Press #{i + 1} to hear lessons from your #{c.name} class."
+            x.Say "Press #{i.to_i + 1} to hear lessons from your #{c.name} class."
           end
         end
       end
@@ -74,7 +74,7 @@ class Call < ActiveRecord::Base
       event :wrong_number, :to => :gather_classroom_number
       response do |x|
         @classrooms = self.user.classrooms.uniq
-        @classroom = @classrooms[digits - 1]
+        @classroom = @classrooms[digits.to_i - 1]
         if @classroom.present?
           x.Say "Great.  You would like assignments from your #{@classroom.name} class."
           x.Redirect flow_url(:correct_number)
