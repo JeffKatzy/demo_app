@@ -1,14 +1,6 @@
 .row
   .three.mobile-four.columns#class_list
-    .row
-    %h6 Manage Assignments
-    .classrooms= link_to 'Add new classroom +', "#", :'data-reveal-id' => "myModal"
-    %ul
-      - @auth.classrooms.each do |classroom|
-        .six.columns.classes
-          %li.classrooms= link_to classroom.name, assignments_classroom_path(classroom), remote: true
-        .six.columns
-          %li.classrooms= link_to "Visit", classroom_path(classroom)
+    = render partial: 'classrooms/class_list'
   .nine.columns
     #assignments
       = render partial: 'classrooms/assignments_page'
