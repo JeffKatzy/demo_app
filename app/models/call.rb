@@ -132,10 +132,10 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:lecture_finished) do
-          user_lecture = user.user_lectures.build(:lecture_id => user.lecture.id)
+          user_lecture = user.user_lectures.build(:lecture_id => user.lecture.id, :assignment_id => user.assignment_id)
+          user_lecture.save
           x.Play user.lecture.soundfile.url
           user_lecture.end_time = Time.now
-          user_lecture.save
         end
       end
     end

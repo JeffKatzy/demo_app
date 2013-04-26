@@ -59,9 +59,14 @@ class User < ActiveRecord::Base
 
   def add_user_to_classroom(random, user)
     classroom = Classroom.find_by_random(random)
-    user.classrooms << classroom if user.classrooms.exclude?(classroom)
-    body = "You are now registered for #{classroom.name} class."
-    Text.send_text_to(user.cell_number, body)
+    if user.classrooms.exclude?(classroom)
+      user.classrooms << classroom
+      classroom.lectures.each do |lecture|
+        Assignment.create(classroom_id: classroom.id, user_id: user.id, lecture_id: lecture.id)
+      end
+      body = "You are now registered for #{classroom.name} class."
+      Text.send_text_to(user.cell_number, body)
+    end
   end
 
   def lecture_percentage_correct
