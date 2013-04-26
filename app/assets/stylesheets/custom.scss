@@ -1,5 +1,12 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400);
 
+.info {
+  right: -85%;
+  position: absolute;
+  top: 10px;
+  color: rgb(64, 64, 64);
+  font-size: 18px;
+}
 
 .hover-enter {
   background: red;
@@ -105,8 +112,13 @@ dl.vertical.four.columns {
   border: line solid black;
 }
 
-#time, #number_completed, #percent_correct {
-  padding: 20px 0px;
+#percent_correct {
+  padding: 22px 0px;
+  width: 80px
+}
+
+#number_completed{
+  padding: 40px 0px;
   width: 80px
 }
 

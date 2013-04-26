@@ -178,7 +178,7 @@ class Call < ActiveRecord::Base
           assignment = Assignment.find(user.assignment_id)
           classroom = assignment.classroom
           classroom.classroom_push(answer)
-          if user.user_lectures.last.user_answers.count.to_i == assignment.lecture.questions.count
+          if user.user_lectures.last.user_answers.count == assignment.lecture.questions.count
             assignment.complete = true
             assignment.save
           end

@@ -7,9 +7,6 @@
       %dd#number_completed.vert_tab
         %button.tiny.button.round.embossed
           Number Completed
-      %dd#time.vert_tab
-        %button.tiny.button.round.embossed
-          Time per lecture
     #container{:'data-classroom' => @classroom.id}
       - @users.each do |user|
         %div{ :class => user.name }
