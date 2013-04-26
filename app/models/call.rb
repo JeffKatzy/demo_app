@@ -38,8 +38,7 @@ class Call < ActiveRecord::Base
       # TODO if user has a current question id, transition to play_question
       # TODO else transition to play_lecture
       Rails.logger.warn("in greeting")
-      event :greeted, :to => :advance_user
-      event :no_classroom, :to => :gather_classroom_number
+      event :classroom, :to => :gather_classroom_number
       event :new_user, :to => :play_demo
 
       response do |x|
@@ -48,10 +47,8 @@ class Call < ActiveRecord::Base
            x.Say "Hi new user.  Please hang up and text class plus your classroom number to sign up for a classroom"
           x.Redirect flow_url(:hang_up)
         else
-          user.classrooms.each_with_index do |c, i|
-            x.Say "Welcome back! Press #{i} to hear lessons from your #{c.name} class."
-          end
-          x.Redirect flow_url(:greeted)
+          x.Say "Welcome back #{user.name}!"
+          x.Redirect flow_url(:classroom)
         end
       end
     end
@@ -62,32 +59,27 @@ class Call < ActiveRecord::Base
       event :received_number, :to => :evaluate_classroom_number
 
       response do |x|
-        x.Gather :numDigits => '3', :action => flow_url(:received_number) do
-          x.Say "Please enter the 3 digit classroom number given by your teacher.
-          If you do not know this number, press 999 to move on."
+        x.Gather :numDigits => '1', :action => flow_url(:received_number) do
+          x.Say "Go ahead and choose your lessons"
+          user.classrooms.uniq.each_with_index do |c, i|
+            x.Say "Press #{i + 1} to hear lessons from your #{c.name} class."
+          end
         end
       end
     end
 
     state :evaluate_classroom_number do
       event :found_number, :to => :adding_user
-      event :no_number, :to => :advance_user
       event :wrong_number, :to => :gather_classroom_number
+      @classroom = user.homeworks.order(:created_at).limit(5)[digits.to_i - 1]
       response do |x|
-        if digits == '999'
-          x.Say "Ok, we'll move on."
-          x.Redirect flow_url(:no_number)
-        elsif user.assign_classroom(digits) == "no classroom"
+        if @classroom.present?
+          x.Say "Great.  You would like assignments from your #{@classroom.name} class"
+          x.Redirect flow_url(:correct_number)
+        else
           x.Say "Looks like you entered the wrong classroom number.
           Let's try it again."
           x.Redirect flow_url(:wrong_number)
-        else
-          classroom = user.assign_classroom(digits)
-          user.save
-            x.Say "Great you are now in the
-            classroom #{classroom.try(:name)} which is
-            taught by #{classroom.teacher.try(:name)}"
-            x.Redirect flow_url(:found_number)
         end
       end
     end
