@@ -4,6 +4,6 @@
       %h1= link_to 'Yakbat', root_url
     %li.profile
       = link_to "Profile", teacher_path(@auth)
-    %li.right
-      - if @auth.present?
-        = link_to "Logout #{@auth.name}", login_path, :method => :delete
+    / %li.right
+    /   - if @auth.present?
+    /     = link_to "Logout #{@auth.name}", login_path, :method => :delete
