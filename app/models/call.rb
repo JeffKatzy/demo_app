@@ -71,10 +71,10 @@ class Call < ActiveRecord::Base
     state :evaluate_classroom_number do
       event :found_number, :to => :adding_user
       event :wrong_number, :to => :gather_classroom_number
-      @classroom = user.homeworks.order(:created_at).limit(5)[digits.to_i - 1]
+      @classroom = user.classrooms.uniq[digits.to_i - 1]
       response do |x|
         if @classroom.present?
-          x.Say "Great.  You would like assignments from your #{@classroom.name} class"
+          x.Say "Great.  You would like assignments from your #{@classroom.name} class."
           x.Redirect flow_url(:correct_number)
         else
           x.Say "Looks like you entered the wrong classroom number.
