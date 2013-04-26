@@ -43,17 +43,14 @@ class Call < ActiveRecord::Base
       event :new_user, :to => :play_demo
 
       response do |x|
-         if user.new_user?
+        if user.classrooms == []
           Rails.logger.warn("in new user")
-           x.Say "Hi new user"
-          x.Redirect flow_url(:no_classroom)
-        elsif user.classrooms == []
-          x.Say "Hi new user"
-          x.Say "It looks like you are not assigned to a classroom.  Let's take
-          care of that now."
-          x.Redirect flow_url(:no_classroom)
+           x.Say "Hi new user.  Please hang up and text class plus your classroom number to sign up for a classroom"
+          x.Redirect flow_url(:hang_up)
         else
-          x.Say "Welcome back! Let's get back to your classes.  Remember, you can press the number one to repeat a lecture or the two to skip a lecture and move on to questions."
+          user.classrooms.each_with_index do |c, i|
+            x.Say "Welcome back! Press #{i} to hear lessons from your #{c.name} class."
+          end
           x.Redirect flow_url(:greeted)
         end
       end

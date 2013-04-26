@@ -1,9 +1,12 @@
+#assignment_classroom{:'data-classroom-id' => @current_classroom.id, :'data-auth-token' => form_authenticity_token}
 = @current_classroom.name
 .row
   .six.columns#current_assignments
-    Hello
+    %ul
+      - if @current_assignments.present?
+        - @current_assignments.each do |lecture|
+          %li= lecture.name if lecture
   .six.columns#available_assignments
     %ul
-      - @available_assignments.each do |assignment|
-        %li.draggable= assignment.name
-  #draggable
+      - @available_lectures.each do |lecture|
+        %li.movable{:'data-lecture-id' => lecture.id}= lecture.name

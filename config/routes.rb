@@ -13,6 +13,7 @@ DemoApp::Application.routes.draw do
   resources :questions, :users, :teachers, :user_answers, :user_lectures, :sms, :calls
   resources :classrooms do
     get 'assignments', :on => :member
+    post 'assign', :on => :member
   end
   match '/signup',  to: 'teachers#new'
   match '/signin',  to: 'sessions#new'

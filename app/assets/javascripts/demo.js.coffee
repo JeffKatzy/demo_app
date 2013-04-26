@@ -9,7 +9,9 @@ window.app =
     $('body').on('click', '#analytics', app.analytics_view)
     $('body').on('click', '.active_student', app.show_graph)
     $('body').on('click', '#live', app.live_view)
-    $('.draggable').draggable()
+    $('#assignments').on('mouseenter', 'li.movable', app.hover_enter)
+    $('#assignments').on('mouseleave', 'li.movable', app.hover_leave)
+    $('#assignments').on('click', 'li.movable', app.assign)
   subscribe_channel: (channel) ->
     app.pusher.subscribe(channel)
   bind_events: ->
@@ -73,7 +75,21 @@ window.app =
       xkey: 'y',
       ykeys: ['a'],
       labels: ['Percent Correct']
-  reload: ->
-    console.log('reload')
+  hover_enter: ->
+    $(this).addClass('hover-enter')
+  hover_leave: ->
+    $(this).removeClass('hover-enter')
+  assign: ->
+    token = $('#assignment_classroom').data('auth-token')
+    classroom_id = $('#assignment_classroom').data('classroom-id')
+    lecture_id = $(this).data('lecture-id')
+    settings =
+      dataType: 'script'
+      type: "post"
+      url: "/classrooms/#{classroom_id}/assign"
+      data: {authenticity_token: token, lecture_id: lecture_id}
+    $.ajax(settings)
+
+
 
 $(document).ready(app.ready)

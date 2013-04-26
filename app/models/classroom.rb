@@ -26,4 +26,12 @@ class Classroom < ActiveRecord::Base
   def generate_random
     self.random = SecureRandom.hex(2)
   end
+
+  def lectures
+    assignments.map {|a| a.lecture if a.lecture.present? }.uniq.compact
+  end
+
+  def unused_lectures
+    Lecture.all - self.lectures
+  end
 end

@@ -7,9 +7,6 @@ class CallsController < ApplicationController
     @call = Call.create!(@parsed_params)
     @call.user = User.find_or_create_by_cell_number(@parsed_params["from"])
     @call.save
-    # @assignment = Assignment.find(params[:assignment_id].to_i)
-    # Rails.logger.warn("Assignment id: #{@assignment.id}")
-    # @call.assignment = @assignment
     Rails.logger.warn("Creating call with these parsed params: #{@parsed_params}")
     Rails.logger.warn("Created call: #{@call}")
     Rails.logger.warn("Added user to call #{@call.id}")

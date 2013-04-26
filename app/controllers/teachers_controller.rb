@@ -36,7 +36,8 @@ class TeachersController < ApplicationController
 		@teacher = Teacher.find(params[:id])
 		@classroom = Classroom.new
 		@current_classroom = @teacher.classrooms.first
-		@available_assignments = Lecture.all
+		@current_assignments = @current_classroom.lectures
+		@available_lectures = @current_classroom.unused_lectures
 	end
 
 	def index

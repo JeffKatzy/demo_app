@@ -69,8 +69,20 @@ layout 'pages'
 
   def assignments
   	@current_classroom = Classroom.find(params[:id])
-  	@current_assignments = @current_classroom.assignments.map { |a| a.lecture }
-  	@available_assignments = Lecture.all - @current_classroom.assignments
+  	@current_assignments = @current_classroom.lectures
+  	@available_lectures = Lecture.all - @current_assignments
+  end
+
+  def assign
+		@classroom = Classroom.new
+  	@current_classroom = Classroom.find(params[:id].to_i)
+  	@teacher = @current_classroom.teacher
+  	lecture = Lecture.find(params[:lecture_id].to_i)
+  	@current_classroom.users.each do |user|
+  		Assignment.create(user_id: user.id, lecture_id: lecture.id, classroom_id: @current_classroom.id)
+  	end
+  	@current_assignments = @current_classroom.lectures
+  	@available_lectures = Lecture.all - @current_assignments
   end
 
 	def getinfo
