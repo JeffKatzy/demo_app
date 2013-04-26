@@ -47,7 +47,6 @@ class Call < ActiveRecord::Base
            x.Say "Hi new user.  Please hang up and text class plus your classroom number to sign up for a classroom"
           x.Redirect flow_url(:hang_up)
         else
-          @classrooms = user.classrooms.uniq
           x.Say "Welcome back #{user.name}!"
           x.Redirect flow_url(:classroom)
         end
@@ -61,7 +60,8 @@ class Call < ActiveRecord::Base
 
       response do |x|
         x.Gather :numDigits => '1', :action => flow_url(:received_number) do
-          x.Say "Go ahead and choose your lessons"
+          x.Say "Go ahead and choose your lessons."
+          @classrooms = self.user.classrooms.uniq
           @classrooms.each_with_index do |c, i|
             x.Say "Press #{i + 1} to hear lessons from your #{c.name} class."
           end
