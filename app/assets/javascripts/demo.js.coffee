@@ -44,6 +44,7 @@ window.app =
     $(".user_#{data.user} .lecture_name").text(lecture)
   analytics_view: ->
     $('#add_student').hide()
+    $('.element').removeClass('shadow')
     $('.element .percentage_correct').hide()
     $('.element .number_complete').hide()
     $('.label_percent').hide()
@@ -56,6 +57,7 @@ window.app =
     $('dl').slideUp()
   live_view: ->
     $('#chart').slideUp()
+    $('.element').addClass('shadow')
     $('.element').children('.name').children('a').css('background', 'rgb(64, 64, 64)').css('color', 'white')
     $('.element .percentage_correct').show()
     $('.element .number_complete').show()

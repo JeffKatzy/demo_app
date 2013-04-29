@@ -24,9 +24,9 @@ require 'faker'
 
 FactoryGirl.define do
 	factory :question do
-		#association :lecture
-		name 		{Faker::Lorem.words(1)}
-		description {Faker::Lorem.words(7)}
+		association :lecture
+		name 		{ Faker::Lorem.words(1) }
+		description { Faker::Lorem.words(7) }
 
 		factory :question_one do
 			answer	1

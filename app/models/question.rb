@@ -27,7 +27,7 @@ class Question < ActiveRecord::Base
 	belongs_to :lecture
 
 	def next_in_lecture
-		self.lecture.questions.where("#{self.class.table_name}.id > ?", self.id).first
+	   self.lecture.questions.where("#{self.class.table_name}.id > ?", self.id).first
     end
 
     def previous_in_lecture
