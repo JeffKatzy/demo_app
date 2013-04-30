@@ -15,17 +15,27 @@ require 'faker'
 
 FactoryGirl.define do
 	factory :lecture do
-		#association :question
-		name 		{ Faker::Name.name }
+		name 		'Perimeter Demo'
 		description {Faker::Name.name }
 		soundfile_file_name { Faker::Name.name }
 		soundfile_content_type { Faker::Name.name }
 		soundfile_file_size		{ Faker::Name.name }
 
-		 # after_build do |lecture|
-		 # 	[:question_one, :question_two, :question_three].each do |question|
-		 # 		lecture.questions << FactoryGirl.build(question, lecture: lecture)
-		 # 		end
-		 # end
+		 after(:create) do |lecture|
+		  	[:question_one, :question_two, :question_three].each do |question|
+		  		lecture.questions << FactoryGirl.build(question, lecture: lecture)
+		  	end
+		 end
+
+	factory :lecture_one do
+		description "What is 1 + 0?"
+		answer	1
+	end
+
+	factory :question_two do
+		description "What is 1 + 1?"
+		answer 2
+	end
+
 	end
 end

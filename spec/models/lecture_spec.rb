@@ -17,7 +17,13 @@
 require 'spec_helper'
 
 describe Lecture do
-	it "has a valid factory" do
-		FactoryGirl.create(:lecture).should be_valid
-	end
+  let(:lecture) { FactoryGirl.create(:lecture) }
+
+  it "has has many questions" do
+    lecture.questions.count.should eq 3
+  end
+
+  it "has questions assigned in the right order" do
+    lecture.questions.first.answer.should eq 1
+  end
 end
