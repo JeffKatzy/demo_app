@@ -16,6 +16,9 @@
   padding-left: 0px
 }
 
+.username {
+  display: none;
+}
 
 .top-bar ul>li:not(.name):hover {
   background: none;
@@ -401,10 +404,6 @@ dl.vertical.tabs.two.columns dd a{
   overflow: auto;
 }
 
-.time_per_lecture{
-  display: none;
-}
-
 .topic{
   display: none;
 }
@@ -593,7 +592,5 @@ html {
   width: 100%;
 }
 
-.username {
-  display: none;
-}
+
 

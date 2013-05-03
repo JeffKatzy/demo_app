@@ -27,15 +27,9 @@ FactoryGirl.define do
 		  	end
 		 end
 
-	factory :lecture_one do
-		description "What is 1 + 0?"
-		answer	1
-	end
-
-	factory :question_two do
-		description "What is 1 + 1?"
-		answer 2
-	end
-
+		factory :lecture_one do
+			description "What is 1 + 0?"
+			answer	1
+		end
 	end
 end

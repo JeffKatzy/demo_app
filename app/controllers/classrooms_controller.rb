@@ -56,7 +56,7 @@ layout 'pages'
 
 	def demo
 		@demo = true
-		@classroom = Classroom.find(7)
+		@classroom = Classroom.find(1)
 		@users = @classroom.users
 		@answers = UserAnswer.where(user_id: @users.map(&:id))
 		@user = User.new

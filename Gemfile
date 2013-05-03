@@ -13,13 +13,14 @@ gem 'simple_form'
 gem 'nested_form'
 gem 'pry-rails'
 gem 'pry-nav'
-gem 'googlecharts'
 gem 'bcrypt-ruby'
 gem 'pg'
 gem 'jquery-rails'
 gem 'haml'
 gem 'pusher'
 gem 'localtunnel'
+gem 'capybara'
+gem 'twilio-test-toolkit'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.2.4"
@@ -49,8 +50,10 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'factory_girl_rails'
-  gem "rspec-rails", "~> 2.7.0"
-  #gem 'mocha'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'database_cleaner'
   gem 'guard'
   gem 'guard-rspec'
   gem 'spork', '~> 0.9.0.rc'

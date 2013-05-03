@@ -18,10 +18,6 @@ class UserLecture < ActiveRecord::Base
   default_scope order('created_at DESC')
   attr_accessible :end_time
   belongs_to :assignment
-
-	#scope :recent, lambda {
-    #joins(:user_answers).group("user_lectures.id").merge(UserAnswer.recent)
-  	#}
   scope :correct, where(:correct => true)
   scope :today, lambda { where("created_at > ?", 1.day.ago) }
   scope :current, lambda { where("created_at > ?", 1.hour.ago) }
@@ -35,5 +31,4 @@ class UserLecture < ActiveRecord::Base
   def number_incomplete
     lecture.questions.count - user_answers.count
   end
-    # map{|lecture| lecture.user_answers }.flatten.map(&:correct).count(true) / map{|lecture| lecture.user_answers }.flatten.map(&:correct).count
 end
