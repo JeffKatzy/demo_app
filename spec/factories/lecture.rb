@@ -21,15 +21,18 @@ FactoryGirl.define do
 		soundfile_content_type { Faker::Name.name }
 		soundfile_file_size		{ Faker::Name.name }
 
-		 after(:create) do |lecture|
-		  	[:question_one, :question_two, :question_three].each do |question|
-		  		lecture.questions << FactoryGirl.build(question, lecture: lecture)
-		  	end
-		 end
-
 		factory :lecture_one do
-			description "What is 1 + 0?"
-			answer	1
+			description "Perimeter definition"
 		end
+
+		factory :lecture_two do
+			description "Perimeter labels"
+		end
+
+	 after(:create) do |lecture|
+	  	[:question_one, :question_two, :question_three].each do |question|
+	  		lecture.questions << FactoryGirl.build(question, lecture: lecture)
+	  	end
+	 end
 	end
 end

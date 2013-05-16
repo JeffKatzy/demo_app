@@ -1,0 +1,48 @@
+.row
+  .twelve.columns
+    = simple_nested_form_for @lesson, :html => { :multipart => true } do |form|
+      = render 'shared/error_messages'
+      .ten.columns
+        New Lesson
+        %br
+        %br
+        = form.label :lesson_name
+        = form.text_field :name
+        = form.label :lesson_description
+        = form.text_field :description
+      .eight.columns
+        = form.fields_for :lectures do |lecture_form|
+          = lecture_form.label :lecture_name
+          = lecture_form.text_field :name
+          = lecture_form.label :lecture_description
+          = lecture_form.text_field :description
+          = lecture_form.label :lecture_soundfile
+          = lecture_form.file_field :soundfile
+          = lecture_form.link_to_remove "Remove this lecture"
+          = lecture_form.fields_for :questions do |question_form|
+            = question_form.label :question
+            = question_form.label :question_name
+            = question_form.text_field :name
+            %br
+            %br
+            = question_form.label :question_description
+            = question_form.text_field :description
+            %br
+            %br
+            = question_form.label :question_soundfile
+            = question_form.file_field :soundfile
+            %br
+            %br
+            = question_form.label :question_answer
+            = question_form.text_field :answer
+            %br
+            %br
+            = question_form.label :explanation_soundfile
+            = question_form.file_field :explanationfile
+            %br
+            %br
+            = question_form.link_to_remove "Remove this question"
+          = lecture_form.link_to_add "Add a question", :questions
+        = form.link_to_add "Add a lecture", :lectures
+        = form.submit
+

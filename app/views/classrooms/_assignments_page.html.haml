@@ -5,8 +5,9 @@
     %ul
       %li.title Current Assignments
       - if @current_assignments.present?
-        - @current_assignments.each do |lecture|
-          %li= lecture.name if lecture
+        #assignments_list
+          - @current_assignments.each do |lecture|
+            %li= lecture.name if lecture
   .six.columns#available_assignments
     %ul
       %li.title Available Assignments

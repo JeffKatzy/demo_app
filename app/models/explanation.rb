@@ -15,6 +15,7 @@
 #
 
 class Explanation < ActiveRecord::Base
+  belongs_to :question
 
 	has_attached_file :soundfile,
      :storage => :s3,

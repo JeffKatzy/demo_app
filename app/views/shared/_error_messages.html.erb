@@ -1,12 +1,18 @@
-<% if @teacher.errors.any? %>
+<% if @lesson.errors.any? || @lecture.errors.any? %>
   <div id="error_explanation">
-    <div class="alert alert-error">
-      The form contains <%= pluralize(@teacher.errors.count, "error") %>.
-    </div>
+    For lesson:
     <ul>
-    <% @teacher.errors.full_messages.each do |msg| %>
-      <li>* <%= msg %></li>
+    <% @lesson.errors.full_messages.each do |msg| %>
+      <li> <%= msg %></li>
     <% end %>
-    </ul>
+    <% if @lecture %>
+      For lecture:
+      <% @lecture.errors.full_messages.each do |msg| %>
+      <li> <%= msg %></li>
+      <% end %>
+      </ul>
+    <% end %>
   </div>
 <% end %>
+
+

@@ -20,11 +20,14 @@
 #
 
 class Question < ActiveRecord::Base
-	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :answer, :explanationfile, :explanationfile_file_name
-
+	attr_accessible :name, :description, :soundfile, :soundfile_file_name, :answer, :explanationfile, :explanationfile_file_name, :explanation_attributes
+    has_one :explanation, :dependent => :destroy
+    accepts_nested_attributes_for :explanation, :reject_if => lambda { |a| a[:content].blank? }
 	default_scope :order => :id
 
 	belongs_to :lecture
+
+
 
 	def next_in_lecture
 	   self.lecture.questions.where("#{self.class.table_name}.id > ?", self.id).first

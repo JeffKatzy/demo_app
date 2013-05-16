@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
 gem 'twilio-ruby'
+gem 'jquery-ui-rails'
 gem 'call_center', '~> 0.1.3'
 gem 'clockwork'
 gem 'carmen'
@@ -20,6 +21,7 @@ gem 'haml'
 gem 'pusher'
 gem 'localtunnel'
 gem 'capybara'
+gem 'selenium-webdriver'
 gem 'twilio-test-toolkit'
 
 group :assets do

@@ -14,5 +14,11 @@ FactoryGirl.define do
 	factory :lesson do
 		name 		{Faker::Lorem.words(1)}
 		description {Faker::Lorem.words(7)}
-	end
+
+    after(:create) do |lesson|
+      [:lecture_one, :lecture_two].each do |lecture|
+        lesson.lectures << FactoryGirl.build(lecture, lesson: lesson)
+      end
+    end
+  end
 end

@@ -1,8 +1,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.sortable
 //= require jquery_nested_form
-//= require jquery-ui
 //= require demo_app
 //= require demo.js
 //= require foundation/javascripts/modernizr.foundation
