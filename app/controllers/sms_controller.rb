@@ -1,5 +1,3 @@
-require 'twilio-ruby'
-
 class SmsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
@@ -9,12 +7,10 @@ class SmsController < ApplicationController
     user = User.create(cell_number: params['From']) if user.nil?
     if @sms.content_received.match(/call/)
       # TODO if we already know the user doesn't have any classrooms, text them back immediately instead of calling them, and tell them to set up a classroom.
-      Thread.new do
-        Call.initiate_call_to! @sms.incoming_number, create_call_url
-      end
+      SimpleCall.initiate_call_to! @sms.incoming_number, create_call_url
       render :xml => %Q{<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Sms>Hello, Yakbat will call you back at #{fromNumber} with your lesson.</Sms>
+  <Sms>Hello, Yakbat will call you back at #{@sms.incoming_number} with your lesson.</Sms>
 </Response>}
     elsif @sms.content_received.match(/class/)
       random = @sms.content_received.downcase.split(/class/).delete_if(&:empty?).last.strip

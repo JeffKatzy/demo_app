@@ -4,6 +4,9 @@ DemoApp::Application.routes.draw do
   root :to => "static_pages#home"
   get 'calls/create/:assignment_id' => 'calls#create'
 
+  # Need this GET alias because Twilio call callback url doesn't seem to POST
+  get 'calls/create' => 'calls#create', :as => 'create_call'
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :lectures, :only => [:new, :create, :show]
   resources :questions, :users, :teachers, :user_answers, :user_lectures, :sms, :calls, :lessons

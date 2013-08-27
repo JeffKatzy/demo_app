@@ -29,19 +29,6 @@ class Call < ActiveRecord::Base
   attr_accessible :account_sid, :call_sid, :call_status, :digits, :assignment_id
   before_validation { self.state = "greeting" unless state.present? }
 
-  # Send
-  def self.initiate_call_to! phone, url
-    # set up a client to talk to the Twilio REST API
-    @client = Twilio::REST::Client.new(ENV['TW_SID'], ENV['TW_TOK'])
-    # make a new outgoing call
-    @call = @client.account.calls.create(
-      :from => TWILIO_NUMBER,
-      :to => 'fromNumber',
-      :url => create_call_url
-    )
-  end
-
-
   call_flow :state, :initial => :initial do
 
     state :initial do
